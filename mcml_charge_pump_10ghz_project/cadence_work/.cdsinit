@@ -1,0 +1,8 @@
+; UI defaults for the supplied Virtuoso project.
+hiSetFont("label" ?size 15 ?name "DejaVu Sans")
+hiSetFont("text" ?size 15 ?name "DejaVu Sans")
+hiSetFont("ciw" ?size 15 ?name "DejaVu Sans Mono")
+
+load("/home/shivam/Projects/VLSI/mcml_charge_pump_10ghz_project/cadence_work/ade_ngspice_ui.il")
+printf("MCML charge pump: open shivam/tb_mcml_charge_pump/schematic. ADE runs are ngspice/FreePDK45 on this machine.\n")
+printf("Manual waveform command: mcmlShowLastResult()\n")

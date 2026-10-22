@@ -1,0 +1,95 @@
+
+Note: No compatibility mode selected!
+
+
+Circuit: * verified discharge from virtuoso shivam/tb_mcml_charge_pump
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+
+Initial Transient Solution
+--------------------------
+
+Node                                   Voltage
+----                                   -------
+vdd                                          1
+vbias                                     0.45
+up                                           0
+up_b                                         1
+dn                                           0
+dn_b                                         1
+vop                                       0.62
+n_load2                               0.999994
+n_dummy                              0.0540238
+n_load1                               0.542531
+n_bot                                0.0548623
+n_top                                 0.934142
+n_tail                               0.0370006
+v_dn_b#branch                     -6.58557e-10
+v_dn#branch                        5.14301e-11
+v_up_b#branch                      -1.0796e-11
+v_up#branch                        1.88218e-10
+v_bias#branch                     -3.32786e-11
+v_vdd#branch                      -1.75086e-05
+
+ Reference value :  6.48250e-10
+ Reference value :  1.32225e-09
+ Reference value :  1.99675e-09
+ Reference value :  2.66525e-09
+ Reference value :  3.33675e-09
+ Reference value :  4.00475e-09
+ Reference value :  4.67975e-09
+ Reference value :  5.35875e-09
+ Reference value :  6.03000e-09
+ Reference value :  6.68325e-09
+ Reference value :  7.35125e-09
+ Reference value :  8.00500e-09
+ Reference value :  8.67525e-09
+ Reference value :  9.34925e-09
+ Reference value :  9.99275e-09
+ Reference value :  1.05653e-08
+ Reference value :  1.12483e-08
+ Reference value :  1.19283e-08
+ Reference value :  1.26118e-08
+ Reference value :  1.32963e-08
+ Reference value :  1.39748e-08
+ Reference value :  1.46673e-08
+ Reference value :  1.53468e-08
+ Reference value :  1.60443e-08
+ Reference value :  1.67351e-08
+ Reference value :  1.74208e-08
+ Reference value :  1.80953e-08
+ Reference value :  1.87848e-08
+ Reference value :  1.94758e-08
+ Reference value :  2.01738e-08
+ Reference value :  2.08583e-08
+ Reference value :  2.15523e-08
+ Reference value :  2.22443e-08
+ Reference value :  2.29148e-08
+ Reference value :  2.35928e-08
+ Reference value :  2.42758e-08
+ Reference value :  2.49728e-08
+ Reference value :  2.56623e-08
+ Reference value :  2.63543e-08
+ Reference value :  2.70372e-08
+ Reference value :  2.77138e-08
+ Reference value :  2.83993e-08
+ Reference value :  2.90588e-08
+ Reference value :  2.97362e-08
+ Reference value :  3.04248e-08
+ Reference value :  3.11113e-08
+ Reference value :  3.18008e-08
+ Reference value :  3.24763e-08
+ Reference value :  3.31628e-08
+ Reference value :  3.38533e-08
+ Reference value :  3.45398e-08
+ Reference value :  3.52368e-08
+ Reference value :  3.59354e-08
+ Reference value :  3.66263e-08
+ Reference value :  3.73233e-08
+ Reference value :  3.80088e-08
+ Reference value :  3.86863e-08
+ Reference value :  3.93663e-08
+No. of Data Rows : 84805
+ngspice-45.2 done

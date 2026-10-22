@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 3: Why This is a VLSI / Transistor-Level Project - Cadence Virtuoso Design</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+</head>
+<body>
+  <div class="deck-container">
+    <section class="slide active" id="slide-3">
+      <div class="slide-header">
+        <div class="slide-header-left">
+          <div class="slide-category">VLSI Engineering Focus</div>
+          <h1 class="slide-title">Why This is a VLSI / Transistor-Level Project</h1>
+          <div class="slide-subtitle">Project Focus: MOS-Level Circuit Design & Device Physics, Not Application Development</div>
+        </div>
+        <div class="slide-header-right">
+          <div class="slide-index-pill">03 / 10</div>
+        </div>
+      </div>
+
+      <div class="slide-body">
+        <div class="grid-2col">
+          <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+            <div class="card highlight">
+              <div class="card-header">
+                <span class="card-title">Transistor-Level Design Elements</span>
+              </div>
+              <p>
+                The charge pump is created using individual device primitives in Cadence Virtuoso. No prebuilt converter IC or macromodel is used:
+              </p>
+              <ul class="feature-list" style="margin-top: 0.25rem;">
+                <li><strong>NMOS and PMOS Transistors:</strong> Custom channel aspect ratios ($W/L$).</li>
+                <li><strong>Integrated Capacitors:</strong> Metal-Insulator-Metal (MIM) and MOS capacitor banks.</li>
+                <li><strong>Clock Drivers:</strong> Sized CMOS inverter buffers for non-overlapping phases.</li>
+                <li><strong>Physical Guard Rings:</strong> Substrate isolation to prevent parasitic latchup.</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <span class="card-title">Key Transistor Design Variables: Wn, Wp, L</span>
+              </div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; font-size: 0.85rem;">
+                <div class="card subtle" style="padding: 0.55rem;">
+                  <strong>ON-Resistance ($R_{ON}$):</strong>
+                  <div style="color: var(--text-secondary); margin-top: 0.2rem;">Dictates conduction drop and charge-transfer speed.</div>
+                </div>
+                <div class="card subtle" style="padding: 0.55rem;">
+                  <strong>Parasitic Capacitances:</strong>
+                  <div style="color: var(--text-secondary); margin-top: 0.2rem;">$C_{gs}, C_{gd}, C_{db}$ cause clock feedthrough and power loss.</div>
+                </div>
+                <div class="card subtle" style="padding: 0.55rem;">
+                  <strong>Body Effect ($\gamma$):</strong>
+                  <div style="color: var(--text-secondary); margin-top: 0.2rem;">Shifts threshold voltage $V_{th}(V_{SB})$ across cascaded stages.</div>
+                </div>
+                <div class="card subtle" style="padding: 0.55rem;">
+                  <strong>Power Dissipation:</strong>
+                  <div style="color: var(--text-secondary); margin-top: 0.2rem;">Dynamic switching loss $P = f_{clk} C_{tot} V^2$ scales with width.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Matplotlib Sizing Trade-off Curves -->
+          <div style="display: flex; flex-direction: column; gap: 0.8rem; justify-content: space-between;">
+            <div class="card" style="padding: 0.65rem;">
+              <img src="images/transistor_tradeoff_curves.png" alt="Transistor Sizing Trade-Off Curves" class="diagram-img" style="max-height: 230px;">
+            </div>
+
+            <div class="emphasis-quote" style="padding: 0.75rem 1rem;">
+              <div style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.25rem; letter-spacing: 0.06em; font-style: normal; font-weight: 700;">
+                Core Thesis of the Project
+              </div>
+              “The main work of the project is transistor sizing, circuit optimization, PVT analysis and physical layout.”
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <div class="footer-left">
+          <span>Transistor-Level Engineering Focus</span>
+        </div>
+        <div class="footer-center">
+          <a href="slide-1.html" class="nav-dot"></a>
+          <a href="slide-2.html" class="nav-dot"></a>
+          <a href="slide-3.html" class="nav-dot active"></a>
+          <a href="slide-4.html" class="nav-dot"></a>
+          <a href="slide-5.html" class="nav-dot"></a>
+          <a href="slide-6.html" class="nav-dot"></a>
+          <a href="slide-7.html" class="nav-dot"></a>
+          <a href="slide-8.html" class="nav-dot"></a>
+          <a href="slide-9.html" class="nav-dot"></a>
+          <a href="slide-10.html" class="nav-dot"></a>
+        </div>
+        <div class="footer-right">
+          <kbd>←</kbd> <kbd>→</kbd> Navigate
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="nav-controls">
+    <a href="index.html" class="nav-btn" title="View Full Deck">Deck</a>
+    <a href="slide-2.html" class="nav-btn" title="Previous Slide">◀</a>
+    <a href="slide-4.html" class="nav-btn" title="Next Slide">▶</a>
+  </div>
+
+  <script>
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') {
+        window.location.href = 'slide-4.html';
+      } else if (e.key === 'ArrowLeft' || e.key === 'Backspace') {
+        window.location.href = 'slide-2.html';
+      }
+    });
+  </script>
+</body>
+</html>

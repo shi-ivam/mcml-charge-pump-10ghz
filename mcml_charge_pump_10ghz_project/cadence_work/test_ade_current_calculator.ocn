@@ -1,0 +1,6 @@
+openResults("/home/shivam/simulation/tb_mcml_charge_pump/spectre/schematic/psf")
+selectResult('tran)
+printf("ADE_UP16_NS %g\n" cross(getData("UP" ?result 'tran) 0.5 16 "rising")*1e9)
+printf("ADE_CHARGE16_PS %g\n" let((a b ti vlo vhi) a=getData("UP" ?result 'tran) b=getData("Vop" ?result 'tran) ti=cross(a 0.5 16 "rising") vlo=value(b ti-10e-12) vhi=value(b ti+40e-12) (cross(clip(b ti ti+40e-12) (vlo+vhi)/2 1 "rising")-ti)*1e12))
+printf("ADE_CHARGE_MEAN_PS %g\n" let((a b sum n ti vlo vhi) a=getData("UP" ?result 'tran) b=getData("Vop" ?result 'tran) sum=0.0 for(n 11 20 ti=cross(a 0.5 n "rising") vlo=value(b ti-10e-12) vhi=value(b ti+40e-12) sum=sum+cross(clip(b ti ti+40e-12) (vlo+vhi)/2 1 "rising")-ti) sum/10*1e12))
+exit()

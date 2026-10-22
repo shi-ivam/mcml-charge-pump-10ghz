@@ -1,0 +1,1695 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic Comparator VLSI Project</title>
+
+    <!-- Professional Technical Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- MathJax for precise mathematical equation rendering -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [
+            ["$", "$"],
+            ["\\(", "\\)"],
+          ],
+        },
+        svg: { fontCache: "global" },
+      };
+    </script>
+    <script
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
+
+    <style>
+      /* =========================================================
+           GLOBAL RESETS & THEME VARIABLES
+           ========================================================= */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --bg-color: #07090f; /* Very dark charcoal/blue */
+        --surface: #10141f; /* Card surface */
+        --surface-hover: #161a29;
+        --border: #1e253c;
+        --border-glow: rgba(0, 255, 204, 0.3);
+
+        --accent-primary: #00ffcc; /* Bright Cyan */
+        --accent-secondary: #0088ff; /* Blue */
+        --accent-tertiary: #ff007f; /* Pink for contrasts */
+
+        --text-main: #f8fafc;
+        --text-muted: #94a3b8;
+
+        --font-sans: "Inter", sans-serif;
+        --font-mono: "JetBrains Mono", monospace;
+
+        --slide-w: 1920px;
+        --slide-h: 1080px;
+        --pad: 80px;
+      }
+
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-main);
+        font-family: var(--font-sans);
+        overflow: hidden; /* Absolute rule: NO window scrollbars */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100vw;
+      }
+
+      /* =========================================================
+           PRESENTATION ENGINE (SCALING CANVAS)
+           ========================================================= */
+      #viewport-container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+
+      .presentation {
+        width: var(--slide-w);
+        height: var(--slide-h);
+        position: relative;
+        transform-origin: center center;
+        background-color: var(--bg-color);
+        /* Semiconductor Grid Background */
+        background-image:
+          linear-gradient(rgba(0, 255, 204, 0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(0, 255, 204, 0.03) 1px, transparent 1px);
+        background-size: 60px 60px;
+        background-position: center center;
+        box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+        overflow: hidden; /* Absolute rule: NO slide scrollbars */
+      }
+
+      /* Ambient glowing dots in background */
+      .presentation::before,
+      .presentation::after {
+        content: "";
+        position: absolute;
+        width: 600px;
+        height: 600px;
+        border-radius: 50%;
+        filter: blur(150px);
+        z-index: 0;
+        opacity: 0.15;
+        pointer-events: none;
+      }
+      .presentation::before {
+        top: -200px;
+        left: -200px;
+        background: var(--accent-primary);
+      }
+      .presentation::after {
+        bottom: -200px;
+        right: -200px;
+        background: var(--accent-secondary);
+      }
+
+      /* =========================================================
+           SLIDE ARCHITECTURE
+           ========================================================= */
+      .slide {
+        position: absolute;
+        inset: 0;
+        padding: var(--pad) 100px;
+        display: flex;
+        flex-direction: column;
+        opacity: 0;
+        visibility: hidden;
+        transition:
+          opacity 0.4s ease,
+          transform 0.4s ease;
+        transform: scale(0.98);
+        z-index: 1;
+      }
+
+      .slide.active {
+        opacity: 1;
+        visibility: visible;
+        transform: scale(1);
+        z-index: 10;
+      }
+
+      /* Headers */
+      .slide-header {
+        flex: 0 0 auto;
+        margin-bottom: 50px;
+        position: relative;
+        height: 14%; /* Fixed relative height to prevent layout shifts */
+      }
+
+      .section-label {
+        font-family: var(--font-mono);
+        font-size: 22px;
+        color: var(--accent-primary);
+        letter-spacing: 4px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 15px;
+      }
+
+      .section-label::before {
+        content: "";
+        width: 30px;
+        height: 2px;
+        background: var(--accent-primary);
+      }
+
+      .slide-title {
+        font-size: 64px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        line-height: 1.1;
+        white-space: nowrap;
+      }
+
+      .slide-title span {
+        color: var(--accent-secondary);
+      }
+
+      /* Content Area */
+      .slide-content {
+        flex: 1 1 auto;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 86%; /* Ensures it fits exactly inside remaining space */
+      }
+
+      /* Footer / Navigation */
+      .slide-footer {
+        position: absolute;
+        bottom: 40px;
+        left: 100px;
+        right: 100px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: var(--font-mono);
+        font-size: 20px;
+        color: var(--text-muted);
+        z-index: 20;
+      }
+
+      .slide-nav-dots {
+        display: flex;
+        gap: 10px;
+      }
+      .nav-dot {
+        width: 40px;
+        height: 4px;
+        background: var(--border);
+        border-radius: 2px;
+        transition: 0.3s;
+      }
+      .nav-dot.active {
+        background: var(--accent-primary);
+        box-shadow: 0 0 10px var(--accent-primary);
+      }
+
+      /* =========================================================
+           UI COMPONENTS & VISUAL ARCHITECTURE
+           ========================================================= */
+
+      /* Grid Layouts */
+      .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+        height: 100%;
+      }
+      .grid-3 {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 40px;
+        height: 100%;
+      }
+
+      /* Technical Cards */
+      .tech-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 40px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+      }
+      .tech-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(90deg, var(--accent-primary), transparent);
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+      }
+
+      .card-title {
+        font-size: 32px;
+        font-weight: 600;
+        color: var(--accent-primary);
+        margin-bottom: 20px;
+        font-family: var(--font-mono);
+        text-transform: uppercase;
+      }
+
+      .text-lg {
+        font-size: 32px;
+        line-height: 1.5;
+        color: var(--text-main);
+        margin-bottom: 20px;
+      }
+      .text-md {
+        font-size: 26px;
+        line-height: 1.6;
+        color: var(--text-muted);
+      }
+
+      ul.tech-list {
+        list-style: none;
+        padding-left: 10px;
+      }
+      ul.tech-list li {
+        font-size: 26px;
+        margin-bottom: 20px;
+        position: relative;
+        padding-left: 35px;
+        color: var(--text-muted);
+      }
+      ul.tech-list li::before {
+        content: ">";
+        position: absolute;
+        left: 0;
+        top: 0;
+        color: var(--accent-primary);
+        font-family: var(--font-mono);
+        font-weight: bold;
+      }
+      .highlight {
+        color: var(--accent-primary);
+        font-weight: 600;
+      }
+      .highlight-alt {
+        color: var(--accent-tertiary);
+        font-weight: 600;
+      }
+
+      /* Equations */
+      .eq-box {
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid var(--border);
+        padding: 30px;
+        border-radius: 8px;
+        font-size: 36px;
+        text-align: center;
+        margin: 20px 0;
+        box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+      }
+
+      /* Architecture Diagram System (Slide 2/3) */
+      .arch-diagram {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+      }
+      .arch-node {
+        background: var(--surface);
+        border: 2px solid var(--accent-primary);
+        padding: 15px 40px;
+        border-radius: 30px;
+        font-family: var(--font-mono);
+        font-size: 28px;
+        font-weight: bold;
+        color: var(--accent-primary);
+        box-shadow: 0 0 20px rgba(0, 255, 204, 0.1);
+        z-index: 2;
+      }
+      .arch-block {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        padding: 25px 60px;
+        border-radius: 8px;
+        font-size: 28px;
+        font-weight: 600;
+        text-align: center;
+        width: 450px;
+        z-index: 2;
+      }
+      .arch-block.split {
+        display: flex;
+        justify-content: space-between;
+        padding: 0;
+        border: none;
+        background: transparent;
+        gap: 40px;
+        width: 600px;
+      }
+      .arch-sub-block {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        padding: 25px 30px;
+        border-radius: 8px;
+        flex: 1;
+        text-align: center;
+        border-bottom: 3px solid var(--accent-secondary);
+      }
+      .arch-line {
+        width: 2px;
+        height: 40px;
+        background: var(--border);
+        z-index: 1;
+        position: relative;
+      }
+      .arch-line.active {
+        background: var(--accent-primary);
+        box-shadow: 0 0 10px var(--accent-primary);
+      }
+
+      /* Process Flows */
+      .flow-arrow {
+        color: var(--accent-primary);
+        font-size: 40px;
+        text-align: center;
+        margin: 15px 0;
+      }
+      .logic-card {
+        background: rgba(0, 255, 204, 0.03);
+        border: 1px dashed var(--accent-primary);
+        padding: 15px;
+        text-align: center;
+        border-radius: 8px;
+        font-family: var(--font-mono);
+        font-size: 24px;
+      }
+
+      /* Metric Panels (Workflow / deliverables) */
+      .workflow-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 30px;
+        align-content: center;
+        height: 100%;
+      }
+      .workflow-item {
+        background: var(--surface);
+        border-left: 4px solid var(--accent-secondary);
+        padding: 25px;
+        border-radius: 4px;
+        font-size: 22px;
+        color: var(--text-muted);
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        font-family: var(--font-mono);
+      }
+      .workflow-num {
+        color: var(--text-main);
+        font-weight: bold;
+      }
+
+      /* Tables */
+      .tech-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 26px;
+      }
+      .tech-table th {
+        text-align: left;
+        padding: 25px;
+        font-family: var(--font-mono);
+        color: var(--accent-primary);
+        border-bottom: 2px solid var(--border);
+        background: rgba(0, 0, 0, 0.3);
+      }
+      .tech-table td {
+        padding: 25px;
+        border-bottom: 1px solid var(--border);
+        color: var(--text-muted);
+      }
+      .tech-table tr:last-child td {
+        border-bottom: none;
+      }
+      .tech-table tr:hover td {
+        background: var(--surface-hover);
+        color: var(--text-main);
+      }
+
+      /* Logic / Tradeoff Blocks (Slide 10) */
+      .tradeoff-box {
+        text-align: center;
+      }
+      .tradeoff-param {
+        font-family: var(--font-mono);
+        font-size: 32px;
+        color: var(--text-main);
+        margin-bottom: 10px;
+      }
+      .tradeoff-arrow {
+        font-size: 30px;
+        margin: 10px 0;
+      }
+      .tradeoff-arrow.up {
+        color: var(--accent-tertiary);
+      }
+      .tradeoff-arrow.down {
+        color: var(--accent-primary);
+      }
+      .tradeoff-result {
+        font-size: 26px;
+        color: var(--text-muted);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="viewport-container">
+      <div class="presentation" id="presentation">
+        <!-- ==========================================
+             SLIDE 01: TITLE
+             ========================================== -->
+        <div class="slide active">
+          <div
+            style="
+              flex: 1;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              padding: 0 100px;
+            "
+          >
+            <div
+              style="
+                font-family: var(--font-mono);
+                color: var(--accent-primary);
+                font-size: 28px;
+                letter-spacing: 6px;
+                margin-bottom: 30px;
+              "
+            >
+              CMOS VLSI DESIGN PROJECT
+            </div>
+            <h1
+              style="
+                font-size: 110px;
+                font-weight: 700;
+                line-height: 1.1;
+                margin-bottom: 40px;
+                text-transform: uppercase;
+              "
+            >
+              Dynamic
+              <span style="color: var(--accent-secondary)">Comparator</span>
+            </h1>
+            <p
+              style="
+                font-size: 42px;
+                color: var(--text-muted);
+                max-width: 1200px;
+                margin-bottom: 80px;
+                line-height: 1.4;
+              "
+            >
+              Design and Performance Analysis of a Low-Power CMOS Architecture
+              for High-Speed ADC Applications
+            </p>
+            <div
+              style="
+                display: flex;
+                gap: 40px;
+                align-items: center;
+                border-left: 6px solid var(--accent-primary);
+                padding-left: 30px;
+              "
+            >
+              <div>
+                <div
+                  style="
+                    font-size: 20px;
+                    color: var(--text-muted);
+                    font-family: var(--font-mono);
+                    margin-bottom: 10px;
+                  "
+                >
+                  RESEARCHER
+                </div>
+                <div
+                  style="
+                    font-size: 32px;
+                    font-weight: 600;
+                    color: var(--text-main);
+                  "
+                >
+                  Pragyan Jain
+                </div>
+              </div>
+              <div
+                style="width: 2px; height: 60px; background: var(--border)"
+              ></div>
+              <div>
+                <div
+                  style="
+                    font-size: 20px;
+                    color: var(--text-muted);
+                    font-family: var(--font-mono);
+                    margin-bottom: 10px;
+                  "
+                >
+                  ID NUMBER
+                </div>
+                <div
+                  style="
+                    font-size: 32px;
+                    font-weight: 600;
+                    color: var(--accent-primary);
+                    font-family: var(--font-mono);
+                  "
+                >
+                  24BLC1100
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             SLIDE 02: WHAT IS IT?
+             ========================================== -->
+        <div class="slide">
+          <header class="slide-header">
+            <span class="section-label">01 // FUNDAMENTALS</span>
+            <h2 class="slide-title">DYNAMIC <span>COMPARATOR</span></h2>
+          </header>
+          <div class="slide-content">
+            <div class="grid-2">
+              <div
+                style="
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: center;
+                "
+              >
+                <p class="text-lg">
+                  A dynamic comparator evaluates two analog input voltages and
+                  produces a corresponding digital output.
+                </p>
+                <div class="eq-box">
+                  If $V_{IN+} > V_{IN-}$<br />
+                  $V_{OUT+} = 1, \quad V_{OUT-} = 0$
+                </div>
+                <p class="text-md" style="margin-top: 20px">
+                  Unlike continuously biased op-amp comparators, it utilizes a
+                  <span class="highlight">clocked regenerative circuit</span>.
+                </p>
+              </div>
+              <div class="tech-card">
+                <div class="card-title">Key Characteristics</div>
+                <ul class="tech-list">
+                  <li>
+                    <span class="highlight">Zero Static Power:</span> Consumes
+                    power only during the evaluation clock edge.
+                  </li>
+                  <li>
+                    <span class="highlight">Positive Feedback:</span>
+                    Regenerative latch enables extreme high-speed resolution.
+                  </li>
+                  <li>
+                    <span class="highlight">Applications:</span> SAR ADCs, Flash
+                    ADCs, High-speed data converters, Memory sense amplifiers.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             SLIDE 03: ARCHITECTURE
+             ========================================== -->
+        <div class="slide">
+          <header class="slide-header">
+            <span class="section-label">02 // TOPOLOGY</span>
+            <h2 class="slide-title">
+              STRONGARM LATCH <span>ARCHITECTURE</span>
+            </h2>
+          </header>
+          <div class="slide-content">
+            <div class="arch-diagram">
+              <div class="arch-node">VDD</div>
+              <div class="arch-line active"></div>
+              <div
+                class="arch-block"
+                style="border-color: var(--accent-secondary)"
+              >
+                PMOS Precharge Transistors
+              </div>
+              <div class="arch-line"></div>
+              <div
+                class="arch-block"
+                style="padding: 40px; border-color: var(--accent-primary)"
+              >
+                <div
+                  style="
+                    font-family: var(--font-mono);
+                    color: var(--accent-primary);
+                    font-size: 20px;
+                    margin-bottom: 10px;
+                  "
+                >
+                  OUTP / OUTN
+                </div>
+                Cross-Coupled Regenerative Latch
+              </div>
+              <div class="arch-line"></div>
+              <div class="arch-block split">
+                <div class="arch-sub-block">
+                  Input Pair (NMOS)<br /><span
+                    class="highlight"
+                    style="font-size: 20px; font-family: var(--font-mono)"
+                    >VIN+</span
+                  >
+                </div>
+                <div class="arch-sub-block">
+                  Input Pair (NMOS)<br /><span
+                    class="highlight"
+                    style="font-size: 20px; font-family: var(--font-mono)"
+                    >VIN-</span
+                  >
+                </div>
+              </div>
+              <div class="arch-line"></div>
+              <div class="arch-block" style="width: 350px">
+                Tail Transistor (NMOS)
+              </div>
+              <div class="arch-line active"></div>
+              <div class="arch-node">CLK</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             SLIDE 04: OPERATIONAL PHASES
+             ========================================== -->
+        <div class="slide">
+          <header class="slide-header">
+            <span class="section-label">03 // TIMING & LOGIC</span>
+            <h2 class="slide-title">OPERATIONAL <span>PHASES</span></h2>
+          </header>
+          <div class="slide-content">
+            <div class="grid-2">
+              <!-- Phase 1 -->
+              <div
+                class="tech-card"
+                style="border-top: 4px solid var(--accent-secondary)"
+              >
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 30px;
+                  "
+                >
+                  <div class="card-title" style="margin: 0">
+                    PHASE 01: RESET
+                  </div>
+                  <div
+                    class="logic-card"
+                    style="
+                      border-color: var(--accent-secondary);
+                      color: var(--accent-secondary);
+                    "
+                  >
+                    CLK = 0
+                  </div>
+                </div>
+                <ul class="tech-list">
+                  <li>
+                    Tail transistor is
+                    <span class="highlight-alt">OFF</span> (No path to ground).
+                  </li>
+                  <li>
+                    Precharge PMOS transistors turn
+                    <span class="highlight">ON</span>.
+                  </li>
+                  <li>Internal nodes and outputs precharge:</li>
+                </ul>
+                <div
+                  class="eq-box"
+                  style="margin-top: auto; padding: 20px; font-size: 30px"
+                >
+                  $OUTP \rightarrow V_{DD} \quad|\quad OUTN \rightarrow V_{DD}$
+                </div>
+              </div>
+
+              <!-- Phase 2 -->
+              <div
+                class="tech-card"
+                style="border-top: 4px solid var(--accent-primary)"
+              >
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 30px;
+                  "
+                >
+                  <div
+                    class="card-title"
+                    style="margin: 0; color: var(--accent-primary)"
+                  >
+                    PHASE 02: EVALUATION
+                  </div>
+                  <div class="logic-card">CLK = 1</div>
+                </div>
+                <ul class="tech-list">
+                  <li>
+                    Tail transistor turns <span class="highlight">ON</span>.
+                  </li>
+                  <li>
+                    Differential pair discharges nodes at different rates based
+                    on $\Delta V_{IN}$.
+                  </li>
+                  <li>
+                    Positive feedback amplifies the difference exponentially.
+                  </li>
+                </ul>
+                <div
+                  class="eq-box"
+                  style="margin-top: auto; padding: 20px; font-size: 30px"
+                >
+                  $OUT \rightarrow V_{DD} \quad|\quad OUT \rightarrow 0$
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             SLIDE 05: APPLICATION (SAR ADC)
+             ========================================== -->
+        <div class="slide">
+          <header class="slide-header">
+            <span class="section-label">04 // APPLICATION</span>
+            <h2 class="slide-title">SAR ADC <span>INTEGRATION</span></h2>
+          </header>
+          <div class="slide-content" style="align-items: center">
+            <p
+              class="text-lg"
+              style="text-align: center; max-width: 1400px; margin-bottom: 60px"
+            >
+              In an 8-bit Successive Approximation Register (SAR) ADC, the
+              dynamic comparator makes approximately 8 precise decisions per
+              conversion cycle.
+            </p>
+
+            <!-- System Block Diagram -->
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 40px;
+                margin-bottom: 60px;
+                font-family: var(--font-mono);
+                font-size: 26px;
+              "
+            >
+              <div
+                class="arch-node"
+                style="border: none; color: var(--text-main)"
+              >
+                VIN Analog
+              </div>
+              <div style="color: var(--accent-primary)">──────►</div>
+              <div
+                class="tech-card"
+                style="
+                  padding: 40px 60px;
+                  align-items: center;
+                  border-color: var(--accent-primary);
+                "
+              >
+                <div
+                  style="
+                    font-size: 36px;
+                    font-weight: bold;
+                    color: var(--accent-primary);
+                  "
+                >
+                  DYNAMIC COMPARATOR
+                </div>
+              </div>
+              <div style="color: var(--accent-primary)">──────►</div>
+              <div
+                class="tech-card"
+                style="
+                  padding: 40px 60px;
+                  align-items: center;
+                  border-color: var(--accent-secondary);
+                "
+              >
+                <div
+                  style="
+                    font-size: 36px;
+                    font-weight: bold;
+                    color: var(--accent-secondary);
+                  "
+                >
+                  SAR LOGIC
+                </div>
+              </div>
+              <div style="color: var(--accent-primary)">──────►</div>
+              <div
+                class="arch-node"
+                style="border: none; color: var(--text-main)"
+              >
+                Digital Code
+              </div>
+            </div>
+
+            <div class="grid-2" style="width: 100%; height: auto">
+              <div
+                class="logic-card"
+                style="
+                  border: 1px solid var(--border);
+                  padding: 30px;
+                  text-align: left;
+                "
+              >
+                <span
+                  style="
+                    color: var(--accent-primary);
+                    display: block;
+                    margin-bottom: 10px;
+                  "
+                  >SYSTEM SPEED</span
+                >
+                Comparator propagation delay dictates the absolute maximum ADC
+                sampling rate.
+              </div>
+              <div
+                class="logic-card"
+                style="
+                  border: 1px solid var(--border);
+                  padding: 30px;
+                  text-align: left;
+                "
+              >
+                <span
+                  style="
+                    color: var(--accent-secondary);
+                    display: block;
+                    margin-bottom: 10px;
+                  "
+                  >SYSTEM POWER</span
+                >
+                Comparator energy per decision directly influences overall ADC
+                power efficiency.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             SLIDE 06: CADENCE WORKFLOW
+             ========================================== -->
+        <div class="slide">
+          <header class="slide-header">
+            <span class="section-label">05 // METHODOLOGY</span>
+            <h2 class="slide-title">VLSI CADENCE <span>WORKFLOW</span></h2>
+          </header>
+          <div class="slide-content">
+            <div class="workflow-grid">
+              <div class="workflow-item">
+                <span class="workflow-num">01.</span> Transistor Schematic
+              </div>
+              <div class="workflow-item">
+                <span class="workflow-num">02.</span> DC Op-Point Verification
+              </div>
+              <div class="workflow-item">
+                <span class="workflow-num">03.</span> Transient Simulation
+              </div>
+              <div class="workflow-item">
+                <span class="workflow-num">04.</span> Delay Measurement
+              </div>
+              <div class="workflow-item">
+                <span class="workflow-num">05.</span> Power Characterization
+              </div>
+              <div class="workflow-item">
+                <span class="workflow-num">06.</span> Input Offset Analysis
+              </div>
+              <div class="workflow-item">
+                <span class="workflow-num">07.</span> Process Corner Analysis
+              </div>
+              <div class="workflow-item">
+                <span class="workflow-num">08.</span> Monte Carlo Mismatch
+              </div>
+              <div class="workflow-item">
+                <span class="workflow-num">09.</span> Transistor Sizing Target
+              </div>
+              <div class="workflow-item">
+                <span class="workflow-num">10.</span> Custom Layout
+              </div>
+              <div class="workflow-item">
+                <span class="workflow-num">11.</span> DRC & LVS Checking
+              </div>
+              <div class="workflow-item">
+                <span class="workflow-num">12.</span> Post-Layout Extraction
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             SLIDE 07: METRICS
+             ========================================== -->
+        <div class="slide">
+          <header class="slide-header">
+            <span class="section-label"
+              >06 // PERFORMANCE CHARACTERIZATION</span
+            >
+            <h2 class="slide-title">DELAY & <span>POWER METRICS</span></h2>
+          </header>
+          <div class="slide-content">
+            <div class="grid-2">
+              <div class="tech-card">
+                <div class="card-title">PROPAGATION DELAY</div>
+                <p class="text-md">
+                  Time measured from the CLK evaluation edge to a valid
+                  differential output.
+                </p>
+                <div
+                  style="
+                    margin: 40px 0;
+                    border-left: 2px solid var(--border);
+                    padding-left: 20px;
+                  "
+                >
+                  <div
+                    style="
+                      font-family: var(--font-mono);
+                      color: var(--accent-secondary);
+                      margin-bottom: 10px;
+                    "
+                  >
+                    TEST CONDITIONS ($\Delta V$)
+                  </div>
+                  <div style="display: flex; gap: 15px; flex-wrap: wrap">
+                    <span class="logic-card">1 mV</span>
+                    <span class="logic-card">5 mV</span>
+                    <span class="logic-card">10 mV</span>
+                    <span class="logic-card">50 mV</span>
+                  </div>
+                </div>
+                <p class="text-md highlight" style="margin-top: auto">
+                  Smaller input differences take exponentially longer to
+                  resolve.
+                </p>
+              </div>
+
+              <div class="tech-card">
+                <div class="card-title">ENERGY PER DECISION</div>
+                <p class="text-md">
+                  Due to dynamic clocking, power is characterized as Energy per
+                  Comparison ($E_{comparison}$) rather than continuous static
+                  power.
+                </p>
+
+                <div class="eq-box" style="font-size: 28px; padding: 20px">
+                  $P_{avg} = V_{DD} \times I_{avg}$ <br /><br />
+                  $E_{comparison} = \frac{P_{avg}}{f_{CLK}}$
+                </div>
+
+                <div
+                  style="
+                    font-family: var(--font-mono);
+                    font-size: 20px;
+                    color: var(--text-muted);
+                    background: #000;
+                    padding: 20px;
+                    border-radius: 6px;
+                  "
+                >
+                  Example: P = 20 µW @ 100 MHz <br />
+                  <span style="color: var(--accent-primary); font-size: 26px"
+                    >E = 200 fJ / comparison</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             SLIDE 08: OFFSET
+             ========================================== -->
+        <div class="slide">
+          <header class="slide-header">
+            <span class="section-label">07 // NON-IDEALITIES</span>
+            <h2 class="slide-title">INPUT-REFERRED <span>OFFSET</span></h2>
+          </header>
+          <div class="slide-content">
+            <div class="grid-2" style="grid-template-columns: 1fr 1.2fr">
+              <div>
+                <p class="text-lg">
+                  Ideally, the comparator switches at $V_{IN+} = V_{IN-}$.
+                  Transistor mismatch (threshold voltage, dimensions) creates an
+                  offset.
+                </p>
+                <ul class="tech-list" style="margin-top: 40px">
+                  <li>Offset is inversely proportional to $\sqrt{WL}$.</li>
+                  <li>
+                    Requires Monte Carlo mismatch models to simulate accurately.
+                  </li>
+                  <li>Critical metric for ADC resolution constraints.</li>
+                </ul>
+              </div>
+              <div
+                class="tech-card"
+                style="
+                  align-items: center;
+                  justify-content: center;
+                  text-align: center;
+                "
+              >
+                <div class="card-title" style="color: var(--accent-secondary)">
+                  MONTE CARLO STATISTICAL YIELD
+                </div>
+                <p class="text-md" style="margin-bottom: 40px">
+                  Example execution of 500 stochastic runs.
+                </p>
+
+                <div style="display: flex; gap: 40px; margin-bottom: 20px">
+                  <div
+                    style="
+                      background: rgba(0, 0, 0, 0.4);
+                      padding: 30px;
+                      border: 1px solid var(--border);
+                      border-radius: 12px;
+                      min-width: 250px;
+                    "
+                  >
+                    <div
+                      style="
+                        font-family: var(--font-mono);
+                        color: var(--text-muted);
+                        font-size: 20px;
+                        margin-bottom: 10px;
+                      "
+                    >
+                      MEAN ($\mu$)
+                    </div>
+                    <div
+                      style="
+                        font-size: 48px;
+                        color: var(--text-main);
+                        font-family: var(--font-mono);
+                      "
+                    >
+                      0.3
+                      <span style="font-size: 24px; color: var(--text-muted)"
+                        >mV</span
+                      >
+                    </div>
+                  </div>
+                  <div
+                    style="
+                      background: rgba(0, 0, 0, 0.4);
+                      padding: 30px;
+                      border: 1px solid var(--border);
+                      border-radius: 12px;
+                      min-width: 250px;
+                    "
+                  >
+                    <div
+                      style="
+                        font-family: var(--font-mono);
+                        color: var(--text-muted);
+                        font-size: 20px;
+                        margin-bottom: 10px;
+                      "
+                    >
+                      STD DEV ($\sigma$)
+                    </div>
+                    <div
+                      style="
+                        font-size: 48px;
+                        color: var(--accent-primary);
+                        font-family: var(--font-mono);
+                      "
+                    >
+                      3.1
+                      <span style="font-size: 24px; color: var(--text-muted)"
+                        >mV</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             SLIDE 09: PVT
+             ========================================== -->
+        <div class="slide">
+          <header class="slide-header">
+            <span class="section-label">08 // ROBUSTNESS</span>
+            <h2 class="slide-title">PVT <span>CHARACTERIZATION</span></h2>
+          </header>
+          <div class="slide-content">
+            <div class="grid-3">
+              <div class="tech-card">
+                <div class="card-title" style="color: var(--text-main)">
+                  PROCESS CORNERS
+                </div>
+                <p class="text-md" style="margin-bottom: 30px">
+                  Manufacturing variations mapping N/P carrier mobility.
+                </p>
+                <ul class="tech-list">
+                  <li>
+                    <span class="highlight">TT</span> (Typical N / Typical P)
+                  </li>
+                  <li><span class="highlight">SS</span> (Slow N / Slow P)</li>
+                  <li><span class="highlight">FF</span> (Fast N / Fast P)</li>
+                  <li>
+                    <span class="highlight-alt">SF / FS</span> (Cross Corners)
+                  </li>
+                </ul>
+              </div>
+
+              <div class="tech-card">
+                <div class="card-title" style="color: var(--text-main)">
+                  VOLTAGE SWEEP
+                </div>
+                <p class="text-md" style="margin-bottom: 30px">
+                  Analyzing low-voltage capabilities.
+                </p>
+                <table class="tech-table" style="font-size: 22px">
+                  <tr>
+                    <th>VDD</th>
+                    <th>Status</th>
+                  </tr>
+                  <tr>
+                    <td>1.8 V</td>
+                    <td>Nominal</td>
+                  </tr>
+                  <tr>
+                    <td>1.4 V</td>
+                    <td>Functional (Slower)</td>
+                  </tr>
+                  <tr>
+                    <td>1.0 V</td>
+                    <td>Near Threshold Limit</td>
+                  </tr>
+                </table>
+              </div>
+
+              <div class="tech-card">
+                <div class="card-title" style="color: var(--text-main)">
+                  TEMPERATURE & CM
+                </div>
+                <ul class="tech-list" style="margin-bottom: 30px">
+                  <li>
+                    Sweep from <b>-20°C to 125°C</b> to check thermal
+                    degradation.
+                  </li>
+                  <li>
+                    Vary <b>Common Mode ($V_{CM}$)</b> to find optimal input
+                    biasing ranges.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             SLIDE 10: SIZING (RE-ENGINEERED)
+             ========================================== -->
+        <div class="slide">
+          <header class="slide-header">
+            <span class="section-label">09 // ENGINEERING</span>
+            <h2 class="slide-title">
+              TRANSISTOR SIZING <span>OPTIMIZATION</span>
+            </h2>
+          </header>
+          <div class="slide-content">
+            <div class="grid-3">
+              <!-- Input Stage Tradeoff -->
+              <div
+                class="tech-card"
+                style="
+                  border: 1px solid var(--accent-secondary);
+                  background: transparent;
+                "
+              >
+                <div
+                  class="card-title"
+                  style="text-align: center; color: var(--accent-secondary)"
+                >
+                  INPUT PAIR
+                </div>
+                <div class="tradeoff-box">
+                  <div class="tradeoff-param">
+                    Width (W) <span class="tradeoff-arrow up">↑</span>
+                  </div>
+                  <div class="flow-arrow">↓</div>
+                  <div class="tradeoff-param">
+                    Transconductance ($g_m$)
+                    <span class="tradeoff-arrow up">↑</span>
+                  </div>
+                  <div class="flow-arrow">↓</div>
+                  <div
+                    class="tradeoff-param"
+                    style="color: var(--accent-primary)"
+                  >
+                    Offset ($V_{OS}$) <span class="tradeoff-arrow down">↓</span>
+                  </div>
+
+                  <div
+                    style="
+                      margin: 25px 0;
+                      height: 1px;
+                      background: var(--border);
+                    "
+                  ></div>
+                  <div
+                    style="
+                      color: var(--accent-tertiary);
+                      font-family: var(--font-mono);
+                      font-size: 20px;
+                      letter-spacing: 2px;
+                    "
+                  >
+                    PENALTY
+                  </div>
+
+                  <div class="tradeoff-param" style="margin-top: 15px">
+                    Parasitic Cap <span class="tradeoff-arrow up">↑</span>
+                  </div>
+                  <div
+                    class="tradeoff-param"
+                    style="color: var(--accent-tertiary)"
+                  >
+                    Energy Demand <span class="tradeoff-arrow up">↑</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Latch Stage Tradeoff -->
+              <div
+                class="tech-card"
+                style="
+                  border: 1px solid var(--accent-secondary);
+                  background: transparent;
+                "
+              >
+                <div
+                  class="card-title"
+                  style="text-align: center; color: var(--accent-secondary)"
+                >
+                  LATCH TRANSISTORS
+                </div>
+                <div class="tradeoff-box">
+                  <div class="tradeoff-param">
+                    Width (W) <span class="tradeoff-arrow up">↑</span>
+                  </div>
+                  <div class="flow-arrow">↓</div>
+                  <div
+                    class="tradeoff-param"
+                    style="color: var(--accent-primary)"
+                  >
+                    Regeneration Speed <span class="tradeoff-arrow up">↑</span>
+                  </div>
+                  <div class="flow-arrow">↓</div>
+                  <div
+                    class="tradeoff-param"
+                    style="color: var(--accent-primary)"
+                  >
+                    Decision Delay <span class="tradeoff-arrow down">↓</span>
+                  </div>
+
+                  <div
+                    style="
+                      margin: 25px 0;
+                      height: 1px;
+                      background: var(--border);
+                    "
+                  ></div>
+                  <div
+                    style="
+                      color: var(--accent-tertiary);
+                      font-family: var(--font-mono);
+                      font-size: 20px;
+                      letter-spacing: 2px;
+                    "
+                  >
+                    PENALTY
+                  </div>
+
+                  <div class="tradeoff-param" style="margin-top: 15px">
+                    Silicon Area <span class="tradeoff-arrow up">↑</span>
+                  </div>
+                  <div
+                    class="tradeoff-param"
+                    style="color: var(--accent-tertiary)"
+                  >
+                    Dynamic Power <span class="tradeoff-arrow up">↑</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Optimization Target -->
+              <div
+                class="tech-card"
+                style="
+                  background: rgba(0, 255, 204, 0.05);
+                  justify-content: center;
+                  align-items: center;
+                  text-align: center;
+                "
+              >
+                <div
+                  style="
+                    font-family: var(--font-mono);
+                    font-size: 24px;
+                    color: var(--text-muted);
+                    letter-spacing: 4px;
+                    margin-bottom: 20px;
+                  "
+                >
+                  GLOBAL TARGET
+                </div>
+                <div
+                  style="
+                    font-size: 46px;
+                    font-weight: bold;
+                    color: var(--accent-primary);
+                    margin-bottom: 40px;
+                    line-height: 1.2;
+                  "
+                >
+                  MINIMIZE<br />
+                  <span style="color: var(--text-main)">Delay × Energy</span>
+                </div>
+                <div
+                  style="
+                    width: 100%;
+                    height: 1px;
+                    background: var(--accent-primary);
+                    opacity: 0.3;
+                    margin-bottom: 40px;
+                  "
+                ></div>
+                <div
+                  style="
+                    font-family: var(--font-mono);
+                    font-size: 24px;
+                    color: var(--text-muted);
+                    letter-spacing: 4px;
+                    margin-bottom: 20px;
+                  "
+                >
+                  SUBJECT TO CONSTRAINT
+                </div>
+                <div
+                  class="eq-box"
+                  style="
+                    background: transparent;
+                    border-color: var(--accent-primary);
+                    box-shadow: none;
+                    width: 100%;
+                    color: var(--accent-primary);
+                  "
+                >
+                  $V_{OS} < \text{Target}$
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             SLIDE 11: ARCHITECTURAL COMPARISON
+             ========================================== -->
+        <div class="slide">
+          <header class="slide-header">
+            <span class="section-label">10 // UPGRADE TOPOLOGY</span>
+            <h2 class="slide-title">ARCHITECTURAL <span>COMPARISON</span></h2>
+          </header>
+          <div class="slide-content">
+            <p class="text-lg" style="margin-bottom: 40px">
+              Project advancement by comparing Conventional StrongARM vs.
+              Double-Tail Dynamic Comparator.
+            </p>
+
+            <table class="tech-table">
+              <thead>
+                <tr>
+                  <th>Parameter</th>
+                  <th>StrongARM Latch</th>
+                  <th style="color: var(--accent-secondary)">
+                    Double-Tail Architecture
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Transistor Stacking</td>
+                  <td>High (Limits Low VDD)</td>
+                  <td><span class="highlight">Separated Stages</span></td>
+                </tr>
+                <tr>
+                  <td>Low Voltage Operation</td>
+                  <td>Poor</td>
+                  <td><span class="highlight">Excellent</span></td>
+                </tr>
+                <tr>
+                  <td>Regeneration Speed</td>
+                  <td>Fast</td>
+                  <td><span class="highlight">Very Fast</span></td>
+                </tr>
+                <tr>
+                  <td>Kickback Noise</td>
+                  <td>High</td>
+                  <td><span class="highlight">Reduced</span></td>
+                </tr>
+                <tr>
+                  <td>Area / Transistor Count</td>
+                  <td><span class="highlight">Low (~10-12)</span></td>
+                  <td>Higher (~14-16)</td>
+                </tr>
+              </tbody>
+            </table>
+            <p
+              class="text-md highlight"
+              style="margin-top: 30px; text-align: center"
+            >
+              Double-Tail isolates the input transconductor from the
+              regenerative latch, bypassing voltage headroom constraints.
+            </p>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             SLIDE 12: DELIVERABLES
+             ========================================== -->
+        <div class="slide">
+          <header class="slide-header">
+            <span class="section-label">11 // CONCLUSION</span>
+            <h2 class="slide-title">FINAL <span>DELIVERABLES</span></h2>
+          </header>
+          <div class="slide-content">
+            <div class="grid-2">
+              <div class="tech-card">
+                <div class="card-title" style="color: var(--text-main)">
+                  FRONT-END DESIGN
+                </div>
+                <ul class="tech-list">
+                  <li style="color: var(--text-main)">
+                    Transistor-level schematic creation.
+                  </li>
+                  <li style="color: var(--text-main)">
+                    Working clocked logic waveforms.
+                  </li>
+                  <li style="color: var(--text-main)">
+                    Delay & Energy measurement setup.
+                  </li>
+                  <li style="color: var(--text-main)">
+                    PVT Corner & Temp sweep analysis.
+                  </li>
+                  <li style="color: var(--text-main)">
+                    Monte Carlo statistical mismatch modeling.
+                  </li>
+                </ul>
+              </div>
+
+              <div class="tech-card">
+                <div class="card-title" style="color: var(--text-main)">
+                  BACK-END & ANALYSIS
+                </div>
+                <ul class="tech-list">
+                  <li style="color: var(--text-main)">
+                    Custom Mask Layout Generation.
+                  </li>
+                  <li style="color: var(--text-main)">
+                    DRC Clean verification.
+                  </li>
+                  <li style="color: var(--text-main)">
+                    LVS Matched verification.
+                  </li>
+                  <li style="color: var(--text-main)">
+                    Post-layout Parasitic Extraction (PEX).
+                  </li>
+                  <li style="color: var(--accent-primary); font-weight: bold">
+                    Final Architectural Comparison Report.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             GLOBAL FOOTER (Inside Canvas)
+             ========================================== -->
+        <div class="slide-footer">
+          <div
+            style="
+              font-family: var(--font-sans);
+              font-size: 18px;
+              font-weight: bold;
+              letter-spacing: 2px;
+            "
+          >
+            24BLC1100 <span style="color: var(--border)">|</span> PRAGYAN JAIN
+          </div>
+          <div class="slide-nav-dots" id="nav-dots">
+            <!-- Injected via JS -->
+          </div>
+          <div
+            style="
+              font-family: var(--font-mono);
+              font-size: 22px;
+              color: var(--accent-primary);
+            "
+            id="slide-counter"
+          >
+            01 / 12
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      /* =========================================================
+       PRESENTATION ENGINE LOGIC (SCALING & NAVIGATION)
+       ========================================================= */
+      const slides = document.querySelectorAll(".slide");
+      const totalSlides = slides.length;
+      let currentSlide = 0;
+
+      // Generate Nav Dots
+      const dotsContainer = document.getElementById("nav-dots");
+      slides.forEach((_, index) => {
+        const dot = document.createElement("div");
+        dot.className = "nav-dot";
+        if (index === 0) dot.classList.add("active");
+        dotsContainer.appendChild(dot);
+      });
+      const dots = document.querySelectorAll(".nav-dot");
+      const counter = document.getElementById("slide-counter");
+
+      function updateSlide(index) {
+        if (index < 0 || index >= totalSlides) return;
+
+        // Update DOM
+        slides[currentSlide].classList.remove("active");
+        dots[currentSlide].classList.remove("active");
+
+        currentSlide = index;
+
+        slides[currentSlide].classList.add("active");
+        dots[currentSlide].classList.add("active");
+
+        // Update Counter (Format: 01 / 12)
+        const numStr = (currentSlide + 1).toString().padStart(2, "0");
+        counter.innerHTML = `${numStr} <span style="color: var(--text-muted);">/ ${totalSlides}</span>`;
+      }
+
+      // Keyboard Navigation
+      document.addEventListener("keydown", (e) => {
+        if (
+          e.key === "ArrowRight" ||
+          e.key === "Space" ||
+          e.key === "n" ||
+          e.key === "N"
+        ) {
+          updateSlide(currentSlide + 1);
+        } else if (e.key === "ArrowLeft" || e.key === "p" || e.key === "P") {
+          updateSlide(currentSlide - 1);
+        } else if (e.key === "Home") {
+          updateSlide(0);
+        } else if (e.key === "End") {
+          updateSlide(totalSlides - 1);
+        }
+      });
+
+      // Viewport Scaling Engine (Guarantees NO SCROLLBARS & NO CLIPPING)
+      function scalePresentation() {
+        const presentation = document.getElementById("presentation");
+        const targetWidth = 1920;
+        const targetHeight = 1080;
+
+        const windowWidth = window.innerWidth;
+        const windowHeight = window.innerHeight;
+
+        // Calculate the scale required to fit inside the window
+        const scaleX = windowWidth / targetWidth;
+        const scaleY = windowHeight / targetHeight;
+        const scale = Math.min(scaleX, scaleY);
+
+        // Apply transform matrix
+        presentation.style.transform = `scale(${scale})`;
+      }
+
+      // Attach resize listener and initialize
+      window.addEventListener("resize", scalePresentation);
+      scalePresentation();
+    </script>
+  </body>
+</html>

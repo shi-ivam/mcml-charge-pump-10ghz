@@ -1,0 +1,36 @@
+
+simulator lang=spice
+.include "/opt/cadence/pdk/FreePDK45/ncsu_basekit/models/hspice/tran_models/models_nom/NMOS_VTG.inc"
+.include "/opt/cadence/pdk/FreePDK45/ncsu_basekit/models/hspice/tran_models/models_nom/PMOS_VTG.inc"
+
+.param supply=1.0
+
+Vdd vdd 0 'supply'
+Vgnd gnd 0 0
+
+MS2 n_top up_b vdd vdd PMOS_VTG W=170n L=45n
+MS1 n_bot dn gnd gnd NMOS_VTG W=360n L=45n
+Ci n_top n_bot 50f
+MS4_p vop up_b n_top vdd PMOS_VTG W=130n L=45n
+MS4_n vop up n_top gnd NMOS_VTG W=280n L=45n
+MS3_p vop dn_b n_bot vdd PMOS_VTG W=130n L=45n
+MS3_n vop dn n_bot gnd NMOS_VTG W=280n L=45n
+
+MM1 n_load1 n_load1 vdd vdd PMOS_VTG W=190n L=45n
+MM2 n_load2 n_load1 vdd vdd PMOS_VTG W=190n L=45n
+MM3 n_load1 up n_dummy vdd PMOS_VTG W=180n L=45n
+MM4 n_dummy dn_b n_tail gnd NMOS_VTG W=270n L=45n
+MS6 n_load2 up_b vop vdd PMOS_VTG W=180n L=45n
+MS5 vop dn n_tail gnd NMOS_VTG W=270n L=45n
+MM5 n_tail vdd gnd gnd NMOS_VTG W=480n L=45n
+
+CL vop gnd 300f
+.ic v(vop)=0.54
+
+// 10 GHz clocks (Period = 100 ps)
+Vup up gnd pulse(0 'supply' 50p 5p 5p 25p 100p)
+Vup_b up_b gnd pulse('supply' 0 50p 5p 5p 25p 100p)
+Vdn dn gnd 0
+Vdn_b dn_b gnd 'supply'
+
+.tran 100f 10n

@@ -1,0 +1,714 @@
+- generic [active] [ref=e1]:
+  - link "Jump to content" [ref=e2] [cursor=pointer]:
+    - /url: "#bodyContent"
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - navigation "Site" [ref=e6]:
+        - generic "Main menu" [ref=e7]:
+          - button "Main menu" [ref=e8] [cursor=pointer]
+      - link [ref=e12] [cursor=pointer]:
+        - /url: /wiki/Main_Page
+        - generic [ref=e13]:
+          - img "Wikipedia" [ref=e14]
+          - img "The Free Encyclopedia" [ref=e15]
+    - generic [ref=e16]:
+      - search [ref=e17]:
+        - link "Search" [ref=e18] [cursor=pointer]:
+          - /url: /wiki/Special:Search
+      - navigation "Personal tools" [ref=e21]:
+        - generic [ref=e22]:
+          - navigation "Appearance" [ref=e23]:
+            - generic "Change the appearance of the page's font size, width, and color" [ref=e24]:
+              - button "Appearance" [ref=e25] [cursor=pointer]
+              - generic [ref=e26]: Appearance
+          - list [ref=e31]:
+            - listitem [ref=e32]:
+              - link "Donate" [ref=e33] [cursor=pointer]:
+                - /url: https://donate.wikimedia.org/?wmf_source=donate&wmf_medium=sidebar&wmf_campaign=en.wikipedia.org&uselang=en
+            - listitem [ref=e34]:
+              - link "Create account" [ref=e35] [cursor=pointer]:
+                - /url: /w/index.php?title=Special:CreateAccount&returnto=Charge+pump
+            - listitem [ref=e36]:
+              - link "Log in" [ref=e37] [cursor=pointer]:
+                - /url: /w/index.php?title=Special:UserLogin&returnto=Charge+pump
+  - generic [ref=e39]:
+    - main [ref=e41]:
+      - generic [ref=e42]:
+        - navigation "Contents" [ref=e43]:
+          - generic "Table of Contents" [ref=e44]:
+            - button "Toggle the table of contents" [ref=e45] [cursor=pointer]
+            - generic [ref=e46]: Toggle the table of contents
+        - heading "Charge pump" [level=1] [ref=e49]
+        - generic [ref=e51]:
+          - button "11 languages" [ref=e52] [cursor=pointer]
+          - generic [ref=e53]: 11 languages
+      - generic [ref=e57]:
+        - navigation "Namespaces" [ref=e59]:
+          - list [ref=e62]:
+            - listitem [ref=e63]:
+              - link "Article" [ref=e64] [cursor=pointer]:
+                - /url: /wiki/Charge_pump
+            - listitem [ref=e66]:
+              - link "Talk" [ref=e67] [cursor=pointer]:
+                - /url: /wiki/Talk:Charge_pump
+        - generic [ref=e69]:
+          - navigation "Views" [ref=e70]:
+            - list [ref=e73]:
+              - listitem [ref=e74]:
+                - link "Read" [ref=e75] [cursor=pointer]:
+                  - /url: /wiki/Charge_pump
+              - listitem [ref=e77]:
+                - link "Edit" [ref=e78] [cursor=pointer]:
+                  - /url: /w/index.php?title=Charge_pump&action=edit
+              - listitem [ref=e80]:
+                - link "View history" [ref=e81] [cursor=pointer]:
+                  - /url: /w/index.php?title=Charge_pump&action=history
+          - navigation "Page tools" [ref=e83]:
+            - generic [ref=e84]:
+              - button "Tools" [ref=e85] [cursor=pointer]
+              - generic [ref=e86]: Tools
+      - generic "Charge pump" [ref=e89]:
+        - generic [ref=e90]: From Wikipedia, the free encyclopedia
+        - generic [ref=e93]:
+          - generic [ref=e94]:
+            - generic [ref=e98]:
+              - text: This article includes a list of
+              - link "general references" [ref=e99] [cursor=pointer]:
+                - /url: https://en.wikipedia.org/wiki/Wikipedia:Citing_sources#General_references
+              - generic [ref=e100]:
+                - text: but lacks sufficient corresponding
+                - link "inline citations" [ref=e101] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/Wikipedia:Citing_sources#Inline_citations
+              - text: .
+              - generic [ref=e102]:
+                - text: Please help
+                - link "improve this article" [ref=e103] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/w/index.php?title=Charge_pump&action=edit
+                - text: by
+                - link "introducing" [ref=e104] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/Wikipedia:When_to_cite
+                - text: more precise citations.
+              - generic [ref=e105]: (November 2015)
+              - generic [ref=e108]:
+                - text: (
+                - link "Learn how and when to remove this message" [ref=e110] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/Help:Maintenance_template_removal
+                - text: )
+            - figure [ref=e111]:
+              - link [ref=e112] [cursor=pointer]:
+                - /url: https://en.wikipedia.org/wiki/File:Charge_pump,_2_stage.svg
+              - generic [ref=e114]:
+                - text: Two-stage charge pump with DC voltage supply and a pump control signal S
+                - subscript [ref=e115]: "0"
+            - figure [ref=e116]:
+              - link [ref=e117] [cursor=pointer]:
+                - /url: https://en.wikipedia.org/wiki/File:Dickson_voltage_multiplier.svg
+              - generic [ref=e119]:
+                - link "Dickson charge pump" [ref=e120] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/Voltage_multiplier#Dickson_charge_pump
+                - text: with diodes
+            - figure "Dickson charge pump with MOSFETs" [ref=e121]:
+              - link [ref=e122] [cursor=pointer]:
+                - /url: https://en.wikipedia.org/wiki/File:Dickson_MOSFET_voltage_multiplier.svg
+            - figure "PLL charge pump" [ref=e125]:
+              - link [ref=e126] [cursor=pointer]:
+                - /url: https://en.wikipedia.org/wiki/File:ChargePumpPLLCircuit.svg
+            - paragraph [ref=e129]:
+              - text: A charge pump is a kind of
+              - link "DC-to-DC converter" [ref=e130] [cursor=pointer]:
+                - /url: https://en.wikipedia.org/wiki/DC-to-DC_converter
+              - text: that uses
+              - link "capacitors" [ref=e131] [cursor=pointer]:
+                - /url: https://en.wikipedia.org/wiki/Capacitor
+              - text: for energetic charge storage to raise or lower
+              - link "voltage" [ref=e132] [cursor=pointer]:
+                - /url: https://en.wikipedia.org/wiki/Voltage
+              - text: . Charge-pump circuits are capable of high
+              - link "efficiencies" [ref=e133] [cursor=pointer]:
+                - /url: https://en.wikipedia.org/wiki/Electrical_efficiency
+              - text: ", sometimes as high as 90–95%, while being electrically simple circuits."
+          - region [ref=e134]:
+            - generic [ref=e135]:
+              - heading "Description" [level=2] [ref=e136]
+              - generic [ref=e137]:
+                - link "edit":
+                  - /url: /w/index.php?title=Charge_pump&action=edit&section=1
+            - paragraph [ref=e138]:
+              - text: Charge pumps use some form of switching device to control the connection of a supply voltage across a load through a capacitor in a two stage cycle. In the first stage a capacitor is connected across the supply, charging it to that same voltage. In the second stage the circuit is reconfigured so that the capacitor is in series with the supply and the load. This doubles the voltage across the load - the sum of the original supply and the capacitor voltages. The pulsing nature of the higher voltage switched output is often
+              - link "smoothed" [ref=e139] [cursor=pointer]:
+                - /url: https://en.wikipedia.org/wiki/Smoothing_capacitor
+              - text: by the use of an output capacitor.
+            - paragraph [ref=e140]:
+              - text: An external or secondary circuit drives the switching, typically at tens of kilo
+              - link "hertz" [ref=e141] [cursor=pointer]:
+                - /url: https://en.wikipedia.org/wiki/Hertz
+              - text: up to several megahertz. The high frequency minimizes the amount of capacitance required, as less charge needs to be stored and dumped in a shorter cycle.
+            - paragraph [ref=e142]:
+              - text: Charge pumps can double voltages, triple voltages, halve voltages, invert voltages, fractionally multiply or scale voltages (such as ×
+              - generic [ref=e143]: 3⁄2
+              - text: ", ×"
+              - generic [ref=e144]: 4⁄3
+              - text: ", ×"
+              - generic [ref=e145]: 2⁄3
+              - text: ", etc.) and generate arbitrary voltages by quickly alternating between modes, depending on the controller and circuit topology."
+            - paragraph [ref=e146]: They are commonly used in low-power electronics (such as mobile phones) to raise and lower voltages for different parts of the circuitry - minimizing power consumption by controlling supply voltages carefully.
+          - region [ref=e147]:
+            - generic [ref=e148]:
+              - heading "Terminology for PLL" [level=2] [ref=e149]
+              - generic [ref=e150]:
+                - link "edit":
+                  - /url: /w/index.php?title=Charge_pump&action=edit&section=2
+            - paragraph [ref=e151]:
+              - text: The term charge pump is also commonly used in
+              - link "phase-locked loop" [ref=e152] [cursor=pointer]:
+                - /url: https://en.wikipedia.org/wiki/Phase-locked_loop
+              - text: (PLL) circuits even though there is no pumping action involved unlike in the circuit discussed above. A PLL charge pump is merely a bipolar switched current source. This means that it can output positive and negative current pulses into the loop filter of the PLL. It cannot produce higher or lower voltages than its power and ground supply levels.
+          - region [ref=e153]:
+            - generic [ref=e154]:
+              - heading "Applications" [level=2] [ref=e155]
+              - generic [ref=e156]:
+                - link "edit":
+                  - /url: /w/index.php?title=Charge_pump&action=edit&section=3
+            - list [ref=e157]:
+              - listitem [ref=e158]:
+                - text: A common application for charge-pump circuits is in
+                - link "RS-232" [ref=e159] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/RS-232
+                - link "level shifters" [ref=e160] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/Logic_level
+                - text: ", where they are used to derive positive and negative voltages (often +10"
+                - link "V" [ref=e161] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/Volt
+                - text: and −10 V) from a single 5 V or 3 V
+                - link "power supply rail" [ref=e162] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/Power_supply_rail
+                - text: .
+              - listitem [ref=e163]:
+                - text: Charge pumps can also be used as
+                - link "LCD" [ref=e164] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/LCD
+                - text: or white-
+                - link "LED" [ref=e165] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/LED
+                - text: drivers, generating high bias voltages from a single low-voltage supply, such as a battery.
+              - listitem [ref=e166]:
+                - text: Charge pumps are extensively used in NMOS memories and microprocessors to generate a negative voltage "VBB" (about −3 V), which is connected to the substrate. This guarantees that all N+-to-substrate junctions are reversely biased by 3 V or more, decreasing junction capacitance and increasing circuit speed.
+                - superscript [ref=e167]:
+                  - link "[1]" [ref=e168] [cursor=pointer]:
+                    - /url: "#cite_note-1"
+              - listitem [ref=e170]:
+                - text: A charge pump providing a negative
+                - link "voltage spike" [ref=e171] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/Voltage_spike
+                - text: has been used in NES-compatible games not licensed by Nintendo in order to stun the
+                - link "Nintendo Entertainment System lockout chip" [ref=e172] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/10NES
+                - text: .
+                - superscript [ref=e173]:
+                  - link "[2]" [ref=e174] [cursor=pointer]:
+                    - /url: "#cite_note-2"
+              - listitem [ref=e176]:
+                - text: As of 2007, charge pumps are integrated into nearly all
+                - link "EEPROM" [ref=e177] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/EEPROM
+                - text: and
+                - link "flash-memory" [ref=e178] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/Flash_memory
+                - text: "integrated circuits. These devices require a high-voltage pulse to \"clean out\" any existing data in a particular memory cell before it can be written with a new value. Early EEPROM and flash-memory devices required two power supplies: +5 V (for reading) and +12 V (for erasing). As of 2007 , commercially available flash memory and EEPROM memory requires only one external power supply – generally 1.8 V or 3.3 V. A higher voltage, used to erase cells, is generated internally by an on-chip charge pump."
+              - listitem [ref=e179]:
+                - text: Charge pumps are used in
+                - link "H bridges" [ref=e180] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/H_bridge
+                - text: in high-side drivers for
+                - link "gate-driving" [ref=e181] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/Gate_driver
+                - text: high-side n-channel
+                - link "power MOSFETs" [ref=e182] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/Power_MOSFET
+                - text: and
+                - link "IGBTs" [ref=e183] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/IGBT
+                - text: . When the centre of a half bridge goes low, the capacitor is charged through a diode, and this charge is used to later drive the gate of the high-side FET a few volts above the source voltage so as to switch it on. This strategy works well, provided the bridge is regularly switched and avoids the complexity of having to run a separate power supply and permits the more efficient n-channel devices to be used for both switches. This circuit (requiring the periodic switching of the high-side FET) may also be called a "bootstrap" circuit, and some would differentiate between that and a charge pump (which would not require that switching).
+              - listitem [ref=e184]:
+                - text: High-voltage vertical deflection signal generation for
+                - link "cathode-ray tube" [ref=e185] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/Cathode-ray_tube
+                - text: (CRT) monitors, done for example with the TDA1670A integrated circuit. To achieve maximum deviation, a CRT coil needs around 50 V. Using a charge pump voltage doubler from an existing 24 V supply eliminates the need for another supply voltage.
+              - listitem [ref=e186]:
+                - text: Higher-power
+                - link "fast charge" [ref=e187] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/Charge_controller
+                - text: solutions for mobile devices rely on a charge pump instead of a
+                - link "buck converter" [ref=e188] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/Buck_converter
+                - text: to reduce the voltage, as higher efficiency reduces heat generation. The Samsung A23, which takes an input current of 3
+                - link "A" [ref=e189] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/Ampere
+                - text: ", can charge its internal battery packs at 6 A thanks to a 2:1 current pump."
+                - superscript [ref=e190]:
+                  - link "[3]" [ref=e191] [cursor=pointer]:
+                    - /url: "#cite_note-3"
+                - text: Oppo's 240
+                - link "W" [ref=e193] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/Watt
+                - link "SUPERVOOC" [ref=e194] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/VOOC
+                - text: goes further and uses three charge pumps in parallel (98% claimed efficiency
+                - superscript [ref=e195]:
+                  - link "[4]" [ref=e196] [cursor=pointer]:
+                    - /url: "#cite_note-4"
+                - text: ) to go from 24V/10A to 10V/24A, which is then taken by two parallel battery packs.
+                - superscript [ref=e198]:
+                  - link "[5]" [ref=e199] [cursor=pointer]:
+                    - /url: "#cite_note-5"
+          - region [ref=e201]:
+            - generic [ref=e202]:
+              - heading "See also" [level=2] [ref=e203]
+              - generic [ref=e204]:
+                - link "edit":
+                  - /url: /w/index.php?title=Charge_pump&action=edit&section=4
+            - list [ref=e205]:
+              - listitem [ref=e206]:
+                - link "Cockcroft–Walton generator" [ref=e207] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/Cockcroft–Walton_generator
+              - listitem [ref=e208]:
+                - link "Voltage multiplier" [ref=e209] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/Voltage_multiplier
+              - listitem [ref=e210]:
+                - link "Switched capacitor" [ref=e211] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/Switched_capacitor
+              - listitem [ref=e212]:
+                - link "Charge transfer switch" [ref=e213] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/Charge_transfer_switch
+              - listitem [ref=e214]:
+                - link "Voltage doubler" [ref=e215] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/Voltage_doubler
+          - region [ref=e216]:
+            - generic [ref=e217]:
+              - heading "References" [level=2] [ref=e218]
+              - generic [ref=e219]:
+                - link "edit":
+                  - /url: /w/index.php?title=Charge_pump&action=edit&section=5
+            - list [ref=e221]:
+              - listitem [ref=e222]:
+                - link "Jump up" [ref=e224] [cursor=pointer]:
+                  - /url: "#cite_ref-1"
+                  - text: ^
+                - text: Jenne, F. "Substrate Bias Circuit", US Patent 3794862A, Feb 26, 1974.
+              - listitem [ref=e225]:
+                - link "Jump up" [ref=e227] [cursor=pointer]:
+                  - /url: "#cite_ref-2"
+                  - text: ^
+                - generic [ref=e228]:
+                  - text: Kevin Horton.
+                  - link "Colordreams Revision C" [ref=e229] [cursor=pointer]:
+                    - /url: http://kevtris.org/mappers/cdreams/revc.html
+                  - text: . Last modified 2007-09-30. Accessed 2011-09-15.
+              - listitem [ref=e230]:
+                - link "Jump up" [ref=e232] [cursor=pointer]:
+                  - /url: "#cite_ref-3"
+                  - text: ^
+                - generic [ref=e233]:
+                  - generic [ref=e234]:
+                    - text: Release, Press (25 July 2022).
+                    - link "\"Smartphones - 2:1 Charge Pump Direct Charger\"" [ref=e235] [cursor=pointer]:
+                      - /url: https://www.powerelectronicsnews.com/powering-smartphones-with-21-charge-pump-direct-charger-ic/
+                    - text: . Power Electronics News.
+                  - generic "ctx_ver=Z39.88-2004&rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&rft.genre=unknown&rft.jtitle=Power+Electronics+News&rft.atitle=Smartphones+-+2%3A1+Charge+Pump+Direct+Charger&rft.date=2022-07-25&rft.aulast=Release&rft.aufirst=Press&rft_id=https%3A%2F%2Fwww.powerelectronicsnews.com%2Fpowering-smartphones-with-21-charge-pump-direct-charger-ic%2F&rfr_id=info%3Asid%2Fen.wikipedia.org%3ACharge+pump"
+              - listitem [ref=e236]:
+                - link "Jump up" [ref=e238] [cursor=pointer]:
+                  - /url: "#cite_ref-4"
+                  - text: ^
+                - generic [ref=e239]:
+                  - generic [ref=e240]:
+                    - link "\"OPPO 超级闪充四大技术全面突破，布局多终端、多场景闪充生态 | OPPO 官方网站\"" [ref=e241] [cursor=pointer]:
+                      - /url: https://www.oppo.com/cn/newsroom/press/413/
+                    - text: . OPPO (in Chinese (China)).
+                  - generic "ctx_ver=Z39.88-2004&rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&rft.genre=unknown&rft.jtitle=OPPO&rft.atitle=OPPO+%E8%B6%85%E7%BA%A7%E9%97%AA%E5%85%85%E5%9B%9B%E5%A4%A7%E6%8A%80%E6%9C%AF%E5%85%A8%E9%9D%A2%E7%AA%81%E7%A0%B4%EF%BC%8C%E5%B8%83%E5%B1%80%E5%A4%9A%E7%BB%88%E7%AB%AF%E3%80%81%E5%A4%9A%E5%9C%BA%E6%99%AF%E9%97%AA%E5%85%85%E7%94%9F%E6%80%81+%7C+OPPO+%E5%AE%98%E6%96%B9%E7%BD%91%E7%AB%99&rft_id=https%3A%2F%2Fwww.oppo.com%2Fcn%2Fnewsroom%2Fpress%2F413%2F&rfr_id=info%3Asid%2Fen.wikipedia.org%3ACharge+pump"
+              - listitem [ref=e242]:
+                - link "Jump up" [ref=e244] [cursor=pointer]:
+                  - /url: "#cite_ref-5"
+                  - text: ^
+                - generic [ref=e245]:
+                  - generic [ref=e246]:
+                    - text: K., Balakumar (1 March 2022).
+                    - link "\"Oppo claims new levels in fast charging through 240W SUPERVOOC - We explain it\"" [ref=e247] [cursor=pointer]:
+                      - /url: https://www.techradar.com/news/oppo-claims-new-levels-in-fast-charging-through-240w-supervooc-we-explain-it
+                    - text: . TechRadar.
+                  - generic "ctx_ver=Z39.88-2004&rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&rft.genre=unknown&rft.jtitle=TechRadar&rft.atitle=Oppo+claims+new+levels+in+fast+charging+through+240W+SUPERVOOC+-+We+explain+it&rft.date=2022-03-01&rft.aulast=K.&rft.aufirst=Balakumar&rft_id=https%3A%2F%2Fwww.techradar.com%2Fnews%2Foppo-claims-new-levels-in-fast-charging-through-240w-supervooc-we-explain-it&rfr_id=info%3Asid%2Fen.wikipedia.org%3ACharge+pump"
+            - paragraph [ref=e248]: Applying the equivalent resistor concept to calculating the power losses in the charge pumps
+            - list [ref=e250]:
+              - listitem [ref=e251]:
+                - generic [ref=e252]:
+                  - link "Maxwell, J.C." [ref=e253] [cursor=pointer]:
+                    - /url: https://en.wikipedia.org/wiki/James_Clerk_Maxwell
+                  - text: "(1873). \"Intermittent current Art. 775, 776\". A Treatise on Electricity and Magnetism. Oxford: The Clarendon Press. pp. 420–5."
+                - generic "ctx_ver=Z39.88-2004&rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&rft.genre=bookitem&rft.atitle=Intermittent+current+Art.+775%2C+776&rft.btitle=A+Treatise+on+Electricity+and+Magnetism&rft.place=Oxford&rft.pages=420-5&rft.pub=The+Clarendon+Press&rft.date=1873&rft.aulast=Maxwell&rft.aufirst=J.C.&rfr_id=info%3Asid%2Fen.wikipedia.org%3ACharge+pump"
+              - listitem [ref=e254]:
+                - generic [ref=e255]:
+                  - text: "Singer, Z.; Emanuel, A.; Erlicki, M. S. (February 1972). \"Power regulation by means of a switched capacitor\". Proceedings of the Institution of Electrical Engineers. 119 (2): 149–152."
+                  - link "doi" [ref=e256] [cursor=pointer]:
+                    - /url: https://en.wikipedia.org/wiki/Doi_(identifier)
+                  - text: ":"
+                  - link "10.1049/piee.1972.0027" [ref=e257] [cursor=pointer]:
+                    - /url: https://doi.org/10.1049%2Fpiee.1972.0027
+                  - text: .
+                - generic "ctx_ver=Z39.88-2004&rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&rft.genre=article&rft.jtitle=Proceedings+of+the+Institution+of+Electrical+Engineers&rft.atitle=Power+regulation+by+means+of+a+switched+capacitor&rft.volume=119&rft.issue=2&rft.pages=149-152&rft.date=1972-02&rft_id=info%3Adoi%2F10.1049%2Fpiee.1972.0027&rft.aulast=Singer&rft.aufirst=Z.&rft.au=Emanuel%2C+A.&rft.au=Erlicki%2C+M.+S.&rfr_id=info%3Asid%2Fen.wikipedia.org%3ACharge+pump"
+              - listitem [ref=e258]:
+                - generic [ref=e259]:
+                  - text: van Steenwijk, G.; Hoen, K.; Wallinga, H. (1993).
+                  - link "\"Analysis and design of a charge pump circuit for high output current applications\"" [ref=e260] [cursor=pointer]:
+                    - /url: https://ieeexplore.ieee.org/document/5467932
+                  - text: . Proc. 19th European Solid-State Circuits Conference (ESSCIRC). Vol. 1. pp. 118–121.
+                - generic "ctx_ver=Z39.88-2004&rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&rft.genre=bookitem&rft.atitle=Analysis+and+design+of+a+charge+pump+circuit+for+high+output+current+applications&rft.btitle=Proc.+19th+European+Solid-State+Circuits+Conference+%28ESSCIRC%29&rft.pages=118-121&rft.date=1993&rft.aulast=van+Steenwijk&rft.aufirst=G.&rft.au=Hoen%2C+K.&rft.au=Wallinga%2C+H.&rft_id=https%3A%2F%2Fieeexplore.ieee.org%2Fdocument%2F5467932&rfr_id=info%3Asid%2Fen.wikipedia.org%3ACharge+pump"
+              - listitem [ref=e261]:
+                - generic [ref=e262]:
+                  - text: "Kimball, J.W.; Krein, P.T.; Cahill, K.R. (December 2005). \"Modeling of capacitor impedance in switching converters\". IEEE Power Electronics Letters. 3 (4): 136–140."
+                  - link "Bibcode" [ref=e263] [cursor=pointer]:
+                    - /url: https://en.wikipedia.org/wiki/Bibcode_(identifier)
+                  - text: ":"
+                  - link "2005IPEL....3..136K" [ref=e264] [cursor=pointer]:
+                    - /url: https://ui.adsabs.harvard.edu/abs/2005IPEL....3..136K
+                  - text: .
+                  - link "doi" [ref=e265] [cursor=pointer]:
+                    - /url: https://en.wikipedia.org/wiki/Doi_(identifier)
+                  - text: ":"
+                  - link "10.1109/LPEL.2005.863603" [ref=e266] [cursor=pointer]:
+                    - /url: https://doi.org/10.1109%2FLPEL.2005.863603
+                  - text: .
+                  - link "S2CID" [ref=e267] [cursor=pointer]:
+                    - /url: https://en.wikipedia.org/wiki/S2CID_(identifier)
+                  - link "27467492" [ref=e268] [cursor=pointer]:
+                    - /url: https://api.semanticscholar.org/CorpusID:27467492
+                  - text: .
+                - generic "ctx_ver=Z39.88-2004&rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&rft.genre=article&rft.jtitle=IEEE+Power+Electronics+Letters&rft.atitle=Modeling+of+capacitor+impedance+in+switching+converters&rft.volume=3&rft.issue=4&rft.pages=136-140&rft.date=2005-12&rft_id=https%3A%2F%2Fapi.semanticscholar.org%2FCorpusID%3A27467492%23id-name%3DS2CID&rft_id=info%3Adoi%2F10.1109%2FLPEL.2005.863603&rft_id=info%3Abibcode%2F2005IPEL....3..136K&rft.aulast=Kimball&rft.aufirst=J.W.&rft.au=Krein%2C+P.T.&rft.au=Cahill%2C+K.R.&rfr_id=info%3Asid%2Fen.wikipedia.org%3ACharge+pump"
+              - listitem [ref=e269]:
+                - generic [ref=e270]:
+                  - text: Kiyoo Itoh; Masashi Horiguchi; Hitoshi Tanaka (2007).
+                  - link "Ultra-Low Voltage Nano-Scale Memories" [ref=e271] [cursor=pointer]:
+                    - /url: https://books.google.com/books?id=gWZ-wlVsekcC&pg=PR2
+                  - text: . Series on Integrated Circuits and Systems. Springer.
+                  - link "ISBN" [ref=e272] [cursor=pointer]:
+                    - /url: https://en.wikipedia.org/wiki/ISBN_(identifier)
+                  - link "978-0-387-68853-4" [ref=e273] [cursor=pointer]:
+                    - /url: https://en.wikipedia.org/wiki/Special:BookSources/978-0-387-68853-4
+                  - text: .
+                - generic "ctx_ver=Z39.88-2004&rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&rft.genre=book&rft.btitle=Ultra-Low+Voltage+Nano-Scale+Memories&rft.series=Series+on+Integrated+Circuits+and+Systems&rft.pub=Springer&rft.date=2007&rft.isbn=978-0-387-68853-4&rft.au=Kiyoo+Itoh&rft.au=Masashi+Horiguchi&rft.au=Hitoshi+Tanaka&rft_id=https%3A%2F%2Fbooks.google.com%2Fbooks%3Fid%3DgWZ-wlVsekcC%26pg%3DPR2&rfr_id=info%3Asid%2Fen.wikipedia.org%3ACharge+pump"
+              - listitem [ref=e274]:
+                - generic [ref=e275]:
+                  - text: Seeman, M.D.; Sanders, S.R. (March 2008). "Analysis and Optimization of Switched-Capacitor DC–DC Converters".
+                  - link "IEEE Transactions on Power Electronics" [ref=e277] [cursor=pointer]:
+                    - /url: https://en.wikipedia.org/wiki/IEEE_Transactions_on_Power_Electronics
+                  - text: ". 23 (2): 841–851."
+                  - link "Bibcode" [ref=e278] [cursor=pointer]:
+                    - /url: https://en.wikipedia.org/wiki/Bibcode_(identifier)
+                  - text: ":"
+                  - link "2008ITPE...23..841S" [ref=e279] [cursor=pointer]:
+                    - /url: https://ui.adsabs.harvard.edu/abs/2008ITPE...23..841S
+                  - text: .
+                  - link "doi" [ref=e280] [cursor=pointer]:
+                    - /url: https://en.wikipedia.org/wiki/Doi_(identifier)
+                  - text: ":"
+                  - link "10.1109/TPEL.2007.915182" [ref=e281] [cursor=pointer]:
+                    - /url: https://doi.org/10.1109%2FTPEL.2007.915182
+                  - text: .
+                  - link "S2CID" [ref=e282] [cursor=pointer]:
+                    - /url: https://en.wikipedia.org/wiki/S2CID_(identifier)
+                  - link "7011962" [ref=e283] [cursor=pointer]:
+                    - /url: https://api.semanticscholar.org/CorpusID:7011962
+                  - text: .
+                - generic "ctx_ver=Z39.88-2004&rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&rft.genre=article&rft.jtitle=IEEE+Transactions+on+Power+Electronics&rft.atitle=Analysis+and+Optimization+of+Switched-Capacitor+DC%E2%80%93DC+Converters&rft.volume=23&rft.issue=2&rft.pages=841-851&rft.date=2008-03&rft_id=https%3A%2F%2Fapi.semanticscholar.org%2FCorpusID%3A7011962%23id-name%3DS2CID&rft_id=info%3Adoi%2F10.1109%2FTPEL.2007.915182&rft_id=info%3Abibcode%2F2008ITPE...23..841S&rft.aulast=Seeman&rft.aufirst=M.D.&rft.au=Sanders%2C+S.R.&rfr_id=info%3Asid%2Fen.wikipedia.org%3ACharge+pump"
+              - listitem [ref=e284]:
+                - generic [ref=e285]:
+                  - text: Ben-Yaakov, S.; Evzelman, M. (2009). "Generic and unified model of Switched Capacitor Converters". 2009 IEEE Energy Conversion Congress and Exposition. pp. 3501–8.
+                  - link "doi" [ref=e286] [cursor=pointer]:
+                    - /url: https://en.wikipedia.org/wiki/Doi_(identifier)
+                  - text: ":"
+                  - link "10.1109/ECCE.2009.5316060" [ref=e287] [cursor=pointer]:
+                    - /url: https://doi.org/10.1109%2FECCE.2009.5316060
+                  - text: .
+                  - link "ISBN" [ref=e288] [cursor=pointer]:
+                    - /url: https://en.wikipedia.org/wiki/ISBN_(identifier)
+                  - link "978-1-4244-2893-9" [ref=e289] [cursor=pointer]:
+                    - /url: https://en.wikipedia.org/wiki/Special:BookSources/978-1-4244-2893-9
+                  - text: .
+                  - link "S2CID" [ref=e290] [cursor=pointer]:
+                    - /url: https://en.wikipedia.org/wiki/S2CID_(identifier)
+                  - link "9116733" [ref=e291] [cursor=pointer]:
+                    - /url: https://api.semanticscholar.org/CorpusID:9116733
+                  - text: .
+                - generic "ctx_ver=Z39.88-2004&rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&rft.genre=bookitem&rft.atitle=Generic+and+unified+model+of+Switched+Capacitor+Converters&rft.btitle=2009+IEEE+Energy+Conversion+Congress+and+Exposition&rft.pages=3501-8&rft.date=2009&rft_id=https%3A%2F%2Fapi.semanticscholar.org%2FCorpusID%3A9116733%23id-name%3DS2CID&rft_id=info%3Adoi%2F10.1109%2FECCE.2009.5316060&rft.isbn=978-1-4244-2893-9&rft.aulast=Ben-Yaakov&rft.aufirst=S.&rft.au=Evzelman%2C+M.&rfr_id=info%3Asid%2Fen.wikipedia.org%3ACharge+pump"
+              - listitem [ref=e292]:
+                - generic [ref=e293]:
+                  - text: "Ben-Yaakov, S. (January 2012). \"On the Influence of Switch Resistances on Switched-Capacitor Converter Losses\". IEEE Transactions on Industrial Electronics. 59 (1): 638–640."
+                  - link "Bibcode" [ref=e294] [cursor=pointer]:
+                    - /url: https://en.wikipedia.org/wiki/Bibcode_(identifier)
+                  - text: ":"
+                  - link "2012ITIE...59..638B" [ref=e295] [cursor=pointer]:
+                    - /url: https://ui.adsabs.harvard.edu/abs/2012ITIE...59..638B
+                  - text: .
+                  - link "doi" [ref=e296] [cursor=pointer]:
+                    - /url: https://en.wikipedia.org/wiki/Doi_(identifier)
+                  - text: ":"
+                  - link "10.1109/TIE.2011.2146219" [ref=e297] [cursor=pointer]:
+                    - /url: https://doi.org/10.1109%2FTIE.2011.2146219
+                  - text: .
+                  - link "S2CID" [ref=e298] [cursor=pointer]:
+                    - /url: https://en.wikipedia.org/wiki/S2CID_(identifier)
+                  - link "18901243" [ref=e299] [cursor=pointer]:
+                    - /url: https://api.semanticscholar.org/CorpusID:18901243
+                  - text: .
+                - generic "ctx_ver=Z39.88-2004&rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&rft.genre=article&rft.jtitle=IEEE+Transactions+on+Industrial+Electronics&rft.atitle=On+the+Influence+of+Switch+Resistances+on+Switched-Capacitor+Converter+Losses&rft.volume=59&rft.issue=1&rft.pages=638-640&rft.date=2012-01&rft_id=https%3A%2F%2Fapi.semanticscholar.org%2FCorpusID%3A18901243%23id-name%3DS2CID&rft_id=info%3Adoi%2F10.1109%2FTIE.2011.2146219&rft_id=info%3Abibcode%2F2012ITIE...59..638B&rft.aulast=Ben-Yaakov&rft.aufirst=S.&rfr_id=info%3Asid%2Fen.wikipedia.org%3ACharge+pump"
+            - paragraph [ref=e300]: Charge pumps where the voltages across the capacitors follow the binary number system
+            - list [ref=e302]:
+              - listitem [ref=e303]:
+                - generic [ref=e304]: Ueno, F.; Inoue, T.; Oota, I. (1986). "Realization of a new switched-capacitor transformer with a step-up transformer ratio 2n–1 using n capacitors". IEEE International Symposium on Circuits and Systems (ISCAS). pp. 805–8.
+                - generic "ctx_ver=Z39.88-2004&rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&rft.genre=bookitem&rft.atitle=Realization+of+a+new+switched-capacitor+transformer+with+a+step-up+transformer+ratio+2n%E2%80%931+using+n+capacitors&rft.btitle=IEEE+International+Symposium+on+Circuits+and+Systems+%28ISCAS%29&rft.pages=805-8&rft.date=1986&rft.aulast=Ueno&rft.aufirst=F.&rft.au=Inoue%2C+T.&rft.au=Oota%2C+I.&rfr_id=info%3Asid%2Fen.wikipedia.org%3ACharge+pump"
+              - listitem [ref=e305]:
+                - generic [ref=e306]:
+                  - text: "Starzyk, J.A.; Ying-Wei Jan; Fengjing Qiu (March 2001). \"A DC-DC charge pump design based on voltage doublers\". IEEE Transactions on Circuits and Systems I: Fundamental Theory and Applications. 48 (3): 350–9."
+                  - link "Bibcode" [ref=e307] [cursor=pointer]:
+                    - /url: https://en.wikipedia.org/wiki/Bibcode_(identifier)
+                  - text: ":"
+                  - link "2001ITCSR..48..350S" [ref=e308] [cursor=pointer]:
+                    - /url: https://ui.adsabs.harvard.edu/abs/2001ITCSR..48..350S
+                  - text: .
+                  - link "doi" [ref=e309] [cursor=pointer]:
+                    - /url: https://en.wikipedia.org/wiki/Doi_(identifier)
+                  - text: ":"
+                  - link "10.1109/81.915390" [ref=e310] [cursor=pointer]:
+                    - /url: https://doi.org/10.1109%2F81.915390
+                  - text: .
+                - generic "ctx_ver=Z39.88-2004&rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&rft.genre=article&rft.jtitle=IEEE+Transactions+on+Circuits+and+Systems+I%3A+Fundamental+Theory+and+Applications&rft.atitle=A+DC-DC+charge+pump+design+based+on+voltage+doublers&rft.volume=48&rft.issue=3&rft.pages=350-9&rft.date=2001-03&rft_id=info%3Adoi%2F10.1109%2F81.915390&rft_id=info%3Abibcode%2F2001ITCSR..48..350S&rft.aulast=Starzyk&rft.aufirst=J.A.&rft.au=Ying-Wei+Jan&rft.au=Fengjing+Qiu&rfr_id=info%3Asid%2Fen.wikipedia.org%3ACharge+pump"
+              - listitem [ref=e311]:
+                - generic [ref=e312]:
+                  - text: "Fang Lin Luo; Hong Ye (June 2004). \"Positive output multiple-lift push-pull switched-capacitor Luo-converters\". IEEE Transactions on Industrial Electronics. 51 (3): 594–602."
+                  - link "Bibcode" [ref=e313] [cursor=pointer]:
+                    - /url: https://en.wikipedia.org/wiki/Bibcode_(identifier)
+                  - text: ":"
+                  - link "2004ITIE...51..594L" [ref=e314] [cursor=pointer]:
+                    - /url: https://ui.adsabs.harvard.edu/abs/2004ITIE...51..594L
+                  - text: .
+                  - link "doi" [ref=e315] [cursor=pointer]:
+                    - /url: https://en.wikipedia.org/wiki/Doi_(identifier)
+                  - text: ":"
+                  - link "10.1109/TIE.2004.825344" [ref=e316] [cursor=pointer]:
+                    - /url: https://doi.org/10.1109%2FTIE.2004.825344
+                  - text: .
+                  - link "S2CID" [ref=e317] [cursor=pointer]:
+                    - /url: https://en.wikipedia.org/wiki/S2CID_(identifier)
+                  - link "22202569" [ref=e318] [cursor=pointer]:
+                    - /url: https://api.semanticscholar.org/CorpusID:22202569
+                  - text: .
+                - generic "ctx_ver=Z39.88-2004&rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&rft.genre=article&rft.jtitle=IEEE+Transactions+on+Industrial+Electronics&rft.atitle=Positive+output+multiple-lift+push-pull+switched-capacitor+Luo-converters&rft.volume=51&rft.issue=3&rft.pages=594-602&rft.date=2004-06&rft_id=https%3A%2F%2Fapi.semanticscholar.org%2FCorpusID%3A22202569%23id-name%3DS2CID&rft_id=info%3Adoi%2F10.1109%2FTIE.2004.825344&rft_id=info%3Abibcode%2F2004ITIE...51..594L&rft.au=Fang+Lin+Luo&rft.au=Hong+Ye&rfr_id=info%3Asid%2Fen.wikipedia.org%3ACharge+pump"
+              - listitem [ref=e319]:
+                - generic [ref=e320]:
+                  - text: Ben-Yaakov, S.; Kushnerov, A. (2009). "Algebraic foundation of self adjusting Switched Capacitors Converters". 2009 IEEE Energy Conversion Congress and Exposition. pp. 1582–9.
+                  - link "doi" [ref=e321] [cursor=pointer]:
+                    - /url: https://en.wikipedia.org/wiki/Doi_(identifier)
+                  - text: ":"
+                  - link "10.1109/ECCE.2009.5316143" [ref=e322] [cursor=pointer]:
+                    - /url: https://doi.org/10.1109%2FECCE.2009.5316143
+                  - text: .
+                  - link "ISBN" [ref=e323] [cursor=pointer]:
+                    - /url: https://en.wikipedia.org/wiki/ISBN_(identifier)
+                  - link "978-1-4244-2893-9" [ref=e324] [cursor=pointer]:
+                    - /url: https://en.wikipedia.org/wiki/Special:BookSources/978-1-4244-2893-9
+                  - text: .
+                  - link "S2CID" [ref=e325] [cursor=pointer]:
+                    - /url: https://en.wikipedia.org/wiki/S2CID_(identifier)
+                  - link "12915415" [ref=e326] [cursor=pointer]:
+                    - /url: https://api.semanticscholar.org/CorpusID:12915415
+                  - text: .
+                - generic "ctx_ver=Z39.88-2004&rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&rft.genre=bookitem&rft.atitle=Algebraic+foundation+of+self+adjusting+Switched+Capacitors+Converters&rft.btitle=2009+IEEE+Energy+Conversion+Congress+and+Exposition&rft.pages=1582-9&rft.date=2009&rft_id=https%3A%2F%2Fapi.semanticscholar.org%2FCorpusID%3A12915415%23id-name%3DS2CID&rft_id=info%3Adoi%2F10.1109%2FECCE.2009.5316143&rft.isbn=978-1-4244-2893-9&rft.aulast=Ben-Yaakov&rft.aufirst=S.&rft.au=Kushnerov%2C+A.&rfr_id=info%3Asid%2Fen.wikipedia.org%3ACharge+pump"
+              - listitem [ref=e327]:
+                - generic [ref=e328]:
+                  - text: "Allasasmeh, Y.; Gregori, S. (November 2018). \"High-performance switched-capacitor boost-buck integrated power converters\". IEEE Transactions on Circuits and Systems I: Regular Papers. 65 (11): 3970–3983."
+                  - link "Bibcode" [ref=e329] [cursor=pointer]:
+                    - /url: https://en.wikipedia.org/wiki/Bibcode_(identifier)
+                  - text: ":"
+                  - link "2018ITCSR..65.3970A" [ref=e330] [cursor=pointer]:
+                    - /url: https://ui.adsabs.harvard.edu/abs/2018ITCSR..65.3970A
+                  - text: .
+                  - link "doi" [ref=e331] [cursor=pointer]:
+                    - /url: https://en.wikipedia.org/wiki/Doi_(identifier)
+                  - text: ":"
+                  - link "10.1109/TCSI.2018.2863239" [ref=e332] [cursor=pointer]:
+                    - /url: https://doi.org/10.1109%2FTCSI.2018.2863239
+                  - text: .
+                  - link "ISSN" [ref=e333] [cursor=pointer]:
+                    - /url: https://en.wikipedia.org/wiki/ISSN_(identifier)
+                  - link "1558-0806" [ref=e334] [cursor=pointer]:
+                    - /url: https://search.worldcat.org/issn/1558-0806
+                  - text: .
+                  - link "S2CID" [ref=e335] [cursor=pointer]:
+                    - /url: https://en.wikipedia.org/wiki/S2CID_(identifier)
+                  - link "52932169" [ref=e336] [cursor=pointer]:
+                    - /url: https://api.semanticscholar.org/CorpusID:52932169
+                  - text: .
+                - generic "ctx_ver=Z39.88-2004&rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Ajournal&rft.genre=article&rft.jtitle=IEEE+Transactions+on+Circuits+and+Systems+I%3A+Regular+Papers&rft.atitle=High-performance+switched-capacitor+boost-buck+integrated+power+converters&rft.volume=65&rft.issue=11&rft.pages=3970-3983&rft.date=2018-11&rft_id=info%3Adoi%2F10.1109%2FTCSI.2018.2863239&rft_id=https%3A%2F%2Fapi.semanticscholar.org%2FCorpusID%3A52932169%23id-name%3DS2CID&rft.issn=1558-0806&rft_id=info%3Abibcode%2F2018ITCSR..65.3970A&rft.aulast=Allasasmeh&rft.aufirst=Y.&rft.au=Gregori%2C+S.&rfr_id=info%3Asid%2Fen.wikipedia.org%3ACharge+pump"
+          - region [ref=e337]:
+            - generic [ref=e338]:
+              - heading "External links" [level=2] [ref=e339]
+              - generic [ref=e340]:
+                - link "edit":
+                  - /url: /w/index.php?title=Charge_pump&action=edit&section=6
+            - generic [ref=e342]:
+              - link [ref=e345] [cursor=pointer]:
+                - /url: https://en.wikipedia.org/wiki/File:Commons-logo.svg
+                - img "Wikimedia Commons logo" [ref=e346]
+              - generic [ref=e347]:
+                - text: Wikimedia Commons has media related to
+                - link "Charge pump circuits" [ref=e348] [cursor=pointer]:
+                  - /url: https://commons.wikimedia.org/wiki/Category:Charge%20pump%20circuits
+                - text: .
+            - generic [ref=e352]:
+              - text: This article's
+              - generic [ref=e353]:
+                - text: use of
+                - link "external links" [ref=e354] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/Wikipedia:External_links
+                - text: may not follow Wikipedia's policies or guidelines
+              - text: .
+              - generic [ref=e355]:
+                - text: Please
+                - link "improve this article" [ref=e356] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/w/index.php?title=Charge_pump&action=edit
+                - text: by removing
+                - link "excessive" [ref=e357] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/Wikipedia:What_Wikipedia_is_not#Wikipedia_is_not_a_mirror_or_a_repository_of_links,_images,_or_media_files
+                - text: or
+                - link "inappropriate" [ref=e358] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/Wikipedia:External_links
+                - text: external links, and converting useful links where appropriate into
+                - link "footnote references" [ref=e359] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/Wikipedia:Citing_sources
+                - text: .
+              - generic [ref=e360]: (September 2018)
+              - generic [ref=e363]:
+                - text: (
+                - link "Learn how and when to remove this message" [ref=e365] [cursor=pointer]:
+                  - /url: https://en.wikipedia.org/wiki/Help:Maintenance_template_removal
+                - text: )
+            - list [ref=e366]:
+              - listitem [ref=e367]:
+                - link "Charge Pump, inductorless, Voltage Regulators" [ref=e368] [cursor=pointer]:
+                  - /url: https://www.ti.com/power-management/non-isolated-dc-dc-switching-regulators/charge-pump-inductorless/products.html
+              - listitem [ref=e369]:
+                - link "On-chip High-Voltage Generator Design" [ref=e370] [cursor=pointer]:
+                  - /url: https://link.springer.com/book/10.1007/978-1-4614-3849-6
+              - listitem [ref=e371]:
+                - link "Charge Pump DC/DC Converters" [ref=e372] [cursor=pointer]:
+                  - /url: https://www.analog.com/en/product-category/inductorless-charge-pump-dc-dc-converters.html
+                - text: . Applications, circuits and solutions using inductorless (charge pump) dc/dc converters.
+              - listitem [ref=e373]:
+                - link "DC/DC Conversion without Inductors" [ref=e374] [cursor=pointer]:
+                  - /url: http://www.maxim-ic.com/app-notes/index.mvp/id/725
+                - text: . General description of charge pump operation; example applications using Maxim controllers.
+              - listitem [ref=e375]:
+                - 'link "Charge Pump Circuits: An Overview on Design Strategies and Topologies" [ref=e376] [cursor=pointer]':
+                  - /url: https://picture.iczhiku.com/resource/eetop/wYkRpwFlHrpHWnNB.pdf
+                - text: Tutorial by G. Palumbo and D. Pappalardo
+            - navigation [ref=e377]:
+              - table [ref=e378]:
+                - rowgroup [ref=e379]:
+                  - row [ref=e380]:
+                    - columnheader [ref=e381]:
+                      - button "[show]" [ref=e382] [cursor=pointer]
+                      - list [ref=e384]:
+                        - listitem [ref=e385]:
+                          - link "v" [ref=e386] [cursor=pointer]:
+                            - /url: https://en.wikipedia.org/wiki/Template:Electronic_components
+                          - text: ·
+                        - listitem [ref=e387]:
+                          - link "t" [ref=e388] [cursor=pointer]:
+                            - /url: https://en.wikipedia.org/wiki/Template_talk:Electronic_components
+                          - text: ·
+                        - listitem [ref=e389]:
+                          - link "e" [ref=e390] [cursor=pointer]:
+                            - /url: https://en.wikipedia.org/wiki/Special:EditPage/Template:Electronic_components
+                      - link "Electronic components" [ref=e392] [cursor=pointer]:
+                        - /url: https://en.wikipedia.org/wiki/Electronic_component
+                  - row: · · · · · · · · · · · · · · · · · · · · · · · · · · ( · ) · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · ·
+                  - row: · · · · · · · · · ·
+                  - row: · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · ·
+                  - row: · · · · · · · · · · ·
+                  - row: () · ·
+                  - row: ( · · ) · · · ( · ) · · · ·
+                  - row: () · · · · ( · )
+                  - row: · · · · ·
+        - generic [ref=e394]:
+          - link "Categories" [ref=e395] [cursor=pointer]:
+            - /url: /wiki/Help:Category
+          - text: ":"
+          - list [ref=e396]:
+            - listitem [ref=e397]:
+              - link "Electric power conversion" [ref=e398] [cursor=pointer]:
+                - /url: /wiki/Category:Electric_power_conversion
+            - listitem [ref=e399]:
+              - link "Voltage regulation" [ref=e400] [cursor=pointer]:
+                - /url: /wiki/Category:Voltage_regulation
+    - contentinfo [ref=e402]:
+      - list [ref=e403]:
+        - listitem [ref=e404]: This page was last edited on 9 July 2026, at 13:47 (UTC).
+        - listitem [ref=e405]:
+          - text: Page was rendered with
+          - link "Parsoid" [ref=e406] [cursor=pointer]:
+            - /url: https://www.mediawiki.org/wiki/Special:MyLanguage/Parsoid
+          - text: .
+        - listitem [ref=e407]:
+          - text: Text is available under the
+          - link "Creative Commons Attribution-ShareAlike 4.0 License" [ref=e408] [cursor=pointer]:
+            - /url: /wiki/Wikipedia:Text_of_the_Creative_Commons_Attribution-ShareAlike_4.0_International_License
+          - text: ; additional terms may apply. By using this site, you agree to the
+          - link "Terms of Use" [ref=e409] [cursor=pointer]:
+            - /url: https://foundation.wikimedia.org/wiki/Special:MyLanguage/Policy:Terms_of_Use
+          - text: and
+          - link "Privacy Policy" [ref=e410] [cursor=pointer]:
+            - /url: https://foundation.wikimedia.org/wiki/Special:MyLanguage/Policy:Privacy_policy
+          - text: . Wikipedia® is a registered trademark of the
+          - link "Wikimedia Foundation, Inc." [ref=e411] [cursor=pointer]:
+            - /url: https://wikimediafoundation.org/
+          - text: ", a non-profit organization."
+      - list:
+        - listitem [ref=e412]:
+          - link "Privacy policy" [ref=e413] [cursor=pointer]:
+            - /url: https://foundation.wikimedia.org/wiki/Special:MyLanguage/Policy:Privacy_policy
+        - listitem [ref=e414]:
+          - link "About Wikipedia" [ref=e415] [cursor=pointer]:
+            - /url: /wiki/Wikipedia:About
+        - listitem [ref=e416]:
+          - link "Disclaimers" [ref=e417] [cursor=pointer]:
+            - /url: /wiki/Wikipedia:General_disclaimer
+        - listitem [ref=e418]:
+          - link "Contact Wikipedia" [ref=e419] [cursor=pointer]:
+            - /url: //en.wikipedia.org/wiki/Wikipedia:Contact_us
+        - listitem [ref=e420]:
+          - link "Legal & safety contacts" [ref=e421] [cursor=pointer]:
+            - /url: https://foundation.wikimedia.org/wiki/Special:MyLanguage/Legal:Wikimedia_Foundation_Legal_and_Safety_Contact_Information
+        - listitem [ref=e422]:
+          - link "Code of Conduct" [ref=e423] [cursor=pointer]:
+            - /url: https://foundation.wikimedia.org/wiki/Special:MyLanguage/Policy:Universal_Code_of_Conduct
+        - listitem [ref=e424]:
+          - link "Developers" [ref=e425] [cursor=pointer]:
+            - /url: https://developer.wikimedia.org
+        - listitem [ref=e426]:
+          - link "Statistics" [ref=e427] [cursor=pointer]:
+            - /url: https://stats.wikimedia.org/#/en.wikipedia.org
+        - listitem [ref=e428]:
+          - link "Cookie statement" [ref=e429] [cursor=pointer]:
+            - /url: https://foundation.wikimedia.org/wiki/Special:MyLanguage/Policy:Cookie_statement
+        - listitem [ref=e430]:
+          - link "Mobile view" [ref=e431] [cursor=pointer]:
+            - /url: //en.wikipedia.org/w/index.php?title=Charge_pump&mobileaction=toggle_view_mobile
+      - list [ref=e432]:
+        - listitem [ref=e433]:
+          - link [ref=e434] [cursor=pointer]:
+            - /url: https://www.wikimedia.org/
+            - img "Wikimedia Foundation" [ref=e436]
+        - listitem [ref=e437]:
+          - link [ref=e438] [cursor=pointer]:
+            - /url: https://www.mediawiki.org/
+            - img "Powered by MediaWiki" [ref=e440]
+  - generic [ref=e441]:
+    - list

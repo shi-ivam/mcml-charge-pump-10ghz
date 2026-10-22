@@ -1,0 +1,6 @@
+simulator lang=spectre
+
+section mc
+model gpdk045_nmos1v bsim4 type=n vth0=0.35 u0=0.045 toxe=1.2e-9
+model gpdk045_pmos1v bsim4 type=p vth0=-0.35 u0=0.015 toxe=1.2e-9
+endsection mc

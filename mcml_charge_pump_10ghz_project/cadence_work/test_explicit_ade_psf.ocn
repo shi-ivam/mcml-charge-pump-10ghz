@@ -1,0 +1,4 @@
+printf("HAS_UP %L\n" getData("UP" ?result 'tran ?resultsDir "/home/shivam/simulation/tb_mcml_charge_pump/spectre/schematic/psf"))
+printf("UP16_NS %g\n" cross(getData("UP" ?result 'tran ?resultsDir "/home/shivam/simulation/tb_mcml_charge_pump/spectre/schematic/psf") 0.5 16 "rising")*1e9)
+printf("CHARGE_MEAN_PS %g\n" let((d a b sum n ti vlo vhi) d="/home/shivam/simulation/tb_mcml_charge_pump/spectre/schematic/psf" a=getData("UP" ?result 'tran ?resultsDir d) b=getData("Vop" ?result 'tran ?resultsDir d) sum=0.0 for(n 11 20 ti=cross(a 0.5 n "rising") vlo=value(b ti-10e-12) vhi=value(b ti+40e-12) sum=sum+cross(clip(b ti ti+40e-12) (vlo+vhi)/2 1 "rising")-ti) sum/10*1e12))
+exit()

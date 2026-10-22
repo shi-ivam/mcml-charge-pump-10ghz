@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 8: PVT and Reliability Analysis - Cadence Virtuoso Design</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+</head>
+<body>
+  <div class="deck-container">
+    <section class="slide active" id="slide-8">
+      <div class="slide-header">
+        <div class="slide-header-left">
+          <div class="slide-category">Fabrication Reliability</div>
+          <h1 class="slide-title">PVT and Reliability Analysis</h1>
+          <div class="slide-subtitle">Ensuring Circuit Robustness Across Process Corners, Voltage Tolerances, and Temperature Extremes</div>
+        </div>
+        <div class="slide-header-right">
+          <div class="slide-index-pill">08 / 10</div>
+        </div>
+      </div>
+
+      <div class="slide-body">
+        <div class="grid-3col" style="height: auto;">
+          <div class="card highlight">
+            <div class="card-header">
+              <span class="card-title">P — Process Corners</span>
+            </div>
+            <p style="font-size: 0.83rem;">
+              Fabricated MOSFET physical parameters deviate across silicon wafer runs. We test all standard PDK model corners:
+            </p>
+            <ul class="feature-list" style="font-size: 0.82rem; margin-top: 0.2rem;">
+              <li><strong>TT (Typical-Typical):</strong> Nominal target foundry silicon.</li>
+              <li><strong>FF (Fast-Fast):</strong> Lower $V_{th}$, higher mobility & speed.</li>
+              <li><strong>SS (Slow-Slow):</strong> Higher $V_{th}$, higher switch $R_{ON}$.</li>
+              <li><strong>FS / SF:</strong> Cross-skewed NMOS/PMOS corners.</li>
+            </ul>
+          </div>
+
+          <div class="card amber-highlight">
+            <div class="card-header">
+              <span class="card-title">V — Voltage Variations</span>
+            </div>
+            <p style="font-size: 0.83rem;">
+              Supply voltage is varied around nominal operating levels to guarantee robust operation:
+            </p>
+            <ul class="feature-list" style="font-size: 0.82rem; margin-top: 0.2rem;">
+              <li><strong>Nominal Supply:</strong> Baseline reference $V_{IN,nom}$.</li>
+              <li><strong>Low-Voltage:</strong> $V_{IN} - 10\%$ to $-20\%$ margin.</li>
+              <li><strong>High-Voltage:</strong> $V_{IN} + 10\%$ to $+20\%$ margin.</li>
+              <li><strong>Verification:</strong> Ensures proper startup & no breakdown.</li>
+            </ul>
+          </div>
+
+          <div class="card emerald-highlight">
+            <div class="card-header">
+              <span class="card-title">T — Temperature Extremes</span>
+            </div>
+            <p style="font-size: 0.83rem;">
+              Carrier mobility $\mu(T)$ and threshold voltage $V_{th}(T)$ degrade over temperature ranges:
+            </p>
+            <ul class="feature-list" style="font-size: 0.82rem; margin-top: 0.2rem;">
+              <li><strong>Low Temperature ($-40^\circ\text{C}$):</strong> Higher speed, higher leakage.</li>
+              <li><strong>Room Temperature ($27^\circ\text{C}$):</strong> Standard nominal testbench.</li>
+              <li><strong>High Temperature ($125^\circ\text{C}$):</strong> Thermal degradation & high $R_{ON}$.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="grid-2col" style="flex: 1;">
+          <div class="card" style="padding: 0.65rem;">
+            <img src="images/pvt_monte_carlo_analysis.png" alt="PVT and Monte Carlo Statistical Analysis" class="diagram-img" style="max-height: 220px;">
+          </div>
+
+          <div class="approval-quote-box" style="display: flex; flex-direction: column; justify-content: center;">
+            <div class="quote-tag">Reliability Thesis</div>
+            <div class="quote-body">
+              <strong>“Does the optimized transistor-level design remain fully functional and within spec when MOS characteristics, supply voltage, and temperature change simultaneously?”</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <div class="footer-left">
+          <span>PVT Corner & Monte Carlo Analysis</span>
+        </div>
+        <div class="footer-center">
+          <a href="slide-1.html" class="nav-dot"></a>
+          <a href="slide-2.html" class="nav-dot"></a>
+          <a href="slide-3.html" class="nav-dot"></a>
+          <a href="slide-4.html" class="nav-dot"></a>
+          <a href="slide-5.html" class="nav-dot"></a>
+          <a href="slide-6.html" class="nav-dot"></a>
+          <a href="slide-7.html" class="nav-dot"></a>
+          <a href="slide-8.html" class="nav-dot active"></a>
+          <a href="slide-9.html" class="nav-dot"></a>
+          <a href="slide-10.html" class="nav-dot"></a>
+        </div>
+        <div class="footer-right">
+          <kbd>←</kbd> <kbd>→</kbd> Navigate
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="nav-controls">
+    <a href="index.html" class="nav-btn" title="View Full Deck">Deck</a>
+    <a href="slide-7.html" class="nav-btn" title="Previous Slide">◀</a>
+    <a href="slide-9.html" class="nav-btn" title="Next Slide">▶</a>
+  </div>
+
+  <script>
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') {
+        window.location.href = 'slide-9.html';
+      } else if (e.key === 'ArrowLeft' || e.key === 'Backspace') {
+        window.location.href = 'slide-7.html';
+      }
+    });
+  </script>
+</body>
+</html>

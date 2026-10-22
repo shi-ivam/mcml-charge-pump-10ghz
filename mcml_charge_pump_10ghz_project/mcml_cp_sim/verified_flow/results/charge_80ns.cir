@@ -1,0 +1,38 @@
+* Verified charge from Virtuoso shivam/tb_mcml_charge_pump
+* FreePDK45 nominal VTG replaces simplified gpdk045 Spectre models.
+.include "/home/shivam/cadence/pdk/FreePDK45/ncsu_basekit/models/hspice/tran_models/models_nom/NMOS_VTG.inc"
+.include "/home/shivam/cadence/pdk/FreePDK45/ncsu_basekit/models/hspice/tran_models/models_nom/PMOS_VTG.inc"
+V_VDD Vdd 0 DC 1.0
+V_BIAS Vbias 0 DC 0.45
+V_UP UP 0 PULSE(0 1 0 5p 5p 25p 100p)
+V_UP_B UP_b 0 PULSE(1 0 0 5p 5p 25p 100p)
+V_DN DN 0 DC 0
+V_DN_B DN_b 0 DC 1
+M_S6 Vop UP_b n_load2 Vdd PMOS_VTG W=180n L=45n NF=1 AS=16.8f AD=16.8f PS=520n PD=520n NRD=1.16667 NRS=1.16667 SA=140n SB=140n SD=160n M=1
+M_M3 n_dummy UP n_load1 Vdd PMOS_VTG W=180n L=45n NF=1 AS=16.8f AD=16.8f PS=520n PD=520n NRD=1.16667 NRS=1.16667 SA=140n SB=140n SD=160n M=1
+M_M2 n_load2 n_load1 Vdd Vdd PMOS_VTG W=190n L=45n NF=1 AS=16.8f AD=16.8f PS=520n PD=520n NRD=1.16667 NRS=1.16667 SA=140n SB=140n SD=160n M=1
+M_M1 n_load1 n_load1 Vdd Vdd PMOS_VTG W=190n L=45n NF=1 AS=16.8f AD=16.8f PS=520n PD=520n NRD=1.16667 NRS=1.16667 SA=140n SB=140n SD=160n M=1
+M_S3_pmos Vop DN_b n_bot Vdd PMOS_VTG W=130n L=45n NF=1 AS=16.8f AD=16.8f PS=520n PD=520n NRD=1.16667 NRS=1.16667 SA=140n SB=140n SD=160n M=1
+M_S4_pmos Vop UP_b n_top Vdd PMOS_VTG W=130n L=45n NF=1 AS=16.8f AD=16.8f PS=520n PD=520n NRD=1.16667 NRS=1.16667 SA=140n SB=140n SD=160n M=1
+M_S2 n_top UP_b Vdd Vdd PMOS_VTG W=170n L=45n NF=1 AS=16.8f AD=16.8f PS=520n PD=520n NRD=1.16667 NRS=1.16667 SA=140n SB=140n SD=160n M=1
+M_M5 n_tail Vbias 0 0 NMOS_VTG W=480n L=45n NF=1 AS=16.8f AD=16.8f PS=520n PD=520n NRD=1.16667 NRS=1.16667 SA=140n SB=140n SD=160n M=1
+M_S5 Vop DN n_tail 0 NMOS_VTG W=270n L=45n NF=1 AS=16.8f AD=16.8f PS=520n PD=520n NRD=1.16667 NRS=1.16667 SA=140n SB=140n SD=160n M=1
+M_M4 n_dummy DN_b n_tail 0 NMOS_VTG W=270n L=45n NF=1 AS=16.8f AD=16.8f PS=520n PD=520n NRD=1.16667 NRS=1.16667 SA=140n SB=140n SD=160n M=1
+M_S3_nmos Vop DN n_bot 0 NMOS_VTG W=280n L=45n NF=1 AS=16.8f AD=16.8f PS=520n PD=520n NRD=1.16667 NRS=1.16667 SA=140n SB=140n SD=160n M=1
+M_S4_nmos Vop UP n_top 0 NMOS_VTG W=280n L=45n NF=1 AS=16.8f AD=16.8f PS=520n PD=520n NRD=1.16667 NRS=1.16667 SA=140n SB=140n SD=160n M=1
+M_S1 n_bot DN 0 0 NMOS_VTG W=360n L=45n NF=1 AS=16.8f AD=16.8f PS=520n PD=520n NRD=1.16667 NRS=1.16667 SA=140n SB=140n SD=160n M=1
+C_CL Vop 0 300f
+C_Ci n_top n_bot 50f
+.ic V(Vop)=0.54
+.options reltol=1e-3 vabstol=1e-6 iabstol=1e-12
+.temp 27
+.tran 0.5p 80ns 0 0.5p
+.save V(Vop) V(UP) V(UP_b) V(DN) V(DN_b) V(n_tail) V(Vdd) V(Vbias) I(V_VDD)
+.control
+set wr_singlescale
+set wr_vecnames
+run
+wrdata charge_80ns.dat v(vop) v(up) v(up_b) v(dn) v(dn_b) v(n_tail) v(vdd) v(vbias) i(V_VDD)
+quit
+.endc
+.end

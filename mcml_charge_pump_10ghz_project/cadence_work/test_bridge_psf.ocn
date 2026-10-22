@@ -1,0 +1,13 @@
+r = openResults("/home/shivam/simulation/tb_mcml_charge_pump/spectre/schematic/psf")
+printf("BRIDGE_RESULTS %L\n" r)
+selectResult('tran)
+foreach(sig list("Vop" "/Vop" "UP" "Vbias" "I(V_VDD)" "V_VDD:p")
+  w = getData(sig)
+  printf("BRIDGE_TRACE %s %L\n" sig w)
+  when(w
+    xv = drGetWaveformXVec(w)
+    yv = drGetWaveformYVec(w)
+    printf("BRIDGE_POINTS %s %d LAST_X %g LAST_Y %g\n" sig drVectorLength(xv) drGetElem(xv drVectorLength(xv)-1) drGetElem(yv drVectorLength(yv)-1))
+  )
+)
+exit()

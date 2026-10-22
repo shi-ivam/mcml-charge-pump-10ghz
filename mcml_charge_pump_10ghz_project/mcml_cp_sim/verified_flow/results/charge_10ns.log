@@ -1,0 +1,51 @@
+
+Note: No compatibility mode selected!
+
+
+Circuit: * verified charge from virtuoso shivam/tb_mcml_charge_pump
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+
+Initial Transient Solution
+--------------------------
+
+Node                                   Voltage
+----                                   -------
+vdd                                          1
+vbias                                     0.45
+up                                           0
+up_b                                         1
+dn                                           0
+dn_b                                         1
+vop                                       0.54
+n_load2                               0.999991
+n_dummy                              0.0540232
+n_load1                               0.542531
+n_bot                                0.0487562
+n_top                                 0.929255
+n_tail                                   0.037
+v_dn_b#branch                     -6.63505e-10
+v_dn#branch                        3.26628e-11
+v_up_b#branch                     -1.82341e-11
+v_up#branch                        1.76115e-10
+v_bias#branch                     -3.32786e-11
+v_vdd#branch                      -1.75089e-05
+
+ Reference value :  6.35750e-10
+ Reference value :  1.33535e-09
+ Reference value :  2.01625e-09
+ Reference value :  2.69125e-09
+ Reference value :  3.38975e-09
+ Reference value :  4.11525e-09
+ Reference value :  4.81825e-09
+ Reference value :  5.50825e-09
+ Reference value :  6.16325e-09
+ Reference value :  6.83535e-09
+ Reference value :  7.50075e-09
+ Reference value :  8.17825e-09
+ Reference value :  8.81825e-09
+ Reference value :  9.44375e-09
+No. of Data Rows : 21205
+ngspice-45.2 done

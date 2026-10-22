@@ -1,0 +1,3 @@
+load("/home/shivam/Projects/VLSI/mcml_charge_pump_10ghz_project/cadence_work/ade_ngspice_ui.il")
+printf("BRIDGE_UI_LOADED\n")
+exit()

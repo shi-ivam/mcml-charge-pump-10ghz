@@ -1,0 +1,3 @@
+projectDir = '"~/simulation"
+designInfo = '("shivam" "mcml_charge_pump" "schematic" "spectre")
+descriptionText = "10 GHz MCML Charge Pump Simulation State (Paper Fig 6a Replication)"

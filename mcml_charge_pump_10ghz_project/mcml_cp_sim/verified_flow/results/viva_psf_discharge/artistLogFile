@@ -1,0 +1,23 @@
+HEADER
+"PSFversion" "1.00"
+"Log Generator" "ngspice ADE bridge 1.0"
+"Log Time Stamp" "Thu Oct 22 19:20:30 2026"
+TYPE
+"analysisInst" STRUCT(
+"analysisType" STRING *
+"dataFile" STRING *
+"format" STRING *
+"parent" STRING *
+"sweepVariable" ARRAY ( * ) STRING *
+"description" STRING *
+)
+VALUE
+"tran" "analysisInst" (
+"tran"
+"tran.tran"
+"PSF"
+""
+()
+"ngspice 45.2 / FreePDK45 VTG, discharge, 10n"
+)
+END

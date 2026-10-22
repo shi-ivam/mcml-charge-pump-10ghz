@@ -1,0 +1,4 @@
+simulator('spectre)
+design("shivam" "mcml_charge_pump" "schematic")
+createNetlist(?display nil)
+exit()

@@ -1,0 +1,3 @@
+load("/home/shivam/Projects/VLSI/mcml_charge_pump_10ghz_project/mcml_cp_sim/verified_flow/results/ade_popup_ready.il")
+printf("BRIDGE_POPUP_SCRIPT_RETURNED\n")
+exit()

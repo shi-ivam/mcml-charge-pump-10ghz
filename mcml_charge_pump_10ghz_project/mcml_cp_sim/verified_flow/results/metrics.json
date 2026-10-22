@@ -1,0 +1,279 @@
+{
+  "provenance": {
+    "virtuoso_netlist": "/home/shivam/simulation/tb_mcml_charge_pump/spectre/schematic/netlist/input.scs",
+    "virtuoso_netlist_sha256": "592baf3651c09ad57d5200d7a04753760bf95a3f16e57a7612d44b21338dec59",
+    "models": [
+      {
+        "path": "/home/shivam/cadence/pdk/FreePDK45/ncsu_basekit/models/hspice/tran_models/models_nom/NMOS_VTG.inc",
+        "sha256": "3cb730470427d99b6d22ab4d029493fa949daa1040d2ed51179118263682a14c"
+      },
+      {
+        "path": "/home/shivam/cadence/pdk/FreePDK45/ncsu_basekit/models/hspice/tran_models/models_nom/PMOS_VTG.inc",
+        "sha256": "a7d95a2631897134d2f52a9fa8469aef4e7c6dd2a2b5a499fc08645da3465d4a"
+      }
+    ],
+    "simulator": "** ngspice-45.2 : Circuit level simulation program",
+    "model_substitution": "FreePDK45 nominal VTG replaces simplified gpdk045 Spectre models",
+    "virtuoso_source_mode": "charge"
+  },
+  "charging": {
+    "delay": {
+      "valid": true,
+      "mean_ps": 13.811382310972979,
+      "samples": [
+        {
+          "pulse": 11,
+          "input_s": 1.0025e-09,
+          "output_s": 1.0161444199903675e-09,
+          "delay_ps": 13.64441999036749,
+          "before_v": 0.597638743,
+          "after_v": 0.603088043
+        },
+        {
+          "pulse": 12,
+          "input_s": 1.1024999999999999e-09,
+          "output_s": 1.1161789234257676e-09,
+          "delay_ps": 13.678923425767726,
+          "before_v": 0.6030878615,
+          "after_v": 0.6084882650000001
+        },
+        {
+          "pulse": 13,
+          "input_s": 1.2025e-09,
+          "output_s": 1.2162144351524145e-09,
+          "delay_ps": 13.714435152414598,
+          "before_v": 0.6084880815,
+          "after_v": 0.6138405140000001
+        },
+        {
+          "pulse": 14,
+          "input_s": 1.3025e-09,
+          "output_s": 1.3162509337203115e-09,
+          "delay_ps": 13.750933720311481,
+          "before_v": 0.6138403284999999,
+          "after_v": 0.6191455345
+        },
+        {
+          "pulse": 15,
+          "input_s": 1.4024999999999999e-09,
+          "output_s": 1.4162884959857165e-09,
+          "delay_ps": 13.78849598571663,
+          "before_v": 0.6191453465000001,
+          "after_v": 0.6244039090000001
+        },
+        {
+          "pulse": 16,
+          "input_s": 1.5025e-09,
+          "output_s": 1.5163269612345594e-09,
+          "delay_ps": 13.82696123455946,
+          "before_v": 0.624403719,
+          "after_v": 0.6296160895
+        },
+        {
+          "pulse": 17,
+          "input_s": 1.6025e-09,
+          "output_s": 1.6163663036633035e-09,
+          "delay_ps": 13.866303663303485,
+          "before_v": 0.6296158974999999,
+          "after_v": 0.6347824105
+        },
+        {
+          "pulse": 18,
+          "input_s": 1.7024999999999999e-09,
+          "output_s": 1.7164064935376357e-09,
+          "delay_ps": 13.90649353763588,
+          "before_v": 0.6347822155,
+          "after_v": 0.6399031045
+        },
+        {
+          "pulse": 19,
+          "input_s": 1.8025e-09,
+          "output_s": 1.816447516059569e-09,
+          "delay_ps": 13.947516059569077,
+          "before_v": 0.6399029070000001,
+          "after_v": 0.6449783265
+        },
+        {
+          "pulse": 20,
+          "input_s": 1.9025e-09,
+          "output_s": 1.916489340340084e-09,
+          "delay_ps": 13.989340340083963,
+          "before_v": 0.6449781265000001,
+          "after_v": 0.6500081615
+        }
+      ]
+    },
+    "power": {
+      "power_w": 2.2528046595625045e-05,
+      "power_uw": 22.528046595625046,
+      "window_s": [
+        1e-09,
+        1e-08
+      ],
+      "mean_vdd_current_a": 2.2528046595625045e-05
+    }
+  },
+  "discharging": {
+    "delay": {
+      "valid": true,
+      "mean_ps": 15.447330120222142,
+      "samples": [
+        {
+          "pulse": 11,
+          "input_s": 1.0025e-09,
+          "output_s": 1.0175765011981257e-09,
+          "delay_ps": 15.076501198125658,
+          "before_v": 0.3947617085,
+          "after_v": 0.374335478
+        },
+        {
+          "pulse": 12,
+          "input_s": 1.1024999999999999e-09,
+          "output_s": 1.1176377835814037e-09,
+          "delay_ps": 15.137783581403829,
+          "before_v": 0.374335167,
+          "after_v": 0.354402012
+        },
+        {
+          "pulse": 13,
+          "input_s": 1.2025e-09,
+          "output_s": 1.217706408091351e-09,
+          "delay_ps": 15.20640809135097,
+          "before_v": 0.354401741,
+          "after_v": 0.335000205
+        },
+        {
+          "pulse": 14,
+          "input_s": 1.3025e-09,
+          "output_s": 1.3177828019034324e-09,
+          "delay_ps": 15.282801903432375,
+          "before_v": 0.33499997249999997,
+          "after_v": 0.316164482
+        },
+        {
+          "pulse": 15,
+          "input_s": 1.4024999999999999e-09,
+          "output_s": 1.4178671805938328e-09,
+          "delay_ps": 15.36718059383293,
+          "before_v": 0.31616428550000003,
+          "after_v": 0.2979238365
+        },
+        {
+          "pulse": 16,
+          "input_s": 1.5025e-09,
+          "output_s": 1.5179598691898153e-09,
+          "delay_ps": 15.45986918981537,
+          "before_v": 0.29792367550000004,
+          "after_v": 0.28030171
+        },
+        {
+          "pulse": 17,
+          "input_s": 1.6025e-09,
+          "output_s": 1.6180611314825889e-09,
+          "delay_ps": 15.561131482588863,
+          "before_v": 0.280301582,
+          "after_v": 0.2633160035
+        },
+        {
+          "pulse": 18,
+          "input_s": 1.7024999999999999e-09,
+          "output_s": 1.7181712165221633e-09,
+          "delay_ps": 15.671216522163435,
+          "before_v": 0.263315907,
+          "after_v": 0.246979375
+        },
+        {
+          "pulse": 19,
+          "input_s": 1.8025e-09,
+          "output_s": 1.818290600718126e-09,
+          "delay_ps": 15.790600718126143,
+          "before_v": 0.24697930750000002,
+          "after_v": 0.2312998785
+        },
+        {
+          "pulse": 20,
+          "input_s": 1.9025e-09,
+          "output_s": 1.918419807921382e-09,
+          "delay_ps": 15.919807921381834,
+          "before_v": 0.23129983850000002,
+          "after_v": 0.216281379
+        }
+      ]
+    },
+    "power": {
+      "power_w": 1.6096627426428188e-05,
+      "power_uw": 16.09662742642819,
+      "window_s": [
+        1e-09,
+        1e-08
+      ],
+      "mean_vdd_current_a": 1.6096627426428188e-05
+    }
+  },
+  "dynamic_range": {
+    "valid": false,
+    "charge_ref_a": 6.19760971e-05,
+    "discharge_ref_a": 0.000231310341,
+    "reference_errors_pct": [
+      0.0,
+      0.0,
+      115.47362707733741
+    ],
+    "criterion": "charge/discharge current variation <=10% of 0.5 V reference and UP/DN mismatch <=10%",
+    "sweep_step_v": 0.01,
+    "reason": "10% criterion fails at the 0.5 V reference"
+  },
+  "reported_delay": {
+    "mode": "discharging",
+    "ps": 15.447330120222142
+  },
+  "paper_delay_comparison": {
+    "paper_tt_ps": 16.71,
+    "measured_ps": 15.447330120222142,
+    "measured_mode": "discharging",
+    "difference_ps": -1.2626698797778584,
+    "signed_error_pct": -7.556372709622133,
+    "absolute_error_pct": 7.556372709622133,
+    "illustrative_10pct_band_ps": [
+      15.039000000000001,
+      18.381000000000004
+    ],
+    "within_illustrative_10pct_band": true,
+    "comparability": "Numerical proximity only: paper Table 2 uses 10 pF; this DUT uses 300 fF and FreePDK45 nominal VTG; paper edge extraction is unspecified."
+  },
+  "pdp": {
+    "mode": "discharging",
+    "fj": 0.248649917678258
+  },
+  "output_swing": {
+    "charging": {
+      "settled": true,
+      "settling_tolerance_v": 1e-05,
+      "samples_v": [
+        0.9928751990000001,
+        0.9928752000000001,
+        0.9928752015,
+        0.9928752025,
+        0.9928752040000001
+      ],
+      "first_to_last_v": 4.999999969612645e-09,
+      "mean_v": 0.9928752014000001,
+      "stop_s": 8e-08
+    },
+    "discharging": {
+      "settled": true,
+      "settling_tolerance_v": 1e-05,
+      "samples_v": [
+        -0.0006483967390000001,
+        -0.0006483976430000002,
+        -0.0006483985465000001,
+        -0.0006483994500000002,
+        -0.0006484003535000001
+      ],
+      "first_to_last_v": 3.61450000008548e-09,
+      "mean_v": -0.0006483985464000001,
+      "stop_s": 8e-08
+    },
+    "output_swing_v": 0.9935235999464
+  }
+}

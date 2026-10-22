@@ -1,0 +1,597 @@
+
+=== PAGE 4 ===
+52 Analog Integrated Circuits and Signal Processing (2024) 118:49–66
+arrangement as  S3 and  S4 switches to transfer the charges. 
+The secondary charge pump is used to achieve the faster 
+current driving condition. It consists of  M1 and  M2 transis-
+tor as pmos load and  M5 transistor acts as current source.  S5 
+and  S6 switches provides necessary charging and discharg-
+ing currents to the capacitor  CL. The differential inputs of 
+up and down are applied to the transistors  M3,  M4,  S5 and 
+ S6 because of MOS current mode logic arrangement. Both 
+primary and secondary charge pumps having individual 
+charging and discharging paths which accelerates the lock -
+ing process quickly.
+The proposed charge pump operates in 3 conditions:
+(1) Idle condition
+(2) Charging condition
+(3) Discharging condition
+3.1  Operation of the proposed charge pump
+3.1.1  Idle condition “UP = DN = 0”
+When both Up and Down signals from PFD are 0 called 
+idle condition, then  S1,  S2,  S3 and  S4 switches in the primary 
+charge pump becomes OFF and  M3,  M4 becomes ON but 
+ S5 and  S6 becomes OFF hence no transition takes place  CL 
+remains in the previous state.
+3.1.2  Charging condition “UP = 1 and DN = 0”
+Figure  4 shows the operation and transient response of 
+charging condition. At this condition,  S2,  S4 and  S6 switches 
+becomes ON and  S1,  S3 and  S5 becomes OFF. Initially when 
+the charge pump receives input,  S2 PMOS transistor becomes 
+ON and  S1 NMOS transistor becomes  OFF. The transmission 
+gate switches  S4 becomes ON and  S3 becomes OFF. It trans-
+mits the charge from  S2 to the output node via  S4. At the same 
+time,  S6 PMOS transistor becomes ON and  S5 NMOS transis-
+tor becomes OFF. The transistor  S6 is connected to  VDD via 
+the PMOS load, when the input UP = 1and UP =0,  S6 PMOS 
+becomes ON. This transfers the charge to the output node. 
+Hence the load capacitor is charged to  VDD. The capacitor 
+charging waveform is shown in Fig. 6a.
+To achieve fast locking condition, and avoid transient 
+response delay both charge pumps are processed simulta-
+neously. Because of the load capacitor  CL is in charging 
+condition the output voltage  Vop swings up to a certain level 
+of  VDD. The simulated results shows that proposed charge 
+pump swings upto 980 mV for 1 V supply.
+Based on the literature, the required gate potential for the 
+transistor  M6 is,
+(11)VG6 ≤ Vdd − /uni007C.varVthp/uni007C.var
+Fig. 3  Proposed Faster current 
+driving charge pump (FCD-CP) 
+circuit
+Content courtesy of Springer Nature, terms of use apply. Rights reserved.
+=== PAGE 5 ===
+53Analog Integrated Circuits and Signal Processing (2024) 118:49–66 
+The drain current flows across the transistor  M6 is
+IFCD_up is the faster current driving charge pump current 
+which is used to drive the proposed circuit quickly during 
+up charging.
+The output potential at the charge pump is,
+(12)IFCD_up = 1
+2 /u1D707PCox
+/parenleft.s2W
+L
+/parenright.s2
+M6
+(Vdd − Vthp)2
+(13)Vop = Vop(0) + Ci
+Ci + CL
+/parenleft.s1Vdd − Vop(0)
+/parenright.s1+
+IFCD_CP
+Ci + CL
+3.1.3  Dis‑charging condition “UP = 0 and DN = 1”
+Figure  5 shows the operation and transient response of 
+discharging condition. At this condition,  S1,  S3 and  S5 
+switches becomes ON and  S2,  S4 and  S6 becomes OFF. 
+Initially when the charge pump receives input,  S1 NMOS 
+transistor becomes ON and  S2 PMOS transistor becomes 
+ OFF. The transmission gate switches  S3 becomes ON and 
+ S4 becomes OFF. It transmits the charge from  S1 to the 
+output node. At the same time, the  S5 NMOS transistor 
+becomes ON and  S6 PMOS becomes OFF. The transistor 
+ S5 is connected to GND via the NMOS current source, 
+Fig. 4  Proposed charge pump in the charging condition a Operation of the circuit b Transient Response of the proposed charge pump
+Content courtesy of Springer Nature, terms of use apply. Rights reserved.
+=== PAGE 6 ===
+54 Analog Integrated Circuits and Signal Processing (2024) 118:49–66
+when the input DN = 1 and DN =0,  S5 NMOS becomes 
+ON. This transfers the charge from  M5 to the output node. 
+Hence the load capacitor discharged to GND. The capaci-
+tor discharging waveform is shown in Fig.  6b. Because of 
+the load capacitor  CL is in discharging condition the output 
+voltage  Vop swings down to a certain level. The simulated 
+results shows that proposed charge pump swings down to 
+a maximum of 0 V .
+Based on the literature, the required gate potential for 
+the transistor  M5 is,
+The drain current flows across the transistor  M5 is
+IFCD_down is the faster current driving charge pump current 
+during down charging.
+The output potential at the charge pump is,
+(14)VG5 ≥ Vthn
+(15)IFCD_down = 1
+2 /u1D707nCox
+/parenleft.s2W
+L
+/parenright.s2
+M5
+(Vdd − Vthn)2
+3.1.4  Sizing of the transistors
+In the proposed charge pump design, the transistors are 
+sized based on the analysis performed with the power, delay 
+and noise for high frequency applications of PLL. Opti-
+mal transistor sizing involves, finding the balance between 
+speed, power and noise becomes a challenging one. Larger 
+transistors can offer faster switching but might consume 
+more power during the state changes. Smaller transis-
+tors generally exhibit lower parasitic capacitance, thereby 
+reducing the impact of thermal noise, a major contributor 
+to output noise and phase noise. So based on the simula-
+tion results obtained from the trial and error method of the 
+proposed charge pump, the transistor sizing is fixed with 
+the length of 45 nm and with the optimized width for better 
+power, delay and noise management. Figure 7a–c illustrates 
+(16)Vop = Vop(0)
+CL
+Ci + CL
+−
+IFCD_down
+Ci + CL
+Fig. 5  Proposed charge pump in the discharging condition a Operation of the circuit b Transient Response of the proposed charge pump
+Content courtesy of Springer Nature, terms of use apply. Rights reserved.
+=== PAGE 7 ===
+55Analog Integrated Circuits and Signal Processing (2024) 118:49–66 
+changes in power, delay and noise by increasing the width 
+of transistors  (S1,  S2,  M1 and  M2,  M1 and  S6,  M4 and  S5 and 
+ M5).
+For the transistors  S1 and  M5, as width increases the 
+power and phase noise reduces but delay increases. For the 
+transistors  M1 and  M2, as width increases delay decreases 
+but power reduces till 200 nm and after it increases and 
+noise slightly increases. For the transistors  M3 and  S6, 
+as width increases, delay is nearly constant, phase noise 
+slightly reduces but power increases as width hence width 
+is selected as minimum. Similarly, the analysis involves 
+adjusting the width of individual transistors to examine the 
+variations in power, delay and noise and finally the opti-
+mized transistor width is fixed for each transistor repre-
+sented in Table 1.
+4  Results and discussion
+The existing and the proposed charge pump circuits are veri-
+fied with the simulation environment represented in Table 2.
+4.1  Analysis of power, propagation delay 
+and power delay product
+MCML technique does not consumes much power at 
+higher frequencies. It can achieve faster switching speeds 
+because of the current steering techniques. Faster switch-
+ing can reduce the active time and consequently decrease 
+power consumption. Table  3 analyses the results of power, 
+PDP, delay and noise in different process corners. The 
+simulation results of existing and proposed charge pump 
+are achieved using cadence virtuoso with a voltage of 1 V 
+Fig. 6  Transient response at 10 GHz during a Charging condition b Discharging Condition
+Content courtesy of Springer Nature, terms of use apply. Rights reserved.
+=== PAGE 8 ===
+56 Analog Integrated Circuits and Signal Processing (2024) 118:49–66
+and temperature 27 °C at 45 nm CMOS technology. The 
+average power of the proposed circuit is 13.19 μW with 
+a minimum delay of 16.71 ps and a power delay product 
+of 0.225fJ.
+4.2  Monte Carlo analysis
+Figure  8 shows the histogram plot of Monte-Carlo simu-
+lations. It is clear that, the mean value of the power is 
+Fig. 7  Analysis of transistors width for a Average power b Propagation delay and c Phase noise
+Table 1  Sizing of transistors for the proposed charge pump
+Primary charge pump Secondary charge pump
+Transistors Width of the 
+transistors (nm)
+Transistors Width of the 
+transistors 
+(nm)
+S1 360 M1 and  M2 190
+S2 170 M3 and  S6 180
+S3,  S4 (pmos) 130 M4 and  S5 270
+S3,  S4 (nmos) 280 M5 480
+Table 2  Simulation environment
+CMOS technology 45 nm
+Supply voltage 0.8 V, 1 V, 1.2 V
+Process corner TT, FF, SS, FS, SF
+Capacitance 10 pF
+Temperature − 90 °C, − 40 °C, 
+0 °C, 27 °C, 
+90 °C
+Simulation environment Cadence Virtuoso
+Content courtesy of Springer Nature, terms of use apply. Rights reserved.
+=== PAGE 9 ===
+57Analog Integrated Circuits and Signal Processing (2024) 118:49–66 
+13.164 µW which is closer to the TT (Typical) results, that 
+represents the stability of the proposed design. The delay 
+value of the histogram plot represents 16.65 ps, power 
+delay product of 0.224 fJ, output noise of − 231.089 dB 
+and phase noise of − 247.524 dBc/Hz.
+4.3  Noise analysis
+Figure 9 shows the output noise and phase noise response 
+of the proposed charge pump. The phase noise analysis is 
+performed using the periodic steady state with beat fre-
+quency of 10 GHz [26]. The value of output noise and 
+phase noise are − 232.7 dB and − 247.2 dBc/Hz at TT 
+process corner with the temperature of 27 °C with the 
+voltage of 1 V from the proposed charge pump design. 
+Due to the effects of current mode signalling, bias cur -
+rent regulation and differential signalling in the MCML 
+circuits, it maintains a consistent output noise and phase 
+noise spectrum, irrespective of changes in temperature, 
+process corner and supply voltage.
+4.4  Parametric analysis at different temperatures
+The parametric analysis with different temperatures and 
+voltage values for the proposed charge pump are analyzed 
+using the Cadence Virtuoso tool at 45 nm CMOS tech-
+nology. The performance of average power, propagation 
+delay and noise values at different temperatures (− 90 °C, 
+− 40 °C, 0 °C, 27 °C, and 90 °C) and supply voltages 
+(0.8 V, 1 V and 1.2 V) of the proposed charge pump are 
+tabulated in Table  4. The parametric analysis with differ -
+ent temperatures at different supply voltages are shown 
+in Fig. 10.
+4.5  Effect of process, voltage and temperature 
+(PVT) on the proposed charge pump
+The performance of average power, propagation delay and 
+noise values at different temperatures (− 40 °C, 27 °C and 
+90 °C), supply voltages (0.8 V, 1 V and 1.2 V) and process 
+corners (TT, FF, SS) of the proposed charge pump are tabu-
+lated in Table 5. Figure 11 shows the analysis with different 
+process corners at different temperatures and Fig.  12 illus-
+trates the analysis with different supply voltages at different 
+process corners.
+4.6  Overall performance comparison
+Table  6 represents the performance improvement of the 
+proposed charge pump over the existing in percentage. 
+The comparison result in Table  7 shows actual simulation 
+results from the literatures. The layout representation of the 
+proposed charge pump is depicted in Fig.  13 and the area 
+consumption is 11.36 μm 2. The pre layout and post layout 
+comparison of the proposed charge pump is illustrated in 
+Fig. 14a, b for power and delay and Fig.  15a, b for output 
+noise and phase noise respectively.
+Table 3  Corner analysis of existing and proposed charge pump at 45 nm CMOS technology
+Different techniques of charge pump Different pro-
+cess corner
+Parameters of the charge pump
+Power (µW) Delay (ps) Power delay 
+product (fJ)
+Output noise (dB) Phase noise 
+(dBc/Hz)
+Existing charge pump [18] TT 21.82 71.34 1.56 − 214.8 − 227.6
+FF 30.56 63.78 1.95 − 212.3 − 224.8
+SS 13.1 77.19 1.01 − 218.5 − 222.9
+FS 18.27 69.49 1.27 − 215.7 − 228.5
+SF 22.38 75.61 1.69 − 211.1 − 220.3
+Proposed charge pump TT 13.19 16.71 0.221 − 232.7 − 247.2
+FF 18.44 11.54 0.213 − 234.1 − 245.3
+SS 6.01 21.39 0.128 − 232.4 − 243.7
+FS 8.22 13.76 0.113 − 232.7 − 247.8
+SF 15.4 18.45 0.284 − 232.8 − 241.4
+Content courtesy of Springer Nature, terms of use apply. Rights reserved.
+=== PAGE 10 ===
+58 Analog Integrated Circuits and Signal Processing (2024) 118:49–66
+Fig. 8  Monte carlo analysis of 
+the proposed charge pump a 
+Average power b Delay c PDP d 
+Output noise e Phase noise
+Content courtesy of Springer Nature, terms of use apply. Rights reserved.
+=== PAGE 11 ===
+59Analog Integrated Circuits and Signal Processing (2024) 118:49–66 
+Fig. 9  Noise analysis of the proposed charge pump a Output noise b Phase noise
+Table 4  Performance of power, 
+delay and noise at different 
+temperatures @ TT corner
+Vdd (V) Temperature 
+(°C)
+Different parameters of the Proposed charge pump @ different temperatures
+Power (µW) Propagation 
+delay (ps)
+Power delay 
+product (fJ)
+Output noise (dB) Phase noise 
+(dBc/Hz)
+Pre layout
+0.8 − 90 8.59 15.98 0.137 − 231.05 − 248.3
+− 40 8.1 21.95 0.177 − 228.48 − 248.1
+0 6.91 28.75 0.198 − 228.29 − 248.2
+27 5.25 39.24 0.245 − 228.29 − 248.2
+90 6.25 40.36 0.21 − 227.5 − 248.2
+1 − 90 15.27 5.37 0.081 − 232.82 − 247.9
+− 40 14.84 7.26 0.107 − 228.48 − 247.7
+0 14.02 10.39 0.145 − 228.29 − 247.5
+27 13.19 16.71 0.221 − 232.7 − 247.2
+90 13.49 24.6 0.331 − 227.5 − 246.9
+1.2 − 90 25.9 3.17 0.082 − 241.09 − 247.6
+− 40 25.64 6.79 0.174 − 239.97 − 247.3
+0 24.94 10.14 0.252 − 238.71 − 248.9
+27 23.67 12.66 0.307 − 237.62 − 248.5
+90 24.32 19.13 0.452 − 234.21 − 247.5
+Post layout
+0.8 − 90 19.23 37.23 0.715 − 227.94 − 247.8
+− 40 18.56 45.79 0.849 − 223.71 − 247.3
+0 16.84 49.72 0.837 − 223.45 − 247.6
+27 15.42 56.21 0.866 − 223.3 − 247.6
+90 16.24 61.73 1.002 − 221.67 − 247.7
+1 − 90 39.43 29.54 1.164 − 228.43 − 246.9
+− 40 38.65 31.87 1.231 − 223.14 − 246.72
+0 37.92 34.91 1.323 − 222.78 − 246.51
+27 36.27 39.23 1.422 − 228.32 − 246.3
+90 36.81 45.9 1.689 − 221.65 − 245.76
+1.2 − 90 50.31 23.91 1.202 − 237.63 − 246.3
+− 40 48.83 26.89 1.313 − 236.21 − 245.91
+0 47.21 29.21 1.379 − 234.85 − 246.4
+27 45.32 34.71 1.573 − 234.12 − 245.8
+90 46.91 39.23 1.84 − 231.23 − 245.3
+Content courtesy of Springer Nature, terms of use apply. Rights reserved.
+=== PAGE 12 ===
+60 Analog Integrated Circuits and Signal Processing (2024) 118:49–66
+Fig. 10  Parametric analysis at different temperatures of the proposed charge pump with a Average power b Propagation delay c Output noise d 
+Phase noise
+Content courtesy of Springer Nature, terms of use apply. Rights reserved.
+=== PAGE 13 ===
+61Analog Integrated Circuits and Signal Processing (2024) 118:49–66 
+Table 5  Performance of proposed charge pump at PVT variation @ different corners
+Vdd (V) Different parameters Different parameters of the Proposed charge pump @ different temperatures @ different process corners
+@ − 40 °C @ 27 °C @ 90 °C
+TT FF SS TT FF SS TT FF SS
+Pre layout
+0.8 Power (µW) 8.11 9.24 2.94 6.26 9.01 2.76 5.23 8.62 2.6
+Delay (ps) 21.95 12.69 23.97 26.97 15.32 29.2 31.3 17.9 33.5
+PDP (fJ) 0.178 0.117 0.07 0.168 0.138 0.08 0.163 0.154 0.087
+Output noise (dB) − 228.2 − 232.9 − 230.8 − 228.3 − 230.9 − 226.7 − 227.2 − 227.2 − 224.9
+Phase noise (dBc/Hz) − 247.8 − 244.6 − 248.2 − 246.2 − 244.1 − 242.6 − 245.4 − 241.5 − 247.9
+1 Power (µW) 14.85 18.72 6.88 13.19 18.44 6.01 13.5 17.9 5.6
+Delay (ps) 6.93 2.27 12.12 16.71 11.54 21.39 24.4 19.6 29.47
+PDP (fJ) 0.102 0.042 0.083 0.221 0.212 0.128 0.329 0.35 0.165
+Output noise (dB) − 234.2 − 234.6 − 233.9 − 232.7 − 234.1 − 232.4 − 231.4 − 228.6 − 228.3
+Phase noise (dBc/Hz) − 248.3 − 245.7 − 249.1 − 247.2 − 245.3 − 243.7 − 246.5 − 243.6 − 249.6
+1.2 Power (µW) 29.3 31.5 20.6 28.61 30.71 20.12 28.7 29.62 19.79
+Delay (ps) 3.86 1.37 5.28 11.26 9.24 12.92 19.36 13.4 24.59
+PDP (fJ) 0.113 0.043 0.108 0.322 0.283 0.259 0.555 0.396 0.486
+Output noise (dB) − 240.7 − 241.1 − 234.8 − 234.7 − 235.3 − 235.1 − 229.2 − 229.6 − 229.5
+Phase noise (dBc/Hz) − 250.2 − 247.6 − 251.2 − 245.6 − 243.4 − 243.6 − 249.3 − 245.2 − 251.7
+Post layout
+0.8 Power (µW) 18.56 21.32 9.78 15.42 19.51 9.23 16.24 18.82 8.73
+Delay (ps) 45.79 34.61 56.91 56.21 44.82 65.39 61.73 52.81 70.93
+PDP (fJ) 0.849 0.737 0.556 0.866 0.874 0.603 1.002 0.993 0.619
+Output noise (dB) − 223.7 − 224.9 − 221.4 − 223.3 − 225.6 − 222.5 − 221.6 − 221.9 − 220.3
+Phase noise (dBc/Hz) − 247.3 − 243.8 − 247.8 − 245.6 − 243.2 − 241.9 − 243.7 − 240.2 − 245.1
+1 Power (µW) 38.65 42.91 17.85 36.27 42.73 17.32 36.81 39.71 16.25
+Delay (ps) 31.87 22.51 41.23 39.23 30.53 54.28 45.9 33.9 59.21
+PDP (fJ) 1.231 0.965 0.735 1.422 1.304 0.94 1.689 1.346 0.962
+Output noise (dB) − 223.1 − 226.4 − 220.6 − 228.3 − 231.7 − 225.4 − 221.6 − 224.5 − 220.1
+Phase noise (dBc/Hz) − 246.7 − 245.4 − 247.1 − 246.3 − 245.1 − 243 − 245.7 − 242.2 − 246.9
+1.2 Power (µW) 48.83 52.67 23.6 45.32 49.51 22.81 46.91 50.32 21.93
+Delay (ps) 26.89 17.91 37.32 34.71 23.15 46.8 39.23 27.81 50.12
+PDP (fJ) 1.313 0.943 0.880 1.573 1.146 1.067 1.84 1.399 1.099
+Output noise (dB) − 236.2 − 237.6 − 234.8 − 234.1 − 236.9 − 222.8 − 231.2 − 232.3 − 230.9
+Phase noise (dBc/Hz) − 245.9 − 244.7 − 246.8 − 245.8 − 241.5 − 241.8 − 245.3 − 241.5 − 248.6
+Content courtesy of Springer Nature, terms of use apply. Rights reserved.
+=== PAGE 14 ===
+62 Analog Integrated Circuits and Signal Processing (2024) 118:49–66
+Fig. 11  Performance of the proposed charge pump at different process corners with temperature on a Average power b Propagation delay c Out-
+put noise d Phase noise
+Content courtesy of Springer Nature, terms of use apply. Rights reserved.
+=== PAGE 15 ===
+63Analog Integrated Circuits and Signal Processing (2024) 118:49–66 
+5  Conclusion
+In this paper, a high-speed faster current driving charge 
+pump is designed at 45 nm gpdk library with 1 V power 
+supply. The proposed topology uses faster current driv -
+ing approach with MCML logic to speed up the locking 
+process. Simulations are performed using cadence vir -
+tuoso at 10 GHz of frequency. The proposed technique 
+achieves 39.55% of power reduction, transient response 
+speed improved by 76.57% and phase noise cancellation 
+becomes 8.61% improvement over the existing circuit. It 
+Fig. 12  Performance of the proposed charge pump at different supply voltage with process corner on a Average Power b Delay c Output noise d 
+Phase noise
+Table 6  Performance Improvement in Percentage of the proposed 
+charge pump
+S. No Parameters Existing 
+charge pump 
+[18]
+Proposed 
+charge 
+pump
+Percentage 
+improvement 
+(%)
+1 Power (µW) 21.82 13.19 39.5
+2 Delay (ps) 71.34 16.71 76.57
+3 PDP (fJ) 1.56 0.221 85.8
+4 Output noise 
+(dB)
+− 214.8 − 232.7 8.3
+5 Phase noise (dB) − 227.6 − 247.2 8.61
+Content courtesy of Springer Nature, terms of use apply. Rights reserved.
+=== PAGE 16 ===
+64 Analog Integrated Circuits and Signal Processing (2024) 118:49–66
+also achieves 98% of output swing which is more effi-
+cient compared to others. Simulation results are verified 
+with the histogram plot of Monte-Carlo analysis and also 
+validated with different corners along with different tem-
+peratures and voltages for the PVT tolerant analysis. The 
+proposed method proved its efficient performance with the 
+results achieved from the pre layout and post layout simu-
+lations using cadence virtuoso tool. Hence the proposed 
+charge pump can be used in high frequency PLL applica-
+tion and also more suitable for millimetre wave frequency 
+synthesizers.
+Table 7  Comparison of 
+proposed FCD-CP with existing 
+simulation results
+Parameters [21] [22] [24] [20] [19] [25] Proposed work
+Technology (nm) 130 90 90 180 90 90 45
+Supply voltage (V) 0.5 1.2 1.2 1.8 1.8 1.2 1
+Output Swing (V) 0.1–0.48 −  0.3–0.95 – 0–1.7 0.05–1.1 0–0.98
+Power (mW) 0.06 0.134 −  22 1.74 0.095 0.013
+Phase noise (dBc/Hz) −  − 90.214 −  − 105.5 − 101.0 − 143.07 − 247.2
+Frequency (GHz) −  1.25 2.5 2.4 2.5 6.5 10
+Fig. 13  Layout design of the proposed charge pump
+Fig. 14  Pre-layout and Post-layout comparison of supply voltage Vs a Average power b Propagation delay
+Content courtesy of Springer Nature, terms of use apply. Rights reserved.
+=== PAGE 17 ===
+65Analog Integrated Circuits and Signal Processing (2024) 118:49–66 
+Acknowledgements The authors would like to thank the Department 
+of Electronics and Communication Engineering, SRM Institute of 
+Science and Technology, Kattankulathur, for providing the resources 
+(EDA Lab—Cadence Virtuoso tool) to this research.
+Author contributions All Authors are equally contributed.
+Funding The authors declare that no funds, grants, or other support 
+were received during the preparation of this manuscript.
+Data availability The authors declare that the data related to this 
+research is available in the manuscript.
+Declarations 
+Conflict of interest The authors declare that they have no conflict of 
+interest.
+Ethics approval The authors declare that all the procedures were fol-
+lowed in accordance with the ethical standards.
+References
+ 1. Azadmousavi, T., Azadbakht, M., Najafi Aghdam, E., & 
+Frounchi, J. (2018). A novel zero dead zone PFD and effi-
+cient CP for PLL applications. Analog Integrated Circuits 
+and Signal Processing, 95(1), 83–91. https:// doi. org/ 10. 1007/ 
+s10470- 018- 1118-4
+ 2. Chung, H. H., Chen, W., Bakkaloglu, B., Barnaby, H. J., Ver -
+meire, B., & Kiaei, S. (2006). Analysis of single events effects 
+on monolithic PLL frequency synthesizers. IEEE Transactions 
+on Nuclear Science, 53(6), 3539–3543. https:// doi. org/ 10. 1109/ 
+TNS. 2006. 886217
+ 3. Ghasemian, H., Ahmadi, A., Abiri, E., & Salehi, M. R. (2020). 
+An implementation of a new 11-bit 1.2 GS/s hybrid DAC with a 
+noval 3-bit Sub-DAC. Microelectronics Journal, 1, 2. https:// doi. 
+org/ 10. 1016/j. mejo. 2020. 104872
+ 4. Thakore, K., Parmar, H., & Devashrayee, N. (2011). High speed 
+PFD with charge pump and loop filter for low jitter and low power 
+PLL. Iject, 7109, 55–59.
+ 5. Koithyar, A., & Ramesh, T. K. (2018). A faster phase frequency 
+detector using transmission gate–based latch for the reduced 
+response time of the PLL. International Journal of Circuit The-
+ory and Applications, 46(4), 842–854. https:// doi. org/ 10. 1002/ cta. 
+2449
+ 6. Suraparaju, E. R., Arja, P. V. R., & Ren, S. (2015). Simple high-
+resolution CMOS phase frequency detector. Electronics Letters,  
+51(21), 1647–1649. https:// doi. org/ 10. 1049/ el. 2015. 2992
+ 7. Sivasakthi, M., & Radhika, P. (2023). A high-speed MCML logic 
+gate and multiplexer design in 45 nm CMOS technology, pp. 
+01–05. https:// doi. org/ 10. 1109/ icere ct568 37. 2022. 10059 652
+ 8. Sivasakthi, M., & Radhika, P. (2023). Performance comparison of 
+MCML, PFSCL, and dynamic CML gates with parametric analy-
+sis in 45 nm CMOS technology, pp 451–463. https:// doi. org/ 10. 
+1007/ 978- 981- 19- 7753-4_ 35
+ 9. Han, D. H. (2006). Gain-boosting charge pump for current match-
+ing in phase-locked loop. IEEE Transactions on Circuits and Sys-
+tems II: Express Briefs, 53(10), 1022–1025. https:// doi. org/ 10. 
+1109/ TCSII. 2006. 882122
+ 10. Shiau, M. S., Hsu, H. S., Cheng, C. H., Weng, H. H., Wu, H. C., 
+& Liu, D. G. (2013). Reduction of current mismatching in the 
+switches-in-source CMOS charge pump. Microelectronics Jour-
+nal, 44(12), 1296–1301. https:// doi. org/ 10. 1016/j. mejo. 2013. 08. 
+019
+ 11. Wang, C. C., Hou, Z. Y., Chen, C. L., & Shmilovitz, D. (2018). 
+A lock detector loop for low-power PLL-based clock and data 
+recovery circuits. Circuits, Systems, and Signal Processing,  
+37(4), 1692–1703. https:// doi. org/ 10. 1007/ s00034- 017- 0621-7
+ 12. Winterstein, A., & Nossek, J. A. (2018). Analytic signal model 
+for flip-flop based phase-frequency detectors. Electronics Let-
+ters, 54(4), 200–202. https:// doi. org/ 10. 1049/ el. 2017. 4113
+ 13. Soliman, S., Yuan, F., & Raahemifar, K. (2002). An overview of 
+design techniques for CMOS phase detectors. In Proceedings-
+IEEE International Symposium on Circuits and Systems, vol. 5, 
+pp. 457–460. https:// doi. org/ 10. 1109/ iscas. 2002. 10107 39
+Fig. 15  Pre-layout and Post-layout comparison of Frequency Vs a Output noise and b Phase noise
+Content courtesy of Springer Nature, terms of use apply. Rights reserved.
+=== PAGE 18 ===
+66 Analog Integrated Circuits and Signal Processing (2024) 118:49–66
+ 14. Razavi, B. (1996). Monolithic phase-locked loops and clock 
+recovery circuits: Theory and design. Monolithic Phase-Locked 
+Loops and Clock Recovery Circuits: Theory and Design, pp. 
+1–498. https:// doi. org/ 10. 1109/ 97804 70545 331
+ 15. Li, Z., Zheng, S., & Hou, N. (2011). Design of a high perfor -
+mance CMOS charge pump for phase-locked loop synthesizers. 
+Journal of Semiconductors, 32(7), 2–6. https:// doi. org/ 10. 1088/ 
+1674- 4926/ 32/7/ 075007
+ 16. Tanguay, L. F., Sawan, M., & Savaria, Y. (2009). A very-high 
+output impedance charge pump for low-voltage low-power 
+PLLs. Microelectronics Journal, 40(6), 1026–1031. https://  
+doi. org/ 10. 1016/j. mejo. 2009. 03. 001
+ 17. Sivasakthi, M., & Radhika, P. (2024). Design and analysis of 
+PVT tolerant hybrid current starved ring VCO with bulk driven 
+keeper technique at 45 nm CMOS technology for the PLL appli-
+cation. AEUE—International Journal of Electronics and Com-
+munications, 173(July 2023), 154987. https:// doi. org/ 10. 1016/j. 
+aeue. 2023. 154987
+ 18. Schober, S. M., & Choma, J. (2016). A charge transfer-based 
+high performance, ultra-low power CMOS charge pump for 
+PLLs. Analog Integrated Circuits and Signal Processing, 89(3), 
+561–573. https:// doi. org/ 10. 1007/ s10470- 016- 0829-7
+ 19. Lin, T. H., Ti, C. L., & Liu, Y. H. (2009). Dynamic current-
+matching charge pump and gated-offset linearization technique 
+for delta-sigma fractional-N PLLs. IEEE Transactions on Cir -
+cuits and Systems I: Regular Papers, 56(5), 877–885. https://  
+doi. org/ 10. 1109/ TCSI. 2009. 20161 80
+ 20. Nanda, U., Acharya, D. P., & Patra, S. K. (2014). A new trans-
+mission gate cascode current mirror charge pump for fast lock -
+ing low noise PLL. Circuits, Systems, and Signal Processing,  
+33(9), 2709–2718. https:// doi. org/ 10. 1007/ s00034- 014- 9785-6
+ 21. Jalalifar, M., & Byun, G. S. (2013). Near-threshold charge pump 
+circuit using dual feedback loop. Electronics Letters,  49(23), 
+1436–1438. https:// doi. org/ 10. 1049/ el. 2013. 1304
+ 22. Saw, S. K., Das, P., Maiti, M., & Majumder, A. (2021). A power 
+efficient charge pump circuit configuration for fast locking PLL 
+application. Microsystem Technologies, 27(2), 479–491. https:// 
+doi. org/ 10. 1007/ s00542- 018- 4037-5
+ 23. Johansson, H. O. (2003). A simple precharged cmos phase fre-
+quency detector. Phase-Locking in High-Performance Systems: 
+From Devices to Architectures,  33(2), 376–380. https:// doi. org/ 
+10. 1109/ 97804 70545 492. ch45
+ 24. Strzelecki, J., & Ren, S. (2015). Near-zero dead zone phase fre-
+quency detector with wide input frequency difference. Electronics 
+Letters, 51(14), 1059–1061. https:// doi. org/ 10. 1049/ el. 2015. 0653
+ 25. Maiti, M., Saw, S. K., Nath, V., & Majumder, A. (2019). A power 
+efficient PFD-CP architecture for high speed clock and data recov-
+ery application. Microsystem Technologies, 25(12), 4615–4624. 
+https:// doi. org/ 10. 1007/ s00542- 019- 04458-4
+ 26. Version, P. (2019). Spectre circuit simulator and accelerated paral-
+lel simulator RF analysis in ADE. no. January, pp. 1–581.
+Publisher's Note Springer Nature remains neutral with regard to 
+jurisdictional claims in published maps and institutional affiliations.
+Springer Nature or its licensor (e.g. a society or other partner) holds 
+exclusive rights to this article under a publishing agreement with the 
+author(s) or other rightsholder(s); author self-archiving of the accepted 
+manuscript version of this article is solely governed by the terms of 
+such publishing agreement and applicable law.
+M. Sivasakthi received her B.E. 
+degree in Electronics and Com-
+munication Engineering from 
+Anna University, Chennai, India 
+in 2010 and M.E. degree in 
+VLSI Design, from Anna Uni-
+versity, Chennai, India in 2013 
+and currently pursuing Ph.D. in 
+the department of Electronics 
+and Communication Engineer -
+ing, SRM Institute of Science 
+and Technology, Kattankulathur, 
+Chengalpattu, Tamil Nadu, 
+India. Her research interest 
+includes low-power and high-
+speed VLSI circuit design in 
+Phase Locked Loop, frequency synthesizers and in Mixed signal circuit 
+design. In ME degree, she got 6th rank in Anna University. 
+P . Radhika received her B.E. 
+degree in Electronics and Com-
+munication Engineering from 
+Bharathidasan University, India 
+in 2002, M.Tech. Degree in 
+VLSI Design, from Sastra Uni -
+versity, Thanjavur 2004 and 
+Ph.D. in Low Power VLSI 
+Design from SRM University, 
+Kattankulathur in 2019. Cur -
+rently working as an Assistant 
+Professor (Senior Grade) in 
+Department of Electronics and 
+Communication, SRM Institute 
+of Science and Technology, Kat-
+tankulathur, India, since 2004. 
+Her research interest includes low power VLSI circuit design, VLSI 
+Implementation of machine learning algorithms and signal 
+processing.
+Content courtesy of Springer Nature, terms of use apply. Rights reserved.

@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design and Transistor-Level Analysis of a CMOS Charge Pump Using Cadence Virtuoso</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- KaTeX for formula rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+</head>
+<body>
+  <div class="deck-container">
+
+    <!-- ====================================================================
+         SLIDE 1: TITLE & PROJECT OBJECTIVE
+         ==================================================================== -->
+    <section class="slide active" id="slide-1">
+      <div class="slide-header">
+        <div class="slide-header-left">
+          <div class="slide-category">Project Review 1 of 3 — Proposal and Design Plan</div>
+          <h1 class="slide-title">Design and Transistor-Level Analysis of a CMOS Charge Pump</h1>
+          <div class="slide-subtitle">Concept, selected circuit and planned Cadence analysis</div>
+        </div>
+        <div class="slide-header-right">
+          <div class="slide-index-pill">01 / 10</div>
+        </div>
+      </div>
+
+      <div class="slide-body">
+        <div class="grid-2col">
+          <!-- Left Column: Objectives & Specs -->
+          <div class="card highlight" style="justify-content: space-between;">
+            <div>
+              <div class="card-header">
+                <span class="card-title">Main Project Objective</span>
+              </div>
+              <p style="margin-top: 0.65rem; font-size: 0.95rem; line-height: 1.55; color: var(--text-primary);">
+                Design a <strong>CMOS charge pump completely at the transistor level</strong> in Cadence Virtuoso and study how device dimensions, capacitances, and clocking parameters govern circuit performance.
+              </p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem;">
+              <div class="card subtle" style="padding: 0.75rem;">
+                <div style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--accent-blue); font-weight: 700; text-transform: uppercase; margin-bottom: 0.35rem;">
+                  Key Parameters to Optimize
+                </div>
+                <ul class="feature-list">
+                  <li><strong>MOSFET Sizing</strong> ($W_n, W_p, L$)</li>
+                  <li><strong>Pumping Capacitors</strong> ($C_{pump}$)</li>
+                  <li><strong>Number of Stages</strong> ($N$)</li>
+                  <li><strong>Clock Frequency</strong> ($f_{clk}$)</li>
+                  <li><strong>Load Current</strong> ($I_{load}$)</li>
+                </ul>
+              </div>
+
+              <div class="card subtle" style="padding: 0.75rem;">
+                <div style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--accent-green); font-weight: 700; text-transform: uppercase; margin-bottom: 0.35rem;">
+                  What We Plan to Measure
+                </div>
+                <ul class="feature-list">
+                  <li><strong>Output Voltage</strong> ($V_{OUT} > V_{IN}$)</li>
+                  <li><strong>Total Power</strong> ($P_{avg}$)</li>
+                  <li><strong>Power Efficiency</strong> ($\eta$)</li>
+                  <li><strong>Output Ripple</strong> ($V_{ripple}$)</li>
+                  <li><strong>Startup Settling Time</strong> ($t_{start}$)</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="card subtle" style="padding: 0.65rem 0.9rem;">
+              <div style="display: grid; grid-template-columns: 1fr; gap: 0.2rem; font-size: 0.68rem; align-items: center;">
+                <div><span style="color: var(--text-muted);">Team Members:</span> <strong>Pragyan Jain (24BLC1100) &nbsp;·&nbsp; Shivam Kumar (24BLC1103) &nbsp;·&nbsp; K Navin Aakash (23BLC1238)</strong></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Visual Diagram & Scope Callout -->
+          <div style="display: flex; flex-direction: column; gap: 0.9rem;">
+            <div class="schematic-box" style="flex: 1;">
+              <svg viewBox="0 0 520 230" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="60" cy="115" r="4.5" fill="#111111"/>
+                <text x="60" y="92" fill="#111111" font-family="Geist Mono" font-size="12" font-weight="600" text-anchor="middle">VIN</text>
+                <text x="60" y="140" fill="#787774" font-family="Geist Mono" font-size="10" text-anchor="middle">(DC Input)</text>
+                <path d="M 65 115 L 140 115" stroke="#111111" stroke-width="2"/>
+                <polygon points="140,115 132,111 132,119" fill="#111111"/>
+
+                <rect x="140" y="55" width="240" height="120" rx="6" fill="#F7F6F3" stroke="#111111" stroke-width="1.5"/>
+                <rect x="148" y="63" width="224" height="104" rx="4" fill="#FFFFFF" stroke="#EAEAEA" stroke-width="1"/>
+
+                <text x="260" y="96" fill="#111111" font-family="Newsreader" font-size="18" font-weight="600" text-anchor="middle">CMOS Charge Pump</text>
+                <text x="260" y="120" fill="#555552" font-family="Geist" font-size="11" text-anchor="middle">Switched-Capacitor Voltage Booster</text>
+                <text x="260" y="142" fill="#1F6C9F" font-family="Geist Mono" font-size="10.5" font-weight="600" text-anchor="middle">NMOS / PMOS Switches + Pumping Caps</text>
+
+                <path d="M 260 15 L 260 55" stroke="#956400" stroke-width="1.5"/>
+                <text x="260" y="10" fill="#956400" font-family="Geist Mono" font-size="10.5" font-weight="600" text-anchor="middle">CLK / CLKB (Non-Overlapping)</text>
+                <polygon points="260,55 256,47 264,47" fill="#956400"/>
+
+                <path d="M 380 115 L 455 115" stroke="#111111" stroke-width="2"/>
+                <polygon points="455,115 447,111 447,119" fill="#111111"/>
+                <circle cx="460" cy="115" r="4.5" fill="#111111"/>
+                <text x="460" y="92" fill="#111111" font-family="Geist Mono" font-size="12" font-weight="700" text-anchor="middle">VOUT</text>
+                <text x="460" y="140" fill="#346538" font-family="Geist Mono" font-size="11" font-weight="700" text-anchor="middle">VOUT &gt; VIN</text>
+              </svg>
+            </div>
+
+            <div class="approval-quote-box">
+              <div class="quote-tag">Implementation Level</div>
+              <div class="quote-body">
+                <strong>Planned Tool — Cadence Virtuoso</strong><br>
+                <span style="font-size: 0.85rem; color: var(--text-secondary);">Review 1 defines the circuit and test plan. Cadence simulations and optimization will follow in Reviews 2 and 3.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <div class="footer-left">
+          <span>Project Approval Deck</span>
+        </div>
+        <div class="footer-center">
+          <div class="nav-dot active"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+        </div>
+        <div class="footer-right">
+          <kbd>←</kbd> <kbd>→</kbd> Navigate
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SLIDE 2: WHAT IS A CMOS CHARGE PUMP?
+         ==================================================================== -->
+    <section class="slide" id="slide-2">
+      <div class="slide-header">
+        <div class="slide-header-left">
+          <div class="slide-category">Theory & Foundations</div>
+          <h1 class="slide-title">What is a CMOS Charge Pump?</h1>
+          <div class="slide-subtitle">Inductorless DC–DC Voltage Boosting via Transistor-Controlled Charge Redistribution</div>
+        </div>
+        <div class="slide-header-right">
+          <div class="slide-index-pill">02 / 10</div>
+        </div>
+      </div>
+
+      <div class="slide-body">
+        <div class="grid-2col-wide-left">
+          <!-- Left: Explanation & Principles -->
+          <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+            <div class="card">
+              <div class="card-header">
+                <span class="card-title">Core Definition & Operation</span>
+              </div>
+              <p>
+                A CMOS charge pump is a <strong>switched-capacitor DC–DC converter</strong> used to generate an output voltage higher than the available supply voltage without magnetic inductors.
+              </p>
+              <ul class="feature-list" style="margin-top: 0.25rem;">
+                <li><strong>No Inductors Required:</strong> The circuit uses transistor switches and capacitors only.</li>
+                <li><strong>MOS Transistor Switches:</strong> NMOS and PMOS switches driven by non-overlapping clock phases.</li>
+                <li><strong>Pumping Capacitors:</strong> Intermediate charge reservoirs that store and elevate packet energy.</li>
+                <li><strong>Multi-Stage Cascading:</strong> Sequential transfer stages multiply the achievable DC level.</li>
+              </ul>
+            </div>
+
+            <div class="card highlight">
+              <div class="card-header">
+                <span class="card-title">Fundamental Working Principle</span>
+              </div>
+              <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+                <div class="math-card" style="flex: 1;">
+                  <div class="math-label">Capacitive Charge Storage</div>
+                  <div class="math-eq">$$Q = C \cdot V$$</div>
+                </div>
+                <div style="flex: 2; font-size: 0.86rem; color: var(--text-secondary);">
+                  During one clock phase, the capacitor is charged. During the next clock phase, its stored voltage is shifted upward and transferred:
+                  <div style="color: var(--accent-green); font-weight: 700; margin-top: 0.2rem; font-family: var(--font-mono);">
+                    $$V_{OUT} > V_{IN}$$
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="callout-banner">
+              <div class="callout-text">
+                <strong>IC Context:</strong> Used inside ICs for memories (Flash/EEPROM wordline bias), power management, and internal substrate voltage generation.
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: 3-Step Flow Visual Diagram -->
+          <div class="card" style="justify-content: space-between;">
+            <div class="card-header">
+              <span class="card-title">Dynamic Charge Transfer Sequence</span>
+            </div>
+
+            <div class="schematic-box" style="flex: 1; border: none; padding: 0;">
+              <svg viewBox="0 0 360 210" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Step 1: Charge -->
+                <g transform="translate(10, 10)">
+                  <rect x="0" y="0" width="100" height="150" rx="4" fill="#FFFFFF" stroke="#111111" stroke-width="1.2"/>
+                  <rect x="0" y="0" width="100" height="24" rx="4" fill="#F7F6F3"/>
+                  <text x="50" y="16" fill="#111111" font-family="Geist Mono" font-size="10" font-weight="700" text-anchor="middle">1. CHARGE</text>
+                  
+                  <line x1="30" y1="48" x2="70" y2="48" stroke="#346538" stroke-width="2"/>
+                  <circle cx="50" cy="48" r="3" fill="#346538"/>
+                  <text x="50" y="65" fill="#346538" font-family="Geist Mono" font-size="9" text-anchor="middle">Switch Closed</text>
+
+                  <line x1="35" y1="90" x2="65" y2="90" stroke="#111111" stroke-width="2"/>
+                  <line x1="35" y1="96" x2="65" y2="96" stroke="#111111" stroke-width="2"/>
+                  <text x="50" y="115" fill="#787774" font-family="Geist Mono" font-size="9" text-anchor="middle">C_pump</text>
+                  <text x="50" y="138" fill="#111111" font-family="Geist Mono" font-size="9" font-weight="600" text-anchor="middle">Q = C·VIN</text>
+                </g>
+
+                <path d="M 115 85 L 130 85" stroke="#111111" stroke-width="1.5"/>
+                <polygon points="130,85 124,82 124,88" fill="#111111"/>
+
+                <!-- Step 2: Boost -->
+                <g transform="translate(135, 10)">
+                  <rect x="0" y="0" width="100" height="150" rx="4" fill="#FFFFFF" stroke="#111111" stroke-width="1.2"/>
+                  <rect x="0" y="0" width="100" height="24" rx="4" fill="#FBF3DB"/>
+                  <text x="50" y="16" fill="#956400" font-family="Geist Mono" font-size="10" font-weight="700" text-anchor="middle">2. BOOST</text>
+                  
+                  <path d="M 30 65 L 45 65 L 45 45 L 65 45 L 65 65" stroke="#956400" stroke-width="1.8" fill="none"/>
+                  <text x="50" y="78" fill="#956400" font-family="Geist Mono" font-size="9" text-anchor="middle">CLK High</text>
+
+                  <line x1="35" y1="100" x2="65" y2="100" stroke="#111111" stroke-width="2"/>
+                  <line x1="35" y1="106" x2="65" y2="106" stroke="#111111" stroke-width="2"/>
+                  <text x="50" y="125" fill="#956400" font-family="Geist Mono" font-size="9" font-weight="700" text-anchor="middle">+CLK Shift</text>
+                  <text x="50" y="138" fill="#111111" font-family="Geist Mono" font-size="9" font-weight="600" text-anchor="middle">Node Pushed ↑</text>
+                </g>
+
+                <path d="M 240 85 L 255 85" stroke="#111111" stroke-width="1.5"/>
+                <polygon points="255,85 249,82 249,88" fill="#111111"/>
+
+                <!-- Step 3: Transfer -->
+                <g transform="translate(260, 10)">
+                  <rect x="0" y="0" width="95" height="150" rx="4" fill="#FFFFFF" stroke="#111111" stroke-width="1.2"/>
+                  <rect x="0" y="0" width="95" height="24" rx="4" fill="#EDF3EC"/>
+                  <text x="47" y="16" fill="#346538" font-family="Geist Mono" font-size="10" font-weight="700" text-anchor="middle">3. TRANSFER</text>
+                  
+                  <line x1="27" y1="48" x2="67" y2="48" stroke="#346538" stroke-width="2"/>
+                  <circle cx="47" cy="48" r="3" fill="#346538"/>
+                  <text x="47" y="65" fill="#346538" font-family="Geist Mono" font-size="9" text-anchor="middle">Pass Gate ON</text>
+
+                  <path d="M 47 90 L 47 110" stroke="#346538" stroke-width="1.5"/>
+                  <polygon points="47,110 44,104 50,104" fill="#346538"/>
+                  <text x="47" y="126" fill="#346538" font-family="Geist Mono" font-size="9" text-anchor="middle">Charge Moves</text>
+                  <text x="47" y="138" fill="#111111" font-family="Geist Mono" font-size="9" font-weight="700" text-anchor="middle">To VOUT</text>
+                </g>
+
+                <text x="180" y="190" fill="#787774" font-family="Geist Mono" font-size="11.5" text-anchor="middle">Repeat cycle → output rises</text>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <div class="footer-left">
+          <span>Principle of Operation</span>
+        </div>
+        <div class="footer-center">
+          <div class="nav-dot"></div>
+          <div class="nav-dot active"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+        </div>
+        <div class="footer-right">
+          <kbd>←</kbd> <kbd>→</kbd> Navigate
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SLIDE 3: WHY THIS IS A VLSI / TRANSISTOR-LEVEL PROJECT
+         ==================================================================== -->
+    <section class="slide" id="slide-3">
+      <div class="slide-header">
+        <div class="slide-header-left">
+          <div class="slide-category">Project Scope</div>
+          <h1 class="slide-title">What We Will Design and Study</h1>
+          <div class="slide-subtitle">The project focuses on building the circuit and understanding how its main parts affect performance</div>
+        </div>
+        <div class="slide-header-right">
+          <div class="slide-index-pill">03 / 10</div>
+        </div>
+      </div>
+
+      <div class="slide-body">
+        <div class="grid-2col">
+          <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+            <div class="card highlight">
+              <div class="card-header">
+                <span class="card-title">Transistor-Level Design Elements</span>
+              </div>
+              <p>
+                The charge pump is created using individual device primitives in Cadence Virtuoso. No prebuilt converter IC or macromodel is used:
+              </p>
+              <ul class="feature-list" style="margin-top: 0.25rem;">
+                <li><strong>NMOS and PMOS Transistors:</strong> Custom channel aspect ratios ($W/L$).</li>
+                <li><strong>Integrated Capacitors:</strong> Metal-Insulator-Metal (MIM) and MOS capacitor banks.</li>
+                <li><strong>Clock Drivers:</strong> Sized CMOS inverter buffers for non-overlapping phases.</li>
+                <li><strong>Input Signals:</strong> UP/DN voltage sources with adjustable timing.</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <span class="card-title">Key Transistor Design Variables: Wn, Wp, L</span>
+              </div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; font-size: 0.85rem;">
+                <div class="card subtle" style="padding: 0.55rem;">
+                  <strong>ON-Resistance ($R_{ON}$):</strong>
+                  <div style="color: var(--text-secondary); margin-top: 0.2rem;">Dictates conduction drop and charge-transfer speed.</div>
+                </div>
+                <div class="card subtle" style="padding: 0.55rem;">
+                  <strong>Parasitic Capacitances:</strong>
+                  <div style="color: var(--text-secondary); margin-top: 0.2rem;">$C_{gs}, C_{gd}, C_{db}$ cause clock feedthrough and power loss.</div>
+                </div>
+                <div class="card subtle" style="padding: 0.55rem;">
+                  <strong>Body Effect ($\gamma$):</strong>
+                  <div style="color: var(--text-secondary); margin-top: 0.2rem;">Shifts threshold voltage $V_{th}(V_{SB})$ across cascaded stages.</div>
+                </div>
+                <div class="card subtle" style="padding: 0.55rem;">
+                  <strong>Power Dissipation:</strong>
+                  <div style="color: var(--text-secondary); margin-top: 0.2rem;">Dynamic switching loss $P = f_{clk} C_{tot} V^2$ scales with width.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Review 1 study questions; no result plots yet -->
+          <div style="display: flex; flex-direction: column; gap: 0.8rem; justify-content: space-between;">
+            <div class="card" style="padding: 0.85rem;">
+              <div class="card-header">
+                <span class="card-title">Questions We Will Answer Later</span>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 0.55rem; font-size: 0.84rem;">
+                <div class="card subtle" style="padding: 0.65rem;"><strong>Switch size:</strong> Does changing it improve response or increase power?</div>
+                <div class="card subtle" style="padding: 0.65rem;"><strong>Capacitor size:</strong> How does it affect output smoothness and speed?</div>
+                <div class="card subtle" style="padding: 0.65rem;"><strong>Operating conditions:</strong> Does the circuit still work when supply and temperature change?</div>
+              </div>
+              <div style="font-size: 0.72rem; color: var(--accent-blue); font-weight: 700; margin-top: 0.65rem;">REVIEW 1 STATUS: QUESTIONS DEFINED — RESULTS NOT YET GENERATED</div>
+            </div>
+
+            <div class="emphasis-quote" style="padding: 0.75rem 1rem;">
+              <div style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.25rem; letter-spacing: 0.06em; font-style: normal; font-weight: 700;">
+                Project Focus
+              </div>
+              “We will build the charge-pump circuit, test it under different conditions, and improve the design step by step.”
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <div class="footer-left">
+          <span>Project Scope and Study Questions</span>
+        </div>
+        <div class="footer-center">
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot active"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+        </div>
+        <div class="footer-right">
+          <kbd>←</kbd> <kbd>→</kbd> Navigate
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SLIDE 4: CHARGE PUMP CIRCUIT AT A GLANCE
+         ==================================================================== -->
+    <section class="slide" id="slide-4">
+      <div class="slide-header">
+        <div class="slide-header-left">
+          <div class="slide-category">Circuit at a Glance</div>
+          <h1 class="slide-title">How the Charge Pump Circuit Works</h1>
+          <div class="slide-subtitle">A simple view of how the UP and DN signals control the output voltage</div>
+        </div>
+        <div class="slide-header-right">
+          <div class="slide-index-pill">04 / 10</div>
+        </div>
+      </div>
+
+      <div class="slide-body">
+        <div class="grid-2col">
+          <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+            <div class="card" style="padding: 0.85rem 1rem;">
+              <div class="card-header">
+                <span class="card-title">What This Circuit Does</span>
+              </div>
+              <ul class="feature-list" style="font-size: 0.8rem; margin-top: 0.15rem;">
+                <li><strong>S1–S4</strong> work like electronic ON/OFF switches.</li>
+                <li><strong>Ci</strong> moves a small amount of electrical charge during each operation.</li>
+                <li><strong>CL</strong> stores and smooths the voltage at the <strong>Vop output</strong>.</li>
+              </ul>
+            </div>
+
+            <div class="card emerald-highlight" style="padding: 0.85rem 1rem;">
+              <div class="card-header">
+                <span class="card-title">Three Easy Operating States</span>
+              </div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; margin-top: 0.2rem;">
+                <div class="card subtle" style="padding: 0.55rem;"><strong style="color: var(--accent-green);">UP</strong><br><span style="font-size: 0.76rem;">The circuit adds charge, so the output voltage rises.</span></div>
+                <div class="card subtle" style="padding: 0.55rem;"><strong style="color: var(--accent-red);">DN</strong><br><span style="font-size: 0.76rem;">The circuit removes charge, so the output voltage falls.</span></div>
+                <div class="card subtle" style="padding: 0.55rem;"><strong style="color: var(--accent-blue);">No signal</strong><br><span style="font-size: 0.76rem;">The capacitor helps keep the output nearly steady.</span></div>
+              </div>
+            </div>
+
+            <div class="card" style="padding: 0.85rem 1rem;">
+              <div class="card-header">
+                <span class="card-title">Analysis We Will Perform</span>
+              </div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.35rem 0.8rem; font-size: 0.78rem; margin-top: 0.15rem;">
+                <div><strong>Output:</strong> voltage level and stability</div>
+                <div><strong>Timing:</strong> rise, fall and settling time</div>
+                <div><strong>Power:</strong> consumption and efficiency</div>
+                <div><strong>Quality:</strong> ripple and unwanted spikes</div>
+                <div><strong>Components:</strong> switch and capacitor sizes</div>
+                <div><strong>Simulation range:</strong> supply, temperature and device-model changes</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: User-provided switch-based charge-pump reference -->
+          <div class="card" style="justify-content: space-between; padding: 0.75rem;">
+            <div class="card-header" style="margin-bottom: 0.25rem;">
+              <span class="card-title">Circuit Diagram</span>
+            </div>
+
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; flex: 1; min-height: 0;">
+              <img src="images/switch_based_charge_pump_circuit.webp" alt="Switch-based PLL charge pump with S1 through S4, internal capacitor Ci, output Vop, and load capacitor CL" class="diagram-img" style="max-height: min(500px, 55vh); width: auto; max-width: 100%;">
+            </div>
+            <div style="font-size: 0.64rem; color: var(--text-muted); text-align: center; line-height: 1.35; margin-top: 0.2rem;">S1–S4 are switches, Ci transfers charge, and CL smooths the output. Reference: Sivasakthi &amp; Radhika [18].</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <div class="footer-left">
+          <span>Circuit Working and Planned Analysis</span>
+        </div>
+        <div class="footer-center">
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot active"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+        </div>
+        <div class="footer-right">
+          <kbd>←</kbd> <kbd>→</kbd> Navigate
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SLIDE 5: HOW THE CIRCUIT WORKS
+         ==================================================================== -->
+    <section class="slide" id="slide-5">
+      <div class="slide-header">
+        <div class="slide-header-left">
+          <div class="slide-category">Review 1 — Planned Simulation</div>
+          <h1 class="slide-title">How We Plan to Test the Circuit</h1>
+          <div class="slide-subtitle">The waveform plots will be produced in Review 2 after the circuit is built in Cadence</div>
+        </div>
+        <div class="slide-header-right">
+          <div class="slide-index-pill">05 / 10</div>
+        </div>
+      </div>
+
+      <div class="slide-body">
+        <div class="grid-2col">
+          <div class="card highlight" style="justify-content: flex-start; gap: 0.85rem;">
+            <div class="card-header"><span class="card-title">Simple Test Procedure</span></div>
+            <div style="display: grid; grid-template-rows: repeat(4, 1fr); gap: 0.65rem;">
+              <div class="card subtle" style="padding: 0.75rem; display: grid; grid-template-columns: 7rem 1fr; align-items: center; column-gap: 0.8rem;"><strong>1. Build</strong><span>Draw the switches, capacitors, supply and UP/DN inputs in Cadence.</span></div>
+              <div class="card subtle" style="padding: 0.75rem; display: grid; grid-template-columns: 7rem 1fr; align-items: center; column-gap: 0.8rem;"><strong>2. Run</strong><span>Apply UP and DN signals and observe how the output voltage changes with time.</span></div>
+              <div class="card subtle" style="padding: 0.75rem; display: grid; grid-template-columns: 7rem 1fr; align-items: center; column-gap: 0.8rem;"><strong>3. Record</strong><span>Note voltage level, rise/fall time, settling time, ripple and power.</span></div>
+              <div class="card subtle" style="padding: 0.75rem; display: grid; grid-template-columns: 7rem 1fr; align-items: center; column-gap: 0.8rem;"><strong>4. Compare</strong><span>Change one component at a time and identify the most suitable setting.</span></div>
+            </div>
+          </div>
+
+          <div class="card" style="justify-content: flex-start; gap: 0.85rem;">
+            <div class="card-header"><span class="card-title">What We Expect to Verify — Not a Result</span></div>
+            <div style="display: grid; grid-template-columns: 1fr; gap: 0.7rem;">
+              <div class="card subtle" style="padding: 0.8rem; border-left: 3px solid var(--accent-green);"><strong>UP signal</strong><br><span style="color: var(--text-secondary);">The output voltage should move upward.</span></div>
+              <div class="card subtle" style="padding: 0.8rem; border-left: 3px solid var(--accent-red);"><strong>DN signal</strong><br><span style="color: var(--text-secondary);">The output voltage should move downward.</span></div>
+              <div class="card subtle" style="padding: 0.8rem; border-left: 3px solid var(--accent-blue);"><strong>No signal</strong><br><span style="color: var(--text-secondary);">The output should remain nearly steady.</span></div>
+            </div>
+            <div class="callout-banner"><div class="callout-text"><strong>Current status:</strong> Testbench planning only. No Cadence waveform is claimed in Review 1.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <div class="footer-left">
+          <span>Planned Cadence Test Procedure</span>
+        </div>
+        <div class="footer-center">
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot active"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+        </div>
+        <div class="footer-right">
+          <kbd>←</kbd> <kbd>→</kbd> Navigate
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SLIDE 6: MAIN DESIGN CHOICES
+         ==================================================================== -->
+    <section class="slide" id="slide-6">
+      <div class="slide-header">
+        <div class="slide-header-left">
+          <div class="slide-category">Components We Will Adjust</div>
+          <h1 class="slide-title">Main Design Choices</h1>
+          <div class="slide-subtitle">In Review 2, we will change one item at a time and observe its effect</div>
+        </div>
+        <div class="slide-header-right">
+          <div class="slide-index-pill">06 / 10</div>
+        </div>
+      </div>
+
+      <div class="slide-body">
+        <div class="grid-2col-wide-left">
+          <div class="table-container">
+            <table class="cadence-table">
+              <thead>
+                <tr>
+                  <th>Parameter</th>
+                  <th>What We Change</th>
+                  <th>Why It Matters</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="code-cell">Switch Size</td>
+                  <td>Size of S1–S4</td>
+                  <td>Affects response speed, power use and area.</td>
+                </tr>
+                <tr>
+                  <td class="code-cell">Input Capacitor (Ci)</td>
+                  <td>Amount of charge moved</td>
+                  <td>Affects how strongly the output changes.</td>
+                </tr>
+                <tr>
+                  <td class="code-cell">Output Capacitor (CL)</td>
+                  <td>Output storage value</td>
+                  <td>Affects smoothness and settling time.</td>
+                </tr>
+                <tr>
+                  <td class="code-cell">UP/DN Timing</td>
+                  <td>Pulse width and frequency</td>
+                  <td>Affects how quickly the output moves.</td>
+                </tr>
+                <tr>
+                  <td class="code-cell">Output Load</td>
+                  <td>Light to heavier load</td>
+                  <td>Shows whether the output remains stable.</td>
+                </tr>
+                <tr>
+                  <td class="code-cell">Supply Voltage</td>
+                  <td>Lower, normal and higher supply</td>
+                  <td>Checks that the circuit works reliably.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 0.75rem; justify-content: space-between;">
+            <div class="card highlight">
+              <div class="card-header">
+                <span class="card-title">Simple Trade-Offs</span>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.84rem;">
+                <div style="border-left: 2px solid var(--accent-blue); padding-left: 0.5rem;">
+                  <strong>Larger switches:</strong><br>
+                  <span style="color: var(--text-secondary);">May respond faster, but can use more power and area.</span>
+                </div>
+                <div style="border-left: 2px solid var(--accent-green); padding-left: 0.5rem;">
+                  <strong>Larger capacitors:</strong><br>
+                  <span style="color: var(--text-secondary);">May produce a smoother output, but take more area and time to settle.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="approval-quote-box">
+              <div class="quote-tag">Review 2 Method</div>
+              <div class="quote-body" style="font-size: 0.95rem;">
+                <strong>“We will change one value at a time, record the effect, and select a practical combination.”</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <div class="footer-left">
+          <span>Main Design Choices</span>
+        </div>
+        <div class="footer-center">
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot active"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+        </div>
+        <div class="footer-right">
+          <kbd>←</kbd> <kbd>→</kbd> Navigate
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SLIDE 7: ANALYSES WE WILL PERFORM IN CADENCE
+         ==================================================================== -->
+    <section class="slide" id="slide-7">
+      <div class="slide-header">
+        <div class="slide-header-left">
+          <div class="slide-category">Review 1 — Analysis Plan</div>
+          <h1 class="slide-title">Analyses We Will Perform in Cadence</h1>
+          <div class="slide-subtitle">The main checks we plan to run; measured results will be presented in later reviews</div>
+        </div>
+        <div class="slide-header-right">
+          <div class="slide-index-pill">07 / 10</div>
+        </div>
+      </div>
+
+      <div class="slide-body">
+        <div class="grid-2col-wide-left">
+          <div class="table-container">
+            <table class="cadence-table">
+              <thead>
+                <tr>
+                  <th>Planned Check</th>
+                  <th>What We Change</th>
+                  <th>What We Will Observe</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>1. Output over time</strong></td>
+                  <td>UP/DN signal timing</td>
+                  <td>Voltage movement, rise/fall time and settling</td>
+                </tr>
+                <tr>
+                  <td><strong>2. Load check</strong></td>
+                  <td>Output load</td>
+                  <td>Whether the output remains stable</td>
+                </tr>
+                <tr>
+                  <td><strong>3. Output quality</strong></td>
+                  <td>Load and output capacitor</td>
+                  <td>Ripple and unwanted spikes</td>
+                </tr>
+                <tr>
+                  <td><strong>4. Signal-speed check</strong></td>
+                  <td>Input pulse frequency</td>
+                  <td>Response speed and power use</td>
+                </tr>
+                <tr>
+                  <td><strong>5. Switch-size check</strong></td>
+                  <td>Switch dimensions</td>
+                  <td>Effect on response, power and area</td>
+                </tr>
+                <tr>
+                  <td><strong>6. Capacitor-size check</strong></td>
+                  <td>Ci and CL values</td>
+                  <td>Effect on smoothness and settling time</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 0.75rem; justify-content: space-between;">
+            <div class="card highlight">
+              <div class="card-header">
+                <span class="card-title">What These Checks Will Tell Us</span>
+              </div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem;">
+                <div class="math-card">
+                  <div class="math-label">Output</div>
+                  <div class="math-eq" style="font-size: 0.88rem;">Is the voltage stable?</div>
+                </div>
+                <div class="math-card">
+                  <div class="math-label">Speed</div>
+                  <div class="math-eq" style="font-size: 0.88rem;">How quickly does it respond?</div>
+                </div>
+                <div class="math-card">
+                  <div class="math-label">Power</div>
+                  <div class="math-eq" style="font-size: 0.88rem; color: var(--accent-green);">How much power is used?</div>
+                </div>
+                <div class="math-card">
+                  <div class="math-label">Quality</div>
+                  <div class="math-eq" style="font-size: 0.88rem; color: var(--accent-amber);">Are ripple and spikes acceptable?</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="callout-banner" style="border-left: 3px solid var(--accent-green);">
+              <div class="callout-text">
+                <div style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--accent-green); text-transform: uppercase; margin-bottom: 0.2rem; font-weight: 700;">
+                  Review 1 Goal
+                </div>
+                <div style="font-size: 0.95rem; font-weight: 700; color: var(--text-primary);">
+                  Finalize the circuit, variables and simulation plan
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <div class="footer-left">
+          <span>Cadence ADE Simulation Plan</span>
+        </div>
+        <div class="footer-center">
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot active"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+        </div>
+        <div class="footer-right">
+          <kbd>←</kbd> <kbd>→</kbd> Navigate
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SLIDE 8: PVT AND RELIABILITY ANALYSIS
+         ==================================================================== -->
+    <section class="slide" id="slide-8">
+      <div class="slide-header">
+        <div class="slide-header-left">
+          <div class="slide-category">Planned Cadence Checks</div>
+          <h1 class="slide-title">Testing the Circuit Under Different Conditions</h1>
+          <div class="slide-subtitle">These checks are planned for later reviews; no variation results are claimed yet</div>
+        </div>
+        <div class="slide-header-right">
+          <div class="slide-index-pill">08 / 10</div>
+        </div>
+      </div>
+
+      <div class="slide-body">
+        <div class="grid-3col" style="height: auto;">
+          <div class="card highlight">
+            <div class="card-header">
+              <span class="card-title">Device Model Settings</span>
+            </div>
+            <p style="font-size: 0.83rem;">
+              Cadence provides different transistor model settings. We will simulate the circuit using:
+            </p>
+            <ul class="feature-list" style="font-size: 0.82rem; margin-top: 0.2rem;">
+              <li><strong>Typical devices</strong></li>
+              <li><strong>Slightly faster devices</strong></li>
+              <li><strong>Slightly slower devices</strong></li>
+            </ul>
+          </div>
+
+          <div class="card amber-highlight">
+            <div class="card-header">
+              <span class="card-title">Supply Voltage Change</span>
+            </div>
+            <p style="font-size: 0.83rem;">
+              The supply may be slightly above or below its expected value. We will test:
+            </p>
+            <ul class="feature-list" style="font-size: 0.82rem; margin-top: 0.2rem;">
+              <li><strong>Normal supply</strong></li>
+              <li><strong>Lower supply</strong></li>
+              <li><strong>Higher supply</strong></li>
+              <li><strong>Check:</strong> correct startup and output</li>
+            </ul>
+          </div>
+
+          <div class="card emerald-highlight">
+            <div class="card-header">
+              <span class="card-title">Temperature Change</span>
+            </div>
+            <p style="font-size: 0.83rem;">
+              Electronic devices behave differently when temperature changes. We will check:
+            </p>
+            <ul class="feature-list" style="font-size: 0.82rem; margin-top: 0.2rem;">
+              <li><strong>Cold condition</strong></li>
+              <li><strong>Room temperature</strong></li>
+              <li><strong>Hot condition</strong></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="grid-2col" style="flex: 1;">
+          <div class="card" style="padding: 0.85rem; justify-content: center;">
+            <div class="card-header"><span class="card-title">When This Work Will Happen</span></div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.55rem; font-size: 0.8rem;">
+              <div class="card subtle" style="padding: 0.65rem;"><strong>Review 1</strong><br>Choose test ranges.</div>
+              <div class="card subtle" style="padding: 0.65rem;"><strong>Review 2</strong><br>Run initial variation checks.</div>
+              <div class="card subtle" style="padding: 0.65rem;"><strong>Review 3</strong><br>Summarize final limits.</div>
+            </div>
+          </div>
+
+          <div class="approval-quote-box" style="display: flex; flex-direction: column; justify-content: center;">
+            <div class="quote-tag">Question We Plan to Answer</div>
+            <div class="quote-body">
+              <strong>“Does the simulated circuit continue to work correctly when the device model, supply voltage and temperature settings change?”</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <div class="footer-left">
+          <span>Planned Cadence Setting Checks</span>
+        </div>
+        <div class="footer-center">
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot active"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+        </div>
+        <div class="footer-right">
+          <kbd>←</kbd> <kbd>→</kbd> Navigate
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SLIDE 9: FINAL CADENCE SIMULATION PLAN
+         ==================================================================== -->
+    <section class="slide" id="slide-9">
+      <div class="slide-header">
+        <div class="slide-header-left">
+          <div class="slide-category">Review 3 — Final Simulation</div>
+          <h1 class="slide-title">Final Cadence Simulation</h1>
+          <div class="slide-subtitle">Compare all cases and present the final simulation results in Cadence Virtuoso</div>
+        </div>
+        <div class="slide-header-right">
+          <div class="slide-index-pill">09 / 10</div>
+        </div>
+      </div>
+
+      <div class="slide-body">
+        <div class="grid-2col">
+          <div class="card highlight" style="justify-content: flex-start; gap: 0.85rem;">
+            <div class="card-header">
+              <span class="card-title">Three Final Simulation Steps</span>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 0.45rem;">
+              <div class="card subtle" style="padding: 0.8rem; border-left: 3px solid var(--accent-blue); font-size: 0.84rem;">
+                <strong>1. Run the base simulation:</strong><br>Confirm that UP and DN signals move the output in the expected direction.
+              </div>
+              <div class="card subtle" style="padding: 0.8rem; border-left: 3px solid var(--accent-green); font-size: 0.84rem;">
+                <strong>2. Change the main settings:</strong><br>Vary switch size, capacitor values, signal timing, supply and temperature.
+              </div>
+              <div class="card subtle" style="padding: 0.8rem; border-left: 3px solid var(--accent-amber); font-size: 0.84rem;">
+                <strong>3. Compare the cases:</strong><br>Select the simulated setup with the best balance of stability, speed and power.
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: planned simulation outputs only -->
+          <div style="display: flex; flex-direction: column; gap: 0.65rem; justify-content: space-between;">
+            <div class="card highlight" style="padding: 0.85rem;">
+              <div class="card-header"><span class="card-title">Planned Final Simulation Outputs</span></div>
+              <div style="display: flex; flex-direction: column; gap: 0.55rem; font-size: 0.84rem;">
+                <div class="card subtle" style="padding: 0.65rem;"><strong>Waveforms:</strong> UP, DN and output voltage versus time.</div>
+                <div class="card subtle" style="padding: 0.65rem;"><strong>Parameter comparison:</strong> Results for different switch and capacitor values.</div>
+                <div class="card subtle" style="padding: 0.65rem;"><strong>Condition comparison:</strong> Results for supply, temperature and model-setting changes.</div>
+              </div>
+            </div>
+
+            <div class="callout-banner"><div class="callout-text"><strong>Current status:</strong> Review 1 defines the plan. Final Cadence results will be shown in Review 3.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <div class="footer-left">
+          <span>Simulation-Only Final Review</span>
+        </div>
+        <div class="footer-center">
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot active"></div>
+          <div class="nav-dot"></div>
+        </div>
+        <div class="footer-right">
+          <kbd>←</kbd> <kbd>→</kbd> Navigate
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SLIDE 10: EXPECTED OUTCOME + COMPLETE PROJECT FLOW
+         ==================================================================== -->
+    <section class="slide" id="slide-10">
+      <div class="slide-header">
+        <div class="slide-header-left">
+          <div class="slide-category">Project Roadmap</div>
+          <h1 class="slide-title">Plan Across the Three Reviews</h1>
+          <div class="slide-subtitle">Review 1 defines the project; experimental results will appear only after implementation</div>
+        </div>
+        <div class="slide-header-right">
+          <div class="slide-index-pill">10 / 10</div>
+        </div>
+      </div>
+
+      <div class="slide-body">
+        <div class="grid-3col">
+          <div class="card highlight" style="justify-content: space-between;">
+            <div>
+              <div class="card-header"><span class="card-title">Review 1 — Now</span></div>
+              <ul class="feature-list">
+                <li>Understand the charge-pump idea</li>
+                <li>Select and explain the circuit</li>
+                <li>Identify components to vary</li>
+                <li>Prepare the Cadence test plan</li>
+              </ul>
+            </div>
+            <div style="color: var(--accent-green); font-weight: 700; font-size: 0.78rem;">DELIVERABLE: APPROVED PROJECT PLAN</div>
+          </div>
+
+          <div class="card amber-highlight" style="justify-content: space-between;">
+            <div>
+              <div class="card-header"><span class="card-title">Review 2 — Implementation</span></div>
+              <ul class="feature-list">
+                <li>Build the circuit in Cadence</li>
+                <li>Create the testbench</li>
+                <li>Show first waveform results</li>
+                <li>Compare component settings</li>
+              </ul>
+            </div>
+            <div style="color: var(--accent-amber); font-weight: 700; font-size: 0.78rem;">DELIVERABLE: INITIAL SIMULATION RESULTS</div>
+          </div>
+
+          <div class="card emerald-highlight" style="justify-content: space-between;">
+            <div>
+              <div class="card-header"><span class="card-title">Review 3 — Finalization</span></div>
+              <ul class="feature-list">
+                <li>Finalize component values</li>
+                <li>Complete variation checks</li>
+                <li>Compare all simulation cases</li>
+                <li>Present final Cadence results</li>
+              </ul>
+            </div>
+            <div style="color: var(--accent-blue); font-weight: 700; font-size: 0.78rem;">DELIVERABLE: FINAL SIMULATION AND REPORT</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <div class="footer-left">
+          <span>Three-Review Project Roadmap</span>
+        </div>
+        <div class="footer-center">
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot active"></div>
+        </div>
+        <div class="footer-right">
+          <kbd>←</kbd> <kbd>→</kbd> Navigate
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Floating Discrete Controls -->
+  <div class="nav-controls">
+    <button class="nav-btn" id="prevBtn" title="Previous Slide (Left Arrow)">◀</button>
+    <button class="nav-btn" id="nextBtn" title="Next Slide (Right Arrow / Space)">▶</button>
+    <button class="nav-btn" id="fsBtn" title="Toggle Fullscreen (F)">FS</button>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

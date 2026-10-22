@@ -1,0 +1,3 @@
+schematic instLabelFontHeight float 0.125
+schematic pinLabelFontHeight float 0.125
+schematic noteFontHeight float 0.125

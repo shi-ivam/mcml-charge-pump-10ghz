@@ -1,0 +1,43 @@
+* shivam/tb_mcml_charge_pump: real ngspice charging transient
+* Device connectivity and source values transcribed from the Oct 22 Virtuoso netlist.
+* FreePDK45 nominal VTG HSPICE models stand in for gpdk045 Spectre models.
+.include "/home/shivam/cadence/pdk/FreePDK45/ncsu_basekit/models/hspice/tran_models/models_nom/NMOS_VTG.inc"
+.include "/home/shivam/cadence/pdk/FreePDK45/ncsu_basekit/models/hspice/tran_models/models_nom/PMOS_VTG.inc"
+
+V_VDD vdd 0 DC 1.0
+V_BIAS vbias 0 DC 0.45
+V_UP up 0 PULSE(0 1.0 0 5p 5p 25p 100p)
+V_UP_B up_b 0 PULSE(1.0 0 0 5p 5p 25p 100p)
+V_DN dn 0 DC 0
+V_DN_B dn_b 0 DC 1.0
+
+M_S6 vop up_b n_load2 vdd PMOS_VTG W=180n L=45n
+M_M3 n_dummy up n_load1 vdd PMOS_VTG W=180n L=45n
+M_M2 n_load2 n_load1 vdd vdd PMOS_VTG W=190n L=45n
+M_M1 n_load1 n_load1 vdd vdd PMOS_VTG W=190n L=45n
+M_S3_pmos vop dn_b n_bot vdd PMOS_VTG W=130n L=45n
+M_S4_pmos vop up_b n_top vdd PMOS_VTG W=130n L=45n
+M_S2 n_top up_b vdd vdd PMOS_VTG W=170n L=45n
+M_M5 n_tail vbias 0 0 NMOS_VTG W=480n L=45n
+M_S5 vop dn n_tail 0 NMOS_VTG W=270n L=45n
+M_M4 n_dummy dn_b n_tail 0 NMOS_VTG W=270n L=45n
+M_S3_nmos vop dn n_bot 0 NMOS_VTG W=280n L=45n
+M_S4_nmos vop up n_top 0 NMOS_VTG W=280n L=45n
+M_S1 n_bot dn 0 0 NMOS_VTG W=360n L=45n
+
+C_CL vop 0 300f
+C_Ci n_top n_bot 50f
+.ic V(vop)=0.54
+.options reltol=1e-3 vabstol=1e-6 iabstol=1e-12
+.temp 27
+.tran 0.5p 237p 0 0.5p
+.save V(vop) V(up) V(up_b) V(dn) V(dn_b) V(n_tail) V(vdd) V(vbias)
+
+.control
+set wr_singlescale
+set wr_vecnames
+run
+wrdata charging_237ps.dat v(vop) v(up) v(up_b) v(dn) v(dn_b) v(n_tail) v(vdd) v(vbias)
+quit
+.endc
+.end

@@ -1,0 +1,38 @@
+
+Note: No compatibility mode selected!
+
+
+Circuit: * shivam/tb_mcml_charge_pump: real ngspice charging transient
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+
+Initial Transient Solution
+--------------------------
+
+Node                                   Voltage
+----                                   -------
+vdd                                          1
+vbias                                     0.45
+up                                           0
+up_b                                         1
+dn                                           0
+dn_b                                         1
+vop                                       0.54
+n_load2                               0.999991
+n_dummy                              0.0536549
+n_load1                                0.54251
+n_bot                                0.0487558
+n_top                                 0.929257
+n_tail                               0.0368115
+v_dn_b#branch                     -6.64475e-10
+v_dn#branch                        3.26626e-11
+v_up_b#branch                     -1.82343e-11
+v_up#branch                        1.76145e-10
+v_bias#branch                     -3.33114e-11
+v_vdd#branch                      -1.75374e-05
+
+ Reference value :  1.40070e-09 Reference value :  2.81450e-09 Reference value :  4.07050e-09 Reference value :  5.49550e-09 Reference value :  6.81450e-09 Reference value :  8.25050e-09 Reference value :  9.70010e-09
+No. of Data Rows : 11205
+ngspice-45.2 done

@@ -1,0 +1,247 @@
+- generic [active] [ref=f1e1]:
+  - generic [ref=f1e2]:
+    - generic [ref=f1e3]:
+      - generic [ref=f1e4]:
+        - generic [ref=f1e5]:
+          - generic [ref=f1e6]: Cadence Virtuoso — Transistor-Level CMOS
+          - heading "Design and Transistor-Level Analysis of a CMOS Charge Pump" [level=1] [ref=f1e7]
+          - generic [ref=f1e8]: A Switched-Capacitor Voltage Boosting Circuit with MOS-Level Optimization
+        - generic [ref=f1e9]: 01 / 10
+      - generic [ref=f1e12]:
+        - generic [ref=f1e13]:
+          - generic [ref=f1e14]:
+            - generic [ref=f1e15]: Main Project Objective
+            - paragraph [ref=f1e17]:
+              - text: Design a
+              - strong [ref=f1e18]: CMOS charge pump completely at the transistor level
+              - text: in Cadence Virtuoso and study how device dimensions, capacitances, and clocking parameters govern circuit performance.
+          - generic [ref=f1e19]:
+            - generic [ref=f1e20]:
+              - generic [ref=f1e21]: Key Parameters to Optimize
+              - list [ref=f1e22]:
+                - listitem [ref=f1e23]:
+                  - text: —
+                  - strong [ref=f1e24]: MOSFET Sizing
+                  - text: (
+                  - generic [ref=f1e26]:
+                    - math [ref=f1e28]:
+                      - generic [ref=f1e30]:
+                        - generic [ref=f1e31]:
+                          - generic [ref=f1e32]: W
+                          - generic [ref=f1e33]: "n"
+                        - generic [ref=f1e34]: ","
+                        - generic [ref=f1e35]:
+                          - generic [ref=f1e36]: W
+                          - generic [ref=f1e37]: p
+                        - generic [ref=f1e38]: ","
+                        - generic [ref=f1e39]: L
+                    - generic [ref=f1e41]:
+                      - generic [ref=f1e42]:
+                        - text: W
+                        - generic [ref=f1e43]: "n"
+                      - text: ","
+                      - generic [ref=f1e51]:
+                        - text: W
+                        - generic [ref=f1e52]: p
+                      - text: ", L"
+                  - text: )
+                - listitem [ref=f1e60]:
+                  - text: —
+                  - strong [ref=f1e61]: Pumping Capacitors
+                  - text: (
+                  - generic [ref=f1e63]:
+                    - math [ref=f1e65]:
+                      - generic [ref=f1e68]:
+                        - generic [ref=f1e69]: C
+                        - generic [ref=f1e70]:
+                          - generic [ref=f1e71]: p
+                          - generic [ref=f1e72]: u
+                          - generic [ref=f1e73]: m
+                          - generic [ref=f1e74]: p
+                    - generic [ref=f1e77]:
+                      - text: C
+                      - generic [ref=f1e78]: pump
+                  - text: )
+                - listitem [ref=f1e87]:
+                  - text: —
+                  - strong [ref=f1e88]: Number of Stages
+                  - text: (
+                  - generic [ref=f1e90]:
+                    - math [ref=f1e92]:
+                      - generic [ref=f1e93]: "N"
+                    - generic [ref=f1e96]: "N"
+                  - text: )
+                - listitem [ref=f1e98]:
+                  - text: —
+                  - strong [ref=f1e99]: Clock Frequency
+                  - text: (
+                  - generic [ref=f1e101]:
+                    - math [ref=f1e103]:
+                      - generic [ref=f1e106]:
+                        - generic [ref=f1e107]: f
+                        - generic [ref=f1e108]:
+                          - generic [ref=f1e109]: c
+                          - generic [ref=f1e110]: l
+                          - generic [ref=f1e111]: k
+                    - generic [ref=f1e114]:
+                      - text: f
+                      - generic [ref=f1e115]: clk
+                  - text: )
+                - listitem [ref=f1e124]:
+                  - text: —
+                  - strong [ref=f1e125]: Load Current
+                  - text: (
+                  - generic [ref=f1e127]:
+                    - math [ref=f1e129]:
+                      - generic [ref=f1e132]:
+                        - generic [ref=f1e133]: I
+                        - generic [ref=f1e134]:
+                          - generic [ref=f1e135]: l
+                          - generic [ref=f1e136]: o
+                          - generic [ref=f1e137]: a
+                          - generic [ref=f1e138]: d
+                    - generic [ref=f1e141]:
+                      - text: I
+                      - generic [ref=f1e142]: load
+                  - text: )
+            - generic [ref=f1e151]:
+              - generic [ref=f1e152]: Target Output Figures
+              - list [ref=f1e153]:
+                - listitem [ref=f1e154]:
+                  - text: —
+                  - strong [ref=f1e155]: Output Voltage
+                  - text: (
+                  - generic [ref=f1e157]:
+                    - math [ref=f1e159]:
+                      - generic [ref=f1e161]:
+                        - generic [ref=f1e162]:
+                          - generic [ref=f1e163]: V
+                          - generic [ref=f1e164]:
+                            - generic [ref=f1e165]: O
+                            - generic [ref=f1e166]: U
+                            - generic [ref=f1e167]: T
+                        - generic [ref=f1e168]: ">"
+                        - generic [ref=f1e169]:
+                          - generic [ref=f1e170]: V
+                          - generic [ref=f1e171]:
+                            - generic [ref=f1e172]: I
+                            - generic [ref=f1e173]: "N"
+                    - generic [ref=f1e174]:
+                      - generic [ref=f1e175]:
+                        - generic [ref=f1e176]:
+                          - text: V
+                          - generic [ref=f1e177]: OUT
+                        - text: ">"
+                      - generic [ref=f1e187]:
+                        - text: V
+                        - generic [ref=f1e188]: IN
+                  - text: )
+                - listitem [ref=f1e197]:
+                  - text: —
+                  - strong [ref=f1e198]: Total Power
+                  - text: (
+                  - generic [ref=f1e200]:
+                    - math [ref=f1e202]:
+                      - generic [ref=f1e205]:
+                        - generic [ref=f1e206]: P
+                        - generic [ref=f1e207]:
+                          - generic [ref=f1e208]: a
+                          - generic [ref=f1e209]: v
+                          - generic [ref=f1e210]: g
+                    - generic [ref=f1e213]:
+                      - text: P
+                      - generic [ref=f1e214]: avg
+                  - text: )
+                - listitem [ref=f1e223]:
+                  - text: —
+                  - strong [ref=f1e224]: Power Efficiency
+                  - text: (
+                  - generic [ref=f1e226]:
+                    - math [ref=f1e228]:
+                      - generic [ref=f1e229]: η
+                    - generic [ref=f1e232]: η
+                  - text: )
+                - listitem [ref=f1e234]:
+                  - text: —
+                  - strong [ref=f1e235]: Output Ripple
+                  - text: (
+                  - generic [ref=f1e237]:
+                    - math [ref=f1e239]:
+                      - generic [ref=f1e242]:
+                        - generic [ref=f1e243]: V
+                        - generic [ref=f1e244]:
+                          - generic [ref=f1e245]: r
+                          - generic [ref=f1e246]: i
+                          - generic [ref=f1e247]: p
+                          - generic [ref=f1e248]: p
+                          - generic [ref=f1e249]: l
+                          - generic [ref=f1e250]: e
+                    - generic [ref=f1e253]:
+                      - text: V
+                      - generic [ref=f1e254]: ripple
+                  - text: )
+                - listitem [ref=f1e263]:
+                  - text: —
+                  - strong [ref=f1e264]: Startup Settling Time
+                  - text: (
+                  - generic [ref=f1e266]:
+                    - math [ref=f1e268]:
+                      - generic [ref=f1e271]:
+                        - generic [ref=f1e272]: t
+                        - generic [ref=f1e273]:
+                          - generic [ref=f1e274]: s
+                          - generic [ref=f1e275]: t
+                          - generic [ref=f1e276]: a
+                          - generic [ref=f1e277]: r
+                          - generic [ref=f1e278]: t
+                    - generic [ref=f1e281]:
+                      - text: t
+                      - generic [ref=f1e282]: start
+                  - text: )
+          - generic [ref=f1e292]:
+            - generic [ref=f1e293]:
+              - text: "Team:"
+              - strong [ref=f1e294]: VLSI Design Group
+            - generic [ref=f1e295]:
+              - text: "Department:"
+              - strong [ref=f1e296]: ECE / Microelectronics
+            - generic [ref=f1e297]:
+              - text: "Supervisor:"
+              - strong [ref=f1e298]: Project Review Committee
+        - generic [ref=f1e299]:
+          - img [ref=f1e301]:
+            - generic [ref=f1e303]: VIN
+            - generic [ref=f1e304]: (DC Input)
+            - generic [ref=f1e308]: CMOS Charge Pump
+            - generic [ref=f1e309]: Switched-Capacitor Voltage Booster
+            - generic [ref=f1e310]: NMOS / PMOS Switches + Pumping Caps
+            - generic [ref=f1e311]: CLK / CLKB (Non-Overlapping)
+            - generic [ref=f1e315]: VOUT
+            - generic [ref=f1e316]: VOUT > VIN
+          - generic [ref=f1e317]:
+            - generic [ref=f1e318]: Implementation Level
+            - generic [ref=f1e319]:
+              - strong [ref=f1e320]: MOS Transistor Level — Cadence Virtuoso
+              - text: "Direct circuit optimization at device level: schematic sizing, parasitic extraction, PVT corners, and physical layout."
+      - generic [ref=f1e321]:
+        - generic [ref=f1e322]: Project Approval Deck
+        - generic [ref=f1e324]:
+          - generic [ref=f1e325] [cursor=pointer]
+          - generic [ref=f1e326] [cursor=pointer]
+          - generic [ref=f1e327] [cursor=pointer]
+          - generic [ref=f1e328] [cursor=pointer]
+          - generic [ref=f1e329] [cursor=pointer]
+          - generic [ref=f1e330] [cursor=pointer]
+          - generic [ref=f1e331] [cursor=pointer]
+          - generic [ref=f1e332] [cursor=pointer]
+          - generic [ref=f1e333] [cursor=pointer]
+          - generic [ref=f1e334] [cursor=pointer]
+        - generic [ref=f1e335]:
+          - generic [ref=f1e336]: ←
+          - generic [ref=f1e337]: →
+          - text: Navigate
+    - text: — — — — — — — — — — — — — — — — — — — — —
+  - generic [ref=f1e338]:
+    - button "◀" [disabled] [ref=f1e339]
+    - button "▶" [ref=f1e340] [cursor=pointer]
+    - button "FS" [ref=f1e341] [cursor=pointer]

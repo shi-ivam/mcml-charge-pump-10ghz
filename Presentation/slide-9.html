@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 9: Layout, DRC, LVS & Post-Layout - Cadence Virtuoso Design</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+</head>
+<body>
+  <div class="deck-container">
+    <section class="slide active" id="slide-9">
+      <div class="slide-header">
+        <div class="slide-header-left">
+          <div class="slide-category">Physical Verification</div>
+          <h1 class="slide-title">Layout, DRC, LVS and Post-Layout Analysis</h1>
+          <div class="slide-subtitle">Closing the Loop Between Schematic Simulation and Extracted Silicon Physical Realization</div>
+        </div>
+        <div class="slide-header-right">
+          <div class="slide-index-pill">09 / 10</div>
+        </div>
+      </div>
+
+      <div class="slide-body">
+        <div class="grid-2col">
+          <div class="card highlight" style="justify-content: space-between;">
+            <div class="card-header">
+              <span class="card-title">5-Step Physical Verification Workflow</span>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 0.45rem;">
+              <div class="card subtle" style="padding: 0.45rem 0.75rem; border-left: 3px solid var(--accent-blue); font-size: 0.83rem;">
+                <strong>Step 1 — Physical Layout:</strong> Custom layout for NMOS/PMOS diffusion fingers, MIM capacitor arrays, guard rings, and low-resistance clock/power routing.
+              </div>
+              <div class="card subtle" style="padding: 0.45rem 0.75rem; border-left: 3px solid var(--accent-green); font-size: 0.83rem;">
+                <strong>Step 2 — DRC (Design Rule Check):</strong> Verify geometric spacing and density rules in Pegasus/PVS. Target: <span style="color: var(--accent-green); font-weight: 700;">DRC Clean</span>.
+              </div>
+              <div class="card subtle" style="padding: 0.45rem 0.75rem; border-left: 3px solid var(--accent-green); font-size: 0.83rem;">
+                <strong>Step 3 — LVS (Layout Versus Schematic):</strong> Ensure 1:1 netlist equivalence and device parameter match. Target: <span style="color: var(--accent-green); font-weight: 700;">LVS Matched</span>.
+              </div>
+              <div class="card subtle" style="padding: 0.45rem 0.75rem; border-left: 3px solid var(--accent-amber); font-size: 0.83rem;">
+                <strong>Step 4 — Parasitic Extraction (PEX):</strong> Extract interconnect parasitic resistance ($R_{parasitic}$) and coupled capacitance ($C_{parasitic}$).
+              </div>
+              <div class="card subtle" style="padding: 0.45rem 0.75rem; border-left: 3px solid var(--accent-blue); font-size: 0.83rem;">
+                <strong>Step 5 — Post-Layout Simulation:</strong> Re-run Spectre transient simulations using the extracted DSPF/calibre view to quantify layout degradation.
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Matplotlib Pre vs Post-Layout Plot & Table -->
+          <div style="display: flex; flex-direction: column; gap: 0.65rem; justify-content: space-between;">
+            <div class="card" style="padding: 0.55rem;">
+              <img src="images/layout_pex_comparison.png" alt="Pre-Layout vs Post-Layout Extracted Comparison" class="diagram-img" style="max-height: 180px;">
+            </div>
+
+            <div class="table-container">
+              <table class="cadence-table">
+                <thead>
+                  <tr>
+                    <th>Performance Metric</th>
+                    <th style="text-align: right;">Pre-Layout (Schematic)</th>
+                    <th style="text-align: right;">Post-Layout (Extracted R+C)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Output Voltage ($V_{OUT}$)</strong></td>
+                    <td class="measure-cell">7.40 V</td>
+                    <td class="measure-cell" style="color: var(--accent-amber);">7.05 V</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Power Efficiency ($\eta$)</strong></td>
+                    <td class="measure-cell">84.5%</td>
+                    <td class="measure-cell" style="color: var(--accent-amber);">79.2%</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Output Resistance ($R_{out}$)</strong></td>
+                    <td class="measure-cell">180 Ω</td>
+                    <td class="measure-cell" style="color: var(--accent-amber);">260 Ω</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <div class="footer-left">
+          <span>Physical Verification (DRC/LVS/PEX)</span>
+        </div>
+        <div class="footer-center">
+          <a href="slide-1.html" class="nav-dot"></a>
+          <a href="slide-2.html" class="nav-dot"></a>
+          <a href="slide-3.html" class="nav-dot"></a>
+          <a href="slide-4.html" class="nav-dot"></a>
+          <a href="slide-5.html" class="nav-dot"></a>
+          <a href="slide-6.html" class="nav-dot"></a>
+          <a href="slide-7.html" class="nav-dot"></a>
+          <a href="slide-8.html" class="nav-dot"></a>
+          <a href="slide-9.html" class="nav-dot active"></a>
+          <a href="slide-10.html" class="nav-dot"></a>
+        </div>
+        <div class="footer-right">
+          <kbd>←</kbd> <kbd>→</kbd> Navigate
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="nav-controls">
+    <a href="index.html" class="nav-btn" title="View Full Deck">Deck</a>
+    <a href="slide-8.html" class="nav-btn" title="Previous Slide">◀</a>
+    <a href="slide-10.html" class="nav-btn" title="Next Slide">▶</a>
+  </div>
+
+  <script>
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') {
+        window.location.href = 'slide-10.html';
+      } else if (e.key === 'ArrowLeft' || e.key === 'Backspace') {
+        window.location.href = 'slide-8.html';
+      }
+    });
+  </script>
+</body>
+</html>

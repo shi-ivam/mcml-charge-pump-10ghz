@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 6: Main Transistor-Level Design Parameters - Cadence Virtuoso Design</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+</head>
+<body>
+  <div class="deck-container">
+    <section class="slide active" id="slide-6">
+      <div class="slide-header">
+        <div class="slide-header-left">
+          <div class="slide-category">Parametric Optimization</div>
+          <h1 class="slide-title">Main Transistor-Level Design Parameters</h1>
+          <div class="slide-subtitle">Systematic Parametric Sweeps in Cadence Virtuoso ADE to Discover Optimum Trade-offs</div>
+        </div>
+        <div class="slide-header-right">
+          <div class="slide-index-pill">06 / 10</div>
+        </div>
+      </div>
+
+      <div class="slide-body">
+        <div class="grid-2col-wide-left">
+          <div class="table-container">
+            <table class="cadence-table">
+              <thead>
+                <tr>
+                  <th>Parameter</th>
+                  <th>What We Change</th>
+                  <th>Why It Matters (Physical Mechanism)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="code-cell">MOS Width (W)</td>
+                  <td>NMOS / PMOS channel widths</td>
+                  <td>Controls channel switch $R_{ON}$ and parasitic gate/diffusion capacitances.</td>
+                </tr>
+                <tr>
+                  <td class="code-cell">MOS Length (L)</td>
+                  <td>Device channel lengths</td>
+                  <td>Affects punch-through, subthreshold leakage, and total active silicon area.</td>
+                </tr>
+                <tr>
+                  <td class="code-cell">Internal Capacitor (Ci)</td>
+                  <td>Small, medium, and large transfer values</td>
+                  <td>Sets charge packet size ($Q = C \Delta V$) and the Vop step per action.</td>
+                </tr>
+                <tr>
+                  <td class="code-cell">UP/DN Timing</td>
+                  <td>Pulse width, frequency, and timing gap</td>
+                  <td>Sets charge-transfer duration and prevents conflicting UP/DN paths.</td>
+                </tr>
+                <tr>
+                  <td class="code-cell">Pulse Frequency</td>
+                  <td>UP/DN pulse-rate sweep</td>
+                  <td>Dictates charge transfer rate vs dynamic switching losses ($P = C V^2 f$).</td>
+                </tr>
+                <tr>
+                  <td class="code-cell">Load Current (I_load)</td>
+                  <td>Current source load sweeps</td>
+                  <td>Evaluates load regulation, voltage drop, and output impedance ($R_{out}$).</td>
+                </tr>
+                <tr>
+                  <td class="code-cell">Output Capacitor (CL)</td>
+                  <td>Filter capacitor sizing</td>
+                  <td>Dictates output voltage peak-to-peak ripple and transient startup settling.</td>
+                </tr>
+                <tr>
+                  <td class="code-cell">Supply Voltage (VDD)</td>
+                  <td>Lower, normal, and higher simulated supply</td>
+                  <td>Validates Vop control across supply fluctuation ranges while Vop remains below VDD.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 0.75rem; justify-content: space-between;">
+            <div class="card highlight">
+              <div class="card-header">
+                <span class="card-title">Physical Device Trade-Offs</span>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.84rem;">
+                <div style="border-left: 2px solid var(--accent-blue); padding-left: 0.5rem;">
+                  <strong>Transistor Sizing ($W \uparrow$):</strong><br>
+                  <span style="color: var(--text-secondary);">Reduces conduction loss $\to$ Higher output voltage, but increases gate parasitics & dynamic switching power.</span>
+                </div>
+                <div style="border-left: 2px solid var(--accent-green); padding-left: 0.5rem;">
+                  <strong>Capacitor Sizing ($C_{pump} \uparrow$):</strong><br>
+                  <span style="color: var(--text-secondary);">Transfers larger charge packets $\to$ Higher load current drive, but increases die area and startup latency.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="approval-quote-box">
+              <div class="quote-tag">Methodology Rationale</div>
+              <div class="quote-body" style="font-size: 0.95rem;">
+                <strong>“We will use Cadence parameter sweeps in ADE to locate the true Pareto-optimum design rather than choosing arbitrary textbook values.”</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <div class="footer-left">
+          <span>Parametric Optimization Matrix</span>
+        </div>
+        <div class="footer-center">
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot active"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+          <div class="nav-dot"></div>
+        </div>
+        <div class="footer-right">
+          <kbd>←</kbd> <kbd>→</kbd> Navigate
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="nav-controls">
+    <a href="index.html" class="nav-btn" title="View Full Deck">Deck</a>
+    <a href="slide-5.html" class="nav-btn" title="Previous Slide">◀</a>
+    <a href="slide-7.html" class="nav-btn" title="Next Slide">▶</a>
+  </div>
+
+  <script>
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') {
+        window.location.href = 'slide-7.html';
+      } else if (e.key === 'ArrowLeft' || e.key === 'Backspace') {
+        window.location.href = 'slide-5.html';
+      }
+    });
+  </script>
+</body>
+</html>

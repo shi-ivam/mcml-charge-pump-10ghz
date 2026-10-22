@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slide 4: How the Charge Pump Circuit Works</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+</head>
+<body>
+  <div class="deck-container">
+    <section class="slide active" id="slide-4">
+      <div class="slide-header">
+        <div class="slide-header-left">
+          <div class="slide-category">Circuit at a Glance</div>
+          <h1 class="slide-title">How the Charge Pump Circuit Works</h1>
+          <div class="slide-subtitle">A simple view of how the UP and DN signals control the output voltage</div>
+        </div>
+        <div class="slide-header-right">
+          <div class="slide-index-pill">04 / 10</div>
+        </div>
+      </div>
+
+      <div class="slide-body">
+        <div class="grid-2col">
+          <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+            <div class="card" style="padding: 0.85rem 1rem;">
+              <div class="card-header">
+                <span class="card-title">What This Circuit Does</span>
+              </div>
+              <ul class="feature-list" style="font-size: 0.8rem; margin-top: 0.15rem;">
+                <li><strong>S1–S4</strong> work like electronic ON/OFF switches.</li>
+                <li><strong>Ci</strong> moves a small amount of electrical charge during each operation.</li>
+                <li><strong>CL</strong> stores and smooths the <strong>Vop control voltage, which stays below VDD</strong>.</li>
+              </ul>
+            </div>
+
+            <div class="card emerald-highlight" style="padding: 0.85rem 1rem;">
+              <div class="card-header">
+                <span class="card-title">Three Easy Operating States</span>
+              </div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; margin-top: 0.2rem;">
+                <div class="card subtle" style="padding: 0.55rem;"><strong style="color: var(--accent-green);">UP</strong><br><span style="font-size: 0.76rem;">The circuit adds charge, so Vop rises within the VDD range.</span></div>
+                <div class="card subtle" style="padding: 0.55rem;"><strong style="color: var(--accent-red);">DN</strong><br><span style="font-size: 0.76rem;">The circuit removes charge, so the output voltage falls.</span></div>
+                <div class="card subtle" style="padding: 0.55rem;"><strong style="color: var(--accent-blue);">No signal</strong><br><span style="font-size: 0.76rem;">The capacitor helps keep the output nearly steady.</span></div>
+              </div>
+            </div>
+
+            <div class="card" style="padding: 0.85rem 1rem;">
+              <div class="card-header">
+                <span class="card-title">Analysis We Will Perform</span>
+              </div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.35rem 0.8rem; font-size: 0.78rem; margin-top: 0.15rem;">
+                <div><strong>Output:</strong> voltage level and stability</div>
+                <div><strong>Timing:</strong> rise, fall and settling time</div>
+                <div><strong>Power:</strong> consumption and efficiency</div>
+                <div><strong>Quality:</strong> ripple and unwanted spikes</div>
+                <div><strong>Components:</strong> switch and capacitor sizes</div>
+                <div><strong>Reliability:</strong> supply, temperature, manufacturing and layout changes</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: User-provided switch-based charge-pump reference -->
+          <div class="card" style="justify-content: space-between; padding: 0.75rem;">
+            <div class="card-header" style="margin-bottom: 0.25rem;">
+              <span class="card-title">Circuit Diagram</span>
+            </div>
+
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; flex: 1; min-height: 0;">
+              <img src="images/switch_based_charge_pump_circuit.webp" alt="Switch-based PLL charge pump with S1 through S4, internal capacitor Ci, output Vop, and load capacitor CL" class="diagram-img" style="max-height: min(500px, 55vh); width: auto; max-width: 100%;">
+            </div>
+            <div style="font-size: 0.64rem; color: var(--text-muted); text-align: center; line-height: 1.35; margin-top: 0.2rem;">S1-S4 are switches, Ci transfers charge, and CL smooths Vop below VDD. Reference: Sivasakthi and Radhika, “A High-Speed MCML Charge Pump Design at 10 GHz Frequency in 45 nm CMOS Technology for PLL Application.”</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer">
+        <div class="footer-left">
+          <span>Circuit Working and Planned Analysis</span>
+        </div>
+        <div class="footer-center">
+          <a href="slide-1.html" class="nav-dot"></a>
+          <a href="slide-2.html" class="nav-dot"></a>
+          <a href="slide-3.html" class="nav-dot"></a>
+          <a href="slide-4.html" class="nav-dot active"></a>
+          <a href="slide-5.html" class="nav-dot"></a>
+          <a href="slide-6.html" class="nav-dot"></a>
+          <a href="slide-7.html" class="nav-dot"></a>
+          <a href="slide-8.html" class="nav-dot"></a>
+          <a href="slide-9.html" class="nav-dot"></a>
+          <a href="slide-10.html" class="nav-dot"></a>
+        </div>
+        <div class="footer-right">
+          <kbd>←</kbd> <kbd>→</kbd> Navigate
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="nav-controls">
+    <a href="index.html" class="nav-btn" title="View Full Deck">Deck</a>
+    <a href="slide-3.html" class="nav-btn" title="Previous Slide">◀</a>
+    <a href="slide-5.html" class="nav-btn" title="Next Slide">▶</a>
+  </div>
+
+  <script>
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') {
+        window.location.href = 'slide-5.html';
+      } else if (e.key === 'ArrowLeft' || e.key === 'Backspace') {
+        window.location.href = 'slide-3.html';
+      }
+    });
+  </script>
+</body>
+</html>

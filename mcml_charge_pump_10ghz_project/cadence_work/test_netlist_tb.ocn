@@ -1,0 +1,4 @@
+simulator('spectre)
+design("shivam" "tb_mcml_charge_pump" "schematic")
+createNetlist(?display t)
+exit()
