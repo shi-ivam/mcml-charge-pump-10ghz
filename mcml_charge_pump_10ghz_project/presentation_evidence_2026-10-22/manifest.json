@@ -1,0 +1,24 @@
+{
+  "pdf": "Virtuoso_ADE_Calculator_Evidence.pdf",
+  "pdf_sha256": "6ac119fc4aaaae68c047de8859ab7bcc829d93c91a2bfade83f1e899c1b92f0b",
+  "screenshots": {
+    "00_dut_schematic.png": "ad60290aefc296f1e1c75eabc6d16ba3dc61ac3ee24800d45a58973785fbc6d2",
+    "01_testbench_schematic.png": "818641b55d94102392031169520382e1bcfc366529c664ff5d5a44a0d82c5247",
+    "02_ade_step1_final.png": "88803bc5b5baa334def14304d01be6df3325951be02a95c71b9e151843001b6f",
+    "03_viva_charge.png": "dc6e25661da64dc8394d026ed09db0e261368fe84f1cf6495f48028132623de5",
+    "04_viva_discharge.png": "a6be2e6b18ab5c812180c361b95f49d5573810330d9562c02fcccf47965a2e9f",
+    "05_delay_charge_edge.png": "3704587f7803e35c4689000fb65e3ee795e7d33b9adc9efecd6f0bbf9996828f",
+    "06_delay_charge_mean.png": "d5c0d0a6a10d61b5dbd5dd015ad6bd9d6a2b3f89884f5812bef3555206b070ef",
+    "07_delay_discharge_edge.png": "2459f824fad477bc9a78c176f95bb77eeb39683df936c7fd5d251c8aadc89dfa",
+    "08_delay_discharge_mean.png": "989e19ea7aa1df6a7d81f80287de6ab32aa72c8c52b9f093101fba410a12d208",
+    "09_delay_paper_difference.png": "a117d3c616185430b8006716213938a45eea000bf4b76428a4d86c00c662c9ef",
+    "10_power_charge.png": "b4c139b2a22e82d19dbac5dc133337232a145de31f41183e720087852f0f6a43",
+    "11_power_discharge.png": "c64abe7fff50dce6ca3f92ffb5f0f0f72689142fa9b62ca4cc02c58c918ddbc6",
+    "12_swing_charge_high.png": "0cc8763bc93a7c96d0498252fdb69f5bca733218774e2684a39e99094e174da1",
+    "13_swing_discharge_low.png": "d898ed35e95313aa1fa4e1e1f7f79ef7312d717f8b2ba9e10c089f2148cc84d8",
+    "14_swing_combined.png": "02ae5c0529c40a96bbf345b623552c2dbc7b4cdaa3702d1e080a4009f842e903",
+    "15_dc_mismatch_at_0p5v.png": "26da79107377ac069acf30f88de6d3a479ad99b3dff44f40bed1092a895a60d5"
+  },
+  "source_metrics": "/home/shivam/Projects/VLSI/mcml_charge_pump_10ghz_project/mcml_cp_sim/verified_flow/results/metrics.json",
+  "source_dc_sweep": "/home/shivam/Projects/VLSI/mcml_charge_pump_10ghz_project/mcml_cp_sim/verified_flow/results/dc_compliance.csv"
+}

@@ -1,0 +1,14 @@
+t 3 vdd input
+t 1 gnd input
+t 2 a input
+t 0 vout input
+n 0 /vout
+n 1 /gnd
+n 2 /a
+n 3 /vdd
+; pmos1v Instance /PM0 = auLvs device M0
+d pmos1v D G S B (p D S)
+i 0 pmos1v 0 2 3 3 " m 1.0 l 45e-9 w 120e-9 "
+; nmos1v Instance /NM0 = auLvs device M1
+d nmos1v D G S B (p D S)
+i 1 nmos1v 0 2 1 1 " m 1.0 l 45e-9 w 120e-9 "

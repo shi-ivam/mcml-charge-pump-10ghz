@@ -1,7 +1,7 @@
 ; Generated from measured ngspice data. Display only; no Spectre run is implied.
 ; Full-resolution measurements and simulator logs remain beside this file.
 printf("\nIMPORTED ngspice 45.2 / FreePDK45 results from Virtuoso netlist\n")
-printf("Netlist SHA256: 592baf3651c09ad57d5200d7a04753760bf95a3f16e57a7612d44b21338dec59\n")
+printf("Netlist SHA256: 7adea9ec6399ffd0bae31fb8b2bf1640a05611e5e080a55ad495219ff32cf0bc\n")
 newWindow()
 displayMode('strip)
 let((rows n x y ctl watts k w)

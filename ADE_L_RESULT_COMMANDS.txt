@@ -1,0 +1,53 @@
+ADE L RESULT COMMANDS — paste directly into Tools > Calculator
+=============================================================
+
+After the tb_mcml_charge_pump ADE L run has finished, open Tools > Calculator
+and select Options > Algebraic Mode. For each numbered result, clear the
+Calculator buffer, paste ONLY its single expression line, and click Evaluate.
+These are Calculator expressions, not terminal commands or CIW load commands.
+Nothing here imports a script or reruns the testbench. Each expression reads
+the saved waveform results from the ADE run using an explicit resultsDir.
+
+If CIW prints WARNING (OCN-6152) about ngspice-bridge, that warning is expected
+for this setup. It says VT/IT shortcuts are unavailable; the expressions below
+use OCEAN getData instead. A final "t" after "ViVA plotted..." means the
+viewer script completed. Neither message is a measurement failure. Do not
+paste the CIW transcript or its load("...il") command into a zsh terminal:
+zsh will parse the quotes as shell syntax and can report "unmatched \"".
+
+Quick data-access check in the ADE Calculator (seconds; expected 1.5025e-9):
+cross(getData("UP" ?result 'tran ?resultsDir "/home/shivam/simulation/tb_mcml_charge_pump/spectre/schematic/psf") 0.5 16 "rising")
+
+1. Charge delay, mean of UP pulses 11–20 (ps; expected about 13.8114)
+let((d a b sum n ti vlo vhi) d="/home/shivam/simulation/tb_mcml_charge_pump/spectre/schematic/psf" a=getData("UP" ?result 'tran ?resultsDir d) b=getData("Vop" ?result 'tran ?resultsDir d) sum=0.0 for(n 11 20 ti=cross(a 0.5 n "rising") vlo=value(b ti-10e-12) vhi=value(b ti+40e-12) sum=sum+cross(clip(b ti ti+40e-12) (vlo+vhi)/2 1 "rising")-ti) sum/10*1e12)
+
+2. Charge VDD power, average from 1–10 ns (uW; expected about 22.528)
+let((d i) d="/home/shivam/simulation/tb_mcml_charge_pump/spectre/schematic/psf" i=getData("I(V_VDD)" ?result 'tran ?resultsDir d) -1e6*average(clip(i 1e-9 10e-9)))
+
+3. Discharge delay, mean of DN pulses 11–20 (ps; expected about 15.4473)
+let((d a b sum n ti vlo vhi) d="/home/shivam/Projects/VLSI/mcml_charge_pump_10ghz_project/mcml_cp_sim/verified_flow/results/viva_psf_discharge" a=getData("DN" ?result 'tran ?resultsDir d) b=getData("Vop" ?result 'tran ?resultsDir d) sum=0.0 for(n 11 20 ti=cross(a 0.5 n "rising") vlo=value(b ti-10e-12) vhi=value(b ti+40e-12) sum=sum+cross(clip(b ti ti+40e-12) (vlo+vhi)/2 1 "falling")-ti) sum/10*1e12)
+
+4. Discharge VDD power, average from 1–10 ns (uW; expected about 16.097)
+let((d i) d="/home/shivam/Projects/VLSI/mcml_charge_pump_10ghz_project/mcml_cp_sim/verified_flow/results/viva_psf_discharge" i=getData("I(V_VDD)" ?result 'tran ?resultsDir d) -1e6*average(clip(i 1e-9 10e-9)))
+
+5. Settled charge high level (V; expected about 0.9928752)
+let((d v) d="/home/shivam/Projects/VLSI/mcml_charge_pump_10ghz_project/mcml_cp_sim/verified_flow/results/viva_psf_swing_charge" v=getData("Vop" ?result 'tran ?resultsDir d) (value(v 79.4975e-9)+value(v 79.5975e-9)+value(v 79.6975e-9)+value(v 79.7975e-9)+value(v 79.8975e-9))/5)
+
+6. Settled discharge low level (V; expected about -0.0006484)
+let((d v) d="/home/shivam/Projects/VLSI/mcml_charge_pump_10ghz_project/mcml_cp_sim/verified_flow/results/viva_psf_swing_discharge" v=getData("Vop" ?result 'tran ?resultsDir d) (value(v 79.4975e-9)+value(v 79.5975e-9)+value(v 79.6975e-9)+value(v 79.7975e-9)+value(v 79.8975e-9))/5)
+
+7. Combined settled output swing = high - low (V; expected about 0.9935236)
+let((cd dd cv dv cu du high low n) cd="/home/shivam/Projects/VLSI/mcml_charge_pump_10ghz_project/mcml_cp_sim/verified_flow/results/viva_psf_swing_charge" dd="/home/shivam/Projects/VLSI/mcml_charge_pump_10ghz_project/mcml_cp_sim/verified_flow/results/viva_psf_swing_discharge" cv=getData("Vop" ?result 'tran ?resultsDir cd) dv=getData("Vop" ?result 'tran ?resultsDir dd) cu=getData("UP" ?result 'tran ?resultsDir cd) du=getData("DN" ?result 'tran ?resultsDir dd) high=0.0 low=0.0 for(n 796 800 high=high+value(cv cross(cu 0.5 n "rising")-5e-12) low=low+value(dv cross(du 0.5 n "rising")-5e-12)) (high-low)/5)
+
+Report values: charge 13.811 ps / 22.528 uW; discharge 15.447 ps /
+16.097 uW; combined settled Vop swing 0.993524 V. The swing uses the
+separate 80 ns charge and discharge runs saved by the ADE bridge; the 10 ns
+charge result alone is still settling. If the results are nil, check that the
+run finished and the named tran.tran files exist. Recalculate after any
+testbench, model, or run-setting change; expected numbers refer to the
+previously verified setup.
+
+For the professor: these local ADE-launched results were numerically solved
+by ngspice 45.2 with FreePDK45 nominal VTG models and a 300 fF internal
+load. The paper's 16.71 ps, 13.19 uW, and 0–0.98 V use different models
+and a 10 pF load. Do not label the local results as licensed Spectre results.

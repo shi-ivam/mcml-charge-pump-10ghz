@@ -14,3 +14,11 @@ Traceback (most recent call last):
     raise ValueError("Only the checked shivam/tb_mcml_charge_pump testbench is supported; open ADE from that schematic.")
 ValueError: Only the checked shivam/tb_mcml_charge_pump testbench is supported; open ADE from that schematic.
 
+Tue Oct 27 21:29:32 2026
+Traceback (most recent call last):
+  File "/home/shivam/Projects/VLSI/mcml_charge_pump_10ghz_project/mcml_cp_sim/verified_flow/ade_bridge_server.py", line 235, in handle
+    result = execute(req)
+  File "/home/shivam/Projects/VLSI/mcml_charge_pump_10ghz_project/mcml_cp_sim/verified_flow/ade_bridge_server.py", line 184, in execute
+    raise ValueError("Only the checked shivam/tb_mcml_charge_pump testbench is supported; open ADE from that schematic.")
+ValueError: Only the checked shivam/tb_mcml_charge_pump testbench is supported; open ADE from that schematic.
+

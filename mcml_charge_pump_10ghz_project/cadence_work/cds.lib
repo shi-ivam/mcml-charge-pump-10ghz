@@ -7,3 +7,5 @@ DEFINE gpdk045 /home/shivam/cadence/pdk/gpdk045
 DEFINE NCSU_TechLib_FreePDK45 /home/shivam/cadence/pdk/FreePDK45/ncsu_basekit/lib/NCSU_TechLib_FreePDK45
 DEFINE NCSU_Devices_FreePDK45 /home/shivam/cadence/pdk/FreePDK45/ncsu_basekit/lib/NCSU_Devices_FreePDK45
 DEFINE shivam /home/shivam/Projects/VLSI/mcml_charge_pump_10ghz_project/cadence_work/shivam
+DEFINE 24BLC1103 /home/shivam/Projects/VLSI/mcml_charge_pump_10ghz_project/cadence_work/24BLC1103
+DEFINE 24BLC /home/shivam/Projects/VLSI/mcml_charge_pump_10ghz_project/cadence_work/24BLC

@@ -67,6 +67,20 @@ This route has been run on the current workstation. It uses the **current Virtuo
 
 The adapter and its host service are installed and the service is enabled for the user session. It is limited to `shivam/tb_mcml_charge_pump/schematic`; another cellview fails clearly instead of producing fabricated waveforms. From a terminal you can check readiness with:
 
+**After a reboot:** log in to the graphical desktop, then use the project launcher. The Docker daemon and the bridge user service are enabled, but the Virtuoso Docker container is started on demand and has no restart policy. The launcher checks the installed model files, Cadence adapter, ngspice, and Docker image, and starts the user bridge service if needed. `--check` does not open Virtuoso.
+
+```sh
+cd /home/shivam/Projects/VLSI/mcml_charge_pump_10ghz_project
+./launch_virtuoso.sh --check
+./launch_virtuoso.sh
+```
+
+Wait for the Virtuoso CIW, open `shivam/tb_mcml_charge_pump/schematic`, load the testbench's ADE L `step1_final`, and press **Netlist and Run**. The service starts at user login (`systemctl --user is-enabled mcml-ade-bridge.service` currently says `enabled`); `loginctl` reports `Linger=no`, so it is not expected to run before login. The container uses `--rm`, so it disappears at reboot and must be launched again. The project files, saved ADE state, model files, and screenshots remain on disk. Keep the project at its present absolute path: the Cadence library map and bridge scripts contain `/home/shivam/Projects/VLSI/...` paths.
+
+Keep one Cadence container running at a time. The launcher refuses to start a second one because the bridge needs an unambiguous container for ADE results. If Virtuoso is already open, use that session.
+
+**Fresh-run check:** confirm the service is `active`, the netlist and `spectre.out` timestamps advance, and the latest `spectre.out` names ngspice 45.2 and the checked netlist. Re-evaluate one Calculator field with its explicit `?resultsDir` path. A green ADE status or old ViVA window alone does not prove a new run succeeded. The PDF screenshots in Section 4 are fixed evidence from 22 October 2026; they do not update after a reboot or new simulation.
+
 ```sh
 systemctl --user is-active mcml-ade-bridge.service
 /home/shivam/.local/bin/spectre -v
@@ -136,6 +150,10 @@ After an ADE bridge run, enter this in the **Virtuoso CIW** to reopen the ViVA p
 ```skill
 load("/home/shivam/Projects/VLSI/mcml_charge_pump_10ghz_project/cadence_work/show_native_psf_results.il")
 ```
+
+Enter only the `load(...)` line in the **CIW input field**, not in a Linux `zsh` terminal. It displays waveforms; it does not print the delay, power, or swing measurements. Two `OCN-6152` warnings about the unregistered `ngspice-bridge` simulator are expected here: the viewer uses OCEAN `getData`, which the warning says still works. The line `ViVA plotted separate charge and discharge PSF windows...` followed by `t` means the viewer script completed. Do not copy those CIW output lines back into a shell: quotes in the output can produce `zsh: unmatched "`.
+
+To obtain the numerical results after the ADE run, open **ADE L → Tools → Calculator**, select **Options → Algebraic Mode**, and evaluate the expressions in [`ADE_L_RESULT_COMMANDS.txt`](ADE_L_RESULT_COMMANDS.txt) one at a time. The file includes charge/discharge delay and power plus the settled high, low, and combined output swing. These Calculator expressions read the saved result directories directly; they do not use `load(...)`.
 
 The viewer reads both binary PSF result sets at full transient resolution. One ViVA window shows charging `UP`, `UP_b`, `Vop`, and VDD current; a second shows discharging `DN`, `DN_b`, `Vop`, and VDD current. `Vop (charge)` and `Vop (discharge)` come from separate numerical runs. The result popup reports delay, power, PDP, swing, and dynamic-range validity. Label any screenshot **“Virtuoso ViVA, ngspice 45.2 / FreePDK45 VTG results from Virtuoso netlist”**. The traces are Cadence PSF displays of ngspice data, not Cadence Spectre simulation results. A terminal-only `python3 run.py` run does not create the PSF viewer files; use ADE **Netlist and Run** once to generate them.
 
@@ -222,6 +240,8 @@ The percentage is **7.56%**. The expressions use built-in Cadence `getData`, `cr
 
 The paper's reported **0–0.98 V** value is its *output voltage swing*. Measure the settled high and low `Vop` levels, then subtract: `swing = V_HIGH − V_LOW`. The ADE-requested 10 ns PSF contains only the charging run and is still settling. The bridge saves the longer charge and discharge runs separately as `viva_psf_swing_charge` and `viva_psf_swing_discharge`. This checked netlist reaches the settling criterion at **80 ns**.
 
+If your testbench schematic and ADE L `step1_final` are already open after **Netlist and Run**, keep those windows open. The Calculator can read the two 80 ns result directories below from that same ADE session; you do not need to change the testbench controls or run ADE again. Verify that both `viva_psf_swing_charge/tran.tran` and `viva_psf_swing_discharge/tran.tran` exist before evaluating. A `nil` result usually means the bridge run did not finish, a result directory is missing, or the pasted path is wrong. Do not calculate the settled swing from the visible 10 ns charge trace, which has not settled.
+
 **Starting with `tb_mcml_charge_pump` already open after Netlist and Run:**
 
 1. In the same ADE L window choose **Tools → Calculator**, then **Options → Algebraic Mode** if needed.
@@ -249,12 +269,22 @@ The two fields were checked against the binary PSFs in Cadence OCEAN and return 
 let((cd dd cv dv cu du high low n) cd="/home/shivam/Projects/VLSI/mcml_charge_pump_10ghz_project/mcml_cp_sim/verified_flow/results/viva_psf_swing_charge" dd="/home/shivam/Projects/VLSI/mcml_charge_pump_10ghz_project/mcml_cp_sim/verified_flow/results/viva_psf_swing_discharge" cv=getData("Vop" ?result 'tran ?resultsDir cd) dv=getData("Vop" ?result 'tran ?resultsDir dd) cu=getData("UP" ?result 'tran ?resultsDir cd) du=getData("DN" ?result 'tran ?resultsDir dd) high=0.0 low=0.0 for(n 796 800 high=high+value(cv cross(cu 0.5 n "rising")-5e-12) low=low+value(dv cross(du 0.5 n "rising")-5e-12)) (high-low)/5)
 ```
 
-The measured swing is **99.35% of the 1.0 V supply** and **1.38% above the paper's 0.98 V swing**. The negative low level is the numerical result and is retained in the subtraction. These field expressions were evaluated on the binary PSF waveforms in Cadence OCEAN; the ADE L Calculator has not yet been checked interactively for these longer result files. If a future run settles at a different stop time, use its last five input edges instead of fixed pulse numbers 796–800.
+The measured swing is **99.35% of the 1.0 V supply** and **1.38% above the paper's 0.98 V swing**. The negative low level is the numerical result and is retained in the subtraction. These field expressions were evaluated on the binary PSF waveforms in Cadence OCEAN; the ADE L Calculator has not yet been checked interactively for these longer result files. If a future run settles at a different stop time, use its last five input edges instead of fixed pulse numbers 796–800. For a presentation, show the high result, low result, and their subtraction as three Calculator evaluations alongside the two separate ViVA traces. Identify the underlying numerical solver and model set as ngspice 45.2 and FreePDK45 nominal VTG.
 
-**Current-compliance dynamic range is a separate test.** It requires the 0–1 V DC sweep and a current-flatness/mismatch tolerance; it cannot be inferred from the 993.524 mV transient swing. Under the 10% criterion in Section 2.3, the current netlist has **no valid interval containing 0.5 V**, because the UP/DN current mismatch at 0.5 V is **115.47%**. Show `results/dc_compliance.csv` and the DC plot if asked for this stricter metric; do not label the voltage swing as a passing current-compliance range.
+### 3.7 Check current-compliance dynamic range
+
+**This is a separate DC measurement.** The paper-style **993.524 mV output swing** above does not establish a usable charge/discharge current range. The existing transient `step1_final` state does not contain a `Vop` forcing source or a DC sweep, so its Calculator cannot derive this range from the 10 ns waveform. The bridge already ran both DC modes and saved the sweep in `mcml_charge_pump_10ghz_project/mcml_cp_sim/verified_flow/results/dc_compliance.csv` and the summary in `results/metrics.json`.
+
+Starting from the open ADE session, inspect the CSV column headings: `vop_v`, `i_charge_a`, `i_discharge_a`, `charge_error_pct`, `discharge_error_pct`, `mismatch_pct`, and `passes`. At the **0.5 V** reference point the charge and discharge magnitudes are **61.976 µA** and **231.310 µA**. The mismatch is **115.47%**, using `200*abs(I_charge-I_discharge)/(I_charge+I_discharge)`. Because this already exceeds the chosen 10% limit at the reference point, the contiguous passing interval containing 0.5 V does not exist: report **“No valid current-compliance dynamic range under the 10% criterion.”** A 0 V span or a 993.524 mV span would misstate this test.
+
+For a wholly interactive Cadence DC demonstration, use the separate `tb_mcml_charge_pump_dc` procedure in Section 2.3 on a machine with a licensed solver. Save charge and discharge DC current results, then plot the charge error, discharge error, and mismatch against `Vop`. The present bridge exposes transient PSF data to the ADE Calculator, but it does **not** provide a DC PSF result set for Calculator `getData`; do not paste a fabricated DC Calculator expression into this ADE state. The current-machine DC evidence is the actual ngspice sweep CSV and the current-versus-voltage panel in `results/verified_results.png`, with that provenance stated beside the figure.
 
 ## 4. Evidence to show the professor
 
 For a strict **Cadence Spectre simulation** assessment, a licensed Spectre machine is still required. Keep the testbench schematic, CIW Check and Save message, ADE analysis setup, solver log, ViVA waveforms, and DC error curves together. The current machine can launch the numerical run from ADE and show the Virtuoso schematic, Cadence-generated netlist, Cadence-readable transient result, result popup, and measured waveforms in ViVA, but its solver is ngspice with substituted models. State that distinction on every result sheet and spoken explanation.
+
+For screenshots, capture the actual testbench schematic, the ADE `step1_final` analysis setup, the separate charging and discharging ViVA windows, and each Calculator evaluation after it returns a value. Keep the full application title and evaluated number visible. A Calculator field pasted into the window is not evidence of a result until **Evaluate** has completed. For power, capture the VDD-current trace and its 1–10 ns average for each mode. For dynamic range, capture the two settled `Vop` levels and their subtraction; show the separate DC compliance plot and 0.5 V CSV row when discussing current compliance. Put simulator/model provenance in the PDF caption even if a particular application window does not display it. Do not use the older generated `simulation_screenshots` artwork as proof of a Virtuoso run.
+
+The captured evidence set is in [`mcml_charge_pump_10ghz_project/presentation_evidence_2026-10-22/`](mcml_charge_pump_10ghz_project/presentation_evidence_2026-10-22/README.md). Its 17-page [`Virtuoso_ADE_Calculator_Evidence.pdf`](mcml_charge_pump_10ghz_project/presentation_evidence_2026-10-22/Virtuoso_ADE_Calculator_Evidence.pdf) contains 16 actual application-window screenshots: DUT and testbench schematics, the loaded ADE state, separate charging/discharging ViVA *views*, and successful Calculator evaluations for delay, power, settled output swing, and 0.5 V DC current mismatch. The ViVA views are separate tabs in the same ViVA application window, captured one at a time. The DC Calculator page computes the mismatch from the measured `dc_compliance.csv` row; it is not a DC PSF evaluation. The PDF identifies the ngspice/FreePDK45 numerical provenance on every page.
 
 For either route, the result sheet should state the model file/corner, temperature, supply/bias, load, clock period, transient stop and maximum step, initial condition, delay rule, power window and sign, PDP pairing, swing settling test, and the DC dynamic-range tolerance. If a required solver or model is absent, report that blocker and the measured fallback provenance rather than claiming an ADE/Spectre result.

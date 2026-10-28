@@ -1,0 +1,20 @@
+# Archive files
+*.zip
+*.tar.gz
+*.tgz
+
+# Cadence lock files and temporary logs
+*.cdslck
+*.cdslck.*
+*.cdsinfo.tag
+*.logv
+*.history.tmp
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Editor and OS
+.DS_Store
+*.swp
+*~

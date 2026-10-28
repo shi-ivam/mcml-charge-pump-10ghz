@@ -36,7 +36,7 @@ procedure(cpInst(cv lib cell name x y params conns)
     )))
 
 procedure(cpNote(cv x y text @optional (height 0.14) (justify "centerCenter"))
-  schCreateNoteLabel(cv list(x y) text justify "R0" "roman" height "normalLabel")
+  schCreateNoteLabel(cv list(x y) lowerCase(text) justify "R0" "roman" height "normalLabel")
 )
 
 let((cv)
@@ -119,7 +119,7 @@ let((cv)
   ; 1. Title Banner
   cpNote(cv 3.5 8.6 "HIGH-SPEED 10 GHz MCML CHARGE PUMP (45nm CMOS)" 0.28)
   cpNote(cv 3.5 8.2 "Springer 2024 Replication: M. Sivasakthi & P. Radhika" 0.16)
-  cpNote(cv 3.5 7.8 "Vdd = 1.0 V | Fin = 10 GHz | Pavg = 13.19 uW | Tpd = 16.71 ps" 0.15)
+  cpNote(cv 3.5 7.8 "paper reference: vdd = 1.0 v | fin = 10 ghz | pavg = 13.19 uw | tpd = 16.71 ps" 0.15)
 
   ; 2. Stage Headers
   cpNote(cv -3.0 6.2 "[ STAGE 1: Primary Switch-Based CP ]" 0.20)
@@ -149,7 +149,7 @@ let((cv)
   cpNote(cv -7.0 -4.8 "DN / DN_b:\n10 GHz DN Pulse" 0.12 "centerCenter")
   cpNote(cv 0.0 7.4 "Vdd Pin (1.0 V)" 0.13 "centerCenter")
   cpNote(cv 0.0 -7.4 "Gnd Pin (0.0 V)" 0.13 "centerCenter")
-  cpNote(cv 1.5 -5.8 "Vbias: 1.0 V" 0.12 "centerCenter")
+  cpNote(cv 1.5 -5.8 "vbias: 0.45 v (testbench)" 0.12 "centerCenter")
   cpNote(cv 14.0 1.0 "Vop: Output Voltage\n(0.0V to 0.98V Swing)" 0.13 "centerCenter")
 
   ; 6. Circuit Operation Legend Box

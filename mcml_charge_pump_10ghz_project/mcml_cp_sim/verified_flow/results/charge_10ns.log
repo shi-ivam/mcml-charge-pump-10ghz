@@ -33,19 +33,53 @@ v_up#branch                        1.76115e-10
 v_bias#branch                     -3.32786e-11
 v_vdd#branch                      -1.75089e-05
 
- Reference value :  6.35750e-10
- Reference value :  1.33535e-09
- Reference value :  2.01625e-09
- Reference value :  2.69125e-09
- Reference value :  3.38975e-09
- Reference value :  4.11525e-09
- Reference value :  4.81825e-09
- Reference value :  5.50825e-09
- Reference value :  6.16325e-09
- Reference value :  6.83535e-09
- Reference value :  7.50075e-09
- Reference value :  8.17825e-09
- Reference value :  8.81825e-09
- Reference value :  9.44375e-09
+ Reference value :  5.62500e-11
+ Reference value :  2.76250e-10
+ Reference value :  5.21750e-10
+ Reference value :  6.72250e-10
+ Reference value :  8.80750e-10
+ Reference value :  1.03075e-09
+ Reference value :  1.22425e-09
+ Reference value :  1.32925e-09
+ Reference value :  1.50500e-09
+ Reference value :  1.67525e-09
+ Reference value :  1.81625e-09
+ Reference value :  1.94225e-09
+ Reference value :  2.13015e-09
+ Reference value :  2.26275e-09
+ Reference value :  2.41575e-09
+ Reference value :  2.63035e-09
+ Reference value :  2.92475e-09
+ Reference value :  3.16675e-09
+ Reference value :  3.40535e-09
+ Reference value :  3.65775e-09
+ Reference value :  3.91375e-09
+ Reference value :  4.18225e-09
+ Reference value :  4.40775e-09
+ Reference value :  4.66425e-09
+ Reference value :  4.82225e-09
+ Reference value :  5.09625e-09
+ Reference value :  5.32825e-09
+ Reference value :  5.52275e-09
+ Reference value :  5.77875e-09
+ Reference value :  6.04425e-09
+ Reference value :  6.31225e-09
+ Reference value :  6.58675e-09
+ Reference value :  6.80515e-09
+ Reference value :  6.97425e-09
+ Reference value :  7.20515e-09
+ Reference value :  7.21875e-09
+ Reference value :  7.22075e-09
+ Reference value :  7.39775e-09
+ Reference value :  7.59225e-09
+ Reference value :  7.83475e-09
+ Reference value :  8.13225e-09
+ Reference value :  8.38175e-09
+ Reference value :  8.54525e-09
+ Reference value :  8.79925e-09
+ Reference value :  8.96275e-09
+ Reference value :  9.22275e-09
+ Reference value :  9.54675e-09
+ Reference value :  9.82125e-09
 No. of Data Rows : 21205
 ngspice-45.2 done

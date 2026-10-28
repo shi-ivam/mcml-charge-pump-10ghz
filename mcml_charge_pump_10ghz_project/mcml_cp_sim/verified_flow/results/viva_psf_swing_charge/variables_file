@@ -2,7 +2,7 @@ HEADER
 "PSFversion" "1.00"
 "simulator" "ngspice-bridge"
 "version" "ngspice-45.2"
-"date" "Thu Oct 22 19:28:29 2026"
+"date" "Sat Oct 24 13:37:40 2026"
 "design" "shivam/tb_mcml_charge_pump/schematic"
 "analysis" "design_variables"
 TYPE

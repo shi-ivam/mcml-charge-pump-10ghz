@@ -33,19 +33,47 @@ v_up#branch                        1.88218e-10
 v_bias#branch                     -3.32786e-11
 v_vdd#branch                      -1.75086e-05
 
- Reference value :  6.43750e-10
- Reference value :  1.35175e-09
- Reference value :  2.06225e-09
- Reference value :  2.70075e-09
- Reference value :  3.35225e-09
- Reference value :  4.03500e-09
- Reference value :  4.68925e-09
- Reference value :  5.35875e-09
- Reference value :  6.04475e-09
- Reference value :  6.68125e-09
- Reference value :  7.35625e-09
- Reference value :  8.02975e-09
- Reference value :  8.69125e-09
- Reference value :  9.36075e-09
+ Reference value :  1.28250e-10
+ Reference value :  2.90750e-10
+ Reference value :  5.25750e-10
+ Reference value :  7.20250e-10
+ Reference value :  9.86750e-10
+ Reference value :  1.24625e-09
+ Reference value :  1.43475e-09
+ Reference value :  1.66825e-09
+ Reference value :  1.99675e-09
+ Reference value :  2.26425e-09
+ Reference value :  2.50675e-09
+ Reference value :  2.79375e-09
+ Reference value :  3.05825e-09
+ Reference value :  3.23375e-09
+ Reference value :  3.45525e-09
+ Reference value :  3.75875e-09
+ Reference value :  3.92525e-09
+ Reference value :  4.19075e-09
+ Reference value :  4.44275e-09
+ Reference value :  4.60925e-09
+ Reference value :  4.85025e-09
+ Reference value :  5.11375e-09
+ Reference value :  5.41575e-09
+ Reference value :  5.63225e-09
+ Reference value :  5.77325e-09
+ Reference value :  6.00015e-09
+ Reference value :  6.30000e-09
+ Reference value :  6.59925e-09
+ Reference value :  6.82725e-09
+ Reference value :  7.01675e-09
+ Reference value :  7.23500e-09
+ Reference value :  7.42225e-09
+ Reference value :  7.71425e-09
+ Reference value :  7.96525e-09
+ Reference value :  8.17325e-09
+ Reference value :  8.48225e-09
+ Reference value :  8.80015e-09
+ Reference value :  9.09775e-09
+ Reference value :  9.23725e-09
+ Reference value :  9.55175e-09
+ Reference value :  9.80325e-09
+ Reference value :  9.92275e-09
 No. of Data Rows : 21205
 ngspice-45.2 done
